@@ -1,0 +1,1304 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { 
+  Trophy, Star, Timer, Heart, Settings, 
+  Plus, Trash2, Gift, Frown, GraduationCap, Download, X, Users, User,
+  Zap, Award, TrendingUp
+} from 'lucide-react';
+
+// Standard-Daten für Belohnungen mit Ranking
+const DEFAULT_REWARDS = [
+  { person: 'Mama', reward: 'Essen bei McDonalds', rank: 1 },
+  { person: 'Papa', reward: 'Ins Kino gehen', rank: 2 },
+  { person: 'Oma', reward: 'Eis essen', rank: 3 },
+  { person: 'Eltern', reward: '30 Min länger aufbleiben', rank: 4 },
+  { person: 'Mama', reward: 'Bonbon', rank: 5 }
+];
+
+const DEFAULT_PENALTIES = [
+  'Mache 10 lustige Hampelmänner',
+  'Singe dein Lieblingslied',
+  'Erzähle einen Witz',
+  'Mache 5 Liegestütze',
+  'Tanze 30 Sekunden lang',
+  'Mache eine lustige Grimasse',
+  'Hüpfe 20 Mal auf einem Bein',
+  'Stelle dich 1 Minute auf ein Bein',
+  'Mache 3 Purzelbäume'
+];
+
+// Animierte Hintergrund-Komponente
+function AnimatedBackground() {
+  const symbols = ['➕', '➖', '✖️', '➗', '🟰', '🎯', '⭐', '✨', '🌟', '💫', '🎈', '🎨', '🎪', '🎭'];
+  const colors = ['text-yellow-300', 'text-pink-300', 'text-blue-300', 'text-purple-300', 'text-green-300', 'text-red-300'];
+  
+  return (
+    <div className="fixed inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute top-0 left-0 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-pink-400 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
+      <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
+      
+      {[...Array(20)].map((_, i) => (
+        <div
+          key={i}
+          className={`absolute ${colors[i % colors.length]} animate-float`}
+          style={{
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            fontSize: `${Math.random() * 2 + 1}rem`,
+            animationDelay: `${Math.random() * 5}s`,
+            animationDuration: `${Math.random() * 10 + 15}s`,
+            opacity: 0.3
+          }}
+        >
+          {symbols[Math.floor(Math.random() * symbols.length)]}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function App() {
+  // Game State
+  const [gameState, setGameState] = useState('menu');
+  const [gradeLevel, setGradeLevel] = useState(1);
+  const [currentQuestion, setCurrentQuestion] = useState(null);
+  const [userAnswer, setUserAnswer] = useState('');
+  const [questionNumber, setQuestionNumber] = useState(1);
+  const [score, setScore] = useState(0);
+  const [feedback, setFeedback] = useState(null);
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [finalResult, setFinalResult] = useState(null);
+  
+  // Zeit-Tracking
+  const [startTime, setStartTime] = useState(null);
+  const [totalTime, setTotalTime] = useState(0);
+  const [currentQuestionStartTime, setCurrentQuestionStartTime] = useState(null);
+  
+  // Settings
+  const [numberOfQuestions, setNumberOfQuestions] = useState(10);
+  
+  // Multiplayer State
+  const [isMultiplayer, setIsMultiplayer] = useState(false);
+  const [player1, setPlayer1] = useState({ name: '', level: 1 });
+  const [player2, setPlayer2] = useState({ name: '', level: 1 });
+  const [currentPlayer, setCurrentPlayer] = useState(1);
+  const [player1Score, setPlayer1Score] = useState(0);
+  const [player2Score, setPlayer2Score] = useState(0);
+  const [player1Time, setPlayer1Time] = useState(0);
+  const [player2Time, setPlayer2Time] = useState(0);
+  const [showHandover, setShowHandover] = useState(false);
+  const [handoverTimer, setHandoverTimer] = useState(5);
+  
+  // Rewards & Penalties
+  const [rewards, setRewards] = useState([]);
+  const [penalties, setPenalties] = useState([]);
+  const [newRewardPerson, setNewRewardPerson] = useState('');
+  const [newRewardText, setNewRewardText] = useState('');
+  const [newRewardRank, setNewRewardRank] = useState(3);
+  const [newPenalty, setNewPenalty] = useState('');
+  
+  // PWA Install
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [showInstallButton, setShowInstallButton] = useState(false);
+  
+  const inputRef = useRef(null);
+
+  // Klassenstufen-Einstellungen
+  const gradeLevelSettings = {
+    1: { 
+      name: 'Klasse 1', 
+      range: 10, 
+      ops: ['+', '-'], 
+      description: 'Plus und Minus bis 10',
+      color: 'green-400',
+      targetTimePerQuestion: 15 // Zielzeit in Sekunden
+    },
+    2: { 
+      name: 'Klasse 2', 
+      range: 20, 
+      ops: ['+', '-'], 
+      description: 'Plus und Minus bis 20',
+      color: 'blue-400',
+      targetTimePerQuestion: 12
+    },
+    3: { 
+      name: '1x1 Training', 
+      range: 12, 
+      ops: ['×'], 
+      description: 'Kleines Einmaleins (1-12)',
+      color: 'orange-500',
+      targetTimePerQuestion: 8,
+      special: '1x1'
+    },
+    4: { 
+      name: 'Klasse 3', 
+      range: 100, 
+      ops: ['+', '-', '×'], 
+      description: 'Plus, Minus bis 100',
+      color: 'yellow-400',
+      targetTimePerQuestion: 10
+    },
+    5: { 
+      name: 'Klasse 4', 
+      range: 1000, 
+      ops: ['+', '-', '×', '÷'], 
+      description: 'Alle Rechenarten bis 1000',
+      color: 'red-400',
+      targetTimePerQuestion: 8
+    },
+    6: { 
+      name: 'Erwachsene', 
+      range: 10000, 
+      ops: ['+', '-', '×', '÷', '%', 'dreisatz'], 
+      description: 'Rechnen + Prozent + Dreisatz',
+      color: 'purple-600',
+      targetTimePerQuestion: 10,
+      special: 'erwachsene'
+    }
+  };
+
+  // Bewertungs-Funktion
+  const calculatePerformance = (correctAnswers, totalQuestions, totalSeconds, targetSecondsPerQuestion) => {
+    const accuracyScore = (correctAnswers / totalQuestions) * 100;
+    const targetTotalTime = totalQuestions * targetSecondsPerQuestion;
+    const avgTimePerQuestion = totalSeconds / totalQuestions;
+    
+    // Zeit-Score: 100% wenn unter Zielzeit, dann linear abfallend
+    let timeScore = 100;
+    if (totalSeconds > targetTotalTime) {
+      const overtime = totalSeconds - targetTotalTime;
+      timeScore = Math.max(0, 100 - (overtime / targetTotalTime) * 50);
+    } else {
+      // Bonus für schnellere Zeit
+      const timeSaved = targetTotalTime - totalSeconds;
+      timeScore = Math.min(150, 100 + (timeSaved / targetTotalTime) * 50);
+    }
+    
+    // Gesamt-Performance: 70% Genauigkeit, 30% Geschwindigkeit
+    const overallScore = (accuracyScore * 0.7) + (timeScore * 0.3);
+    
+    // Rang bestimmen basierend auf Overall Score
+    let performanceRank = 5;
+    if (overallScore >= 95) performanceRank = 1; // Herausragend
+    else if (overallScore >= 85) performanceRank = 2; // Sehr gut
+    else if (overallScore >= 75) performanceRank = 3; // Gut
+    else if (overallScore >= 65) performanceRank = 4; // Befriedigend
+    else performanceRank = 5; // Übung nötig
+    
+    return {
+      accuracyScore: Math.round(accuracyScore),
+      timeScore: Math.round(timeScore),
+      overallScore: Math.round(overallScore),
+      performanceRank,
+      avgTimePerQuestion: avgTimePerQuestion.toFixed(1),
+      targetTime: targetTotalTime
+    };
+  };
+
+  // LocalStorage Funktionen
+  const loadData = () => {
+    try {
+      const storedRewards = localStorage.getItem('rewards');
+      const storedPenalties = localStorage.getItem('penalties');
+      const storedQuestions = localStorage.getItem('numberOfQuestions');
+      
+      if (storedRewards) {
+        setRewards(JSON.parse(storedRewards));
+      } else {
+        setRewards(DEFAULT_REWARDS);
+        localStorage.setItem('rewards', JSON.stringify(DEFAULT_REWARDS));
+      }
+      
+      if (storedPenalties) {
+        setPenalties(JSON.parse(storedPenalties));
+      } else {
+        setPenalties(DEFAULT_PENALTIES);
+        localStorage.setItem('penalties', JSON.stringify(DEFAULT_PENALTIES));
+      }
+      
+      if (storedQuestions) {
+        setNumberOfQuestions(parseInt(storedQuestions));
+      }
+    } catch (error) {
+      console.error('Fehler beim Laden der Daten:', error);
+      setRewards(DEFAULT_REWARDS);
+      setPenalties(DEFAULT_PENALTIES);
+    }
+  };
+
+  const saveRewards = (newRewards) => {
+    try {
+      localStorage.setItem('rewards', JSON.stringify(newRewards));
+      setRewards(newRewards);
+    } catch (error) {
+      console.error('Fehler beim Speichern der Belohnungen:', error);
+    }
+  };
+
+  const savePenalties = (newPenalties) => {
+    try {
+      localStorage.setItem('penalties', JSON.stringify(newPenalties));
+      setPenalties(newPenalties);
+    } catch (error) {
+      console.error('Fehler beim Speichern der Strafaufgaben:', error);
+    }
+  };
+
+  const saveNumberOfQuestions = (num) => {
+    try {
+      localStorage.setItem('numberOfQuestions', num.toString());
+      setNumberOfQuestions(num);
+    } catch (error) {
+      console.error('Fehler beim Speichern der Aufgabenanzahl:', error);
+    }
+  };
+
+  // Aufgabengenerierung
+  const generateQuestion = (level) => {
+    const settings = gradeLevelSettings[level];
+    const operation = settings.ops[Math.floor(Math.random() * settings.ops.length)];
+    
+    let num1, num2, answer, questionText;
+    
+    // Level 3: Nur 1x1
+    if (level === 3) {
+      num1 = Math.floor(Math.random() * 12) + 1;
+      num2 = Math.floor(Math.random() * 12) + 1;
+      answer = num1 * num2;
+      return { num1, num2, operation: '×', answer };
+    }
+    
+    // Level 6: Erwachsene mit Prozent und Dreisatz
+    if (level === 6 && (operation === '%' || operation === 'dreisatz')) {
+      if (operation === '%') {
+        // Prozentrechnung: "X% von Y"
+        const percent = [5, 10, 15, 20, 25, 30, 40, 50, 75][Math.floor(Math.random() * 9)];
+        const base = [10, 20, 50, 80, 100, 120, 150, 200, 250][Math.floor(Math.random() * 9)];
+        answer = Math.round((percent / 100) * base);
+        questionText = `${percent}% von ${base}`;
+        return { questionText, answer, operation: '%', isSpecial: true };
+      } else {
+        // Dreisatz: "X Stück für Y€, was kosten Z Stück?"
+        const baseAmount = Math.floor(Math.random() * 5) + 2; // 2-6 Stück
+        const basePrice = (Math.floor(Math.random() * 8) + 1) * baseAmount; // Ganzzahlige Preise
+        const targetAmount = Math.floor(Math.random() * 8) + 3; // 3-10 Stück
+        answer = Math.round((basePrice / baseAmount) * targetAmount);
+        questionText = `${baseAmount} Stück = ${basePrice}€, ${targetAmount} Stück`;
+        return { questionText, answer, operation: 'dreisatz', isSpecial: true };
+      }
+    }
+    
+    // Normale Rechenoperationen
+    if (operation === '+') {
+      if (level <= 2) {
+        num1 = Math.floor(Math.random() * settings.range) + 1;
+        num2 = Math.floor(Math.random() * (settings.range - num1)) + 1;
+      } else {
+        num1 = Math.floor(Math.random() * settings.range) + 1;
+        num2 = Math.floor(Math.random() * settings.range) + 1;
+        while (num1 + num2 > settings.range) {
+          num2 = Math.floor(Math.random() * settings.range) + 1;
+        }
+      }
+      answer = num1 + num2;
+    } 
+    else if (operation === '-') {
+      num1 = Math.floor(Math.random() * settings.range) + 1;
+      num2 = Math.floor(Math.random() * num1) + 1;
+      answer = num1 - num2;
+    } 
+    else if (operation === '×') {
+      if (level === 4) {
+        num1 = Math.floor(Math.random() * 10) + 1;
+        num2 = Math.floor(Math.random() * 10) + 1;
+      } else if (level === 5) {
+        num1 = Math.floor(Math.random() * 12) + 1;
+        num2 = Math.floor(Math.random() * 12) + 1;
+      } else if (level === 6) {
+        num1 = Math.floor(Math.random() * 99) + 1;
+        num2 = Math.floor(Math.random() * 99) + 1;
+      } else {
+        num1 = Math.floor(Math.random() * 12) + 1;
+        num2 = Math.floor(Math.random() * 12) + 1;
+      }
+      answer = num1 * num2;
+    } 
+    else if (operation === '÷') {
+      if (level === 6) {
+        const divisor = Math.floor(Math.random() * 20) + 2;
+        const result = Math.floor(Math.random() * 50) + 1;
+        num1 = divisor * result;
+        num2 = divisor;
+      } else {
+        const divisor = Math.floor(Math.random() * 12) + 1;
+        const result = Math.floor(Math.random() * 12) + 1;
+        num1 = divisor * result;
+        num2 = divisor;
+      }
+      answer = num1 / num2;
+    }
+    
+    return { num1, num2, operation, answer };
+  };
+
+  // Singleplayer Spiel-Logik
+  const startGame = (grade) => {
+    setGradeLevel(grade);
+    setGameState('playing');
+    setIsMultiplayer(false);
+    setQuestionNumber(1);
+    setScore(0);
+    setCurrentQuestion(generateQuestion(grade));
+    setUserAnswer('');
+    setShowFeedback(false);
+    setFeedback(null);
+    setStartTime(Date.now());
+    setCurrentQuestionStartTime(Date.now());
+    setTotalTime(0);
+  };
+
+  // Multiplayer Setup
+  const startMultiplayerSetup = () => {
+    setGameState('multiplayer-setup');
+    setPlayer1({ name: '', level: 1 });
+    setPlayer2({ name: '', level: 1 });
+  };
+
+  const startMultiplayerGame = () => {
+    if (!player1.name || !player2.name) {
+      alert('Bitte Namen für beide Spieler eingeben!');
+      return;
+    }
+    
+    setIsMultiplayer(true);
+    setCurrentPlayer(1);
+    setQuestionNumber(1);
+    setPlayer1Score(0);
+    setPlayer2Score(0);
+    setPlayer1Time(0);
+    setPlayer2Time(0);
+    
+    const level = player1.level;
+    setGradeLevel(level);
+    setCurrentQuestion(generateQuestion(level));
+    setUserAnswer('');
+    setShowFeedback(false);
+    setFeedback(null);
+    setStartTime(Date.now());
+    setCurrentQuestionStartTime(Date.now());
+    setGameState('playing');
+  };
+
+  const switchPlayer = () => {
+    setShowHandover(true);
+    setHandoverTimer(5);
+    setGameState('handover');
+  };
+
+  const handleSubmit = (e) => {
+    e?.preventDefault();
+    
+    if (showFeedback || !userAnswer) return;
+    
+    const questionTime = (Date.now() - currentQuestionStartTime) / 1000;
+    const isCorrect = parseInt(userAnswer) === currentQuestion.answer;
+    
+    if (isCorrect) {
+      if (isMultiplayer) {
+        if (currentPlayer === 1) {
+          setPlayer1Score(player1Score + 1);
+          setPlayer1Time(player1Time + questionTime);
+        } else {
+          setPlayer2Score(player2Score + 1);
+          setPlayer2Time(player2Time + questionTime);
+        }
+      } else {
+        setScore(score + 1);
+      }
+      setFeedback({ type: 'correct', time: questionTime });
+    } else {
+      if (isMultiplayer) {
+        if (currentPlayer === 1) {
+          setPlayer1Time(player1Time + questionTime);
+        } else {
+          setPlayer2Time(player2Time + questionTime);
+        }
+      }
+      setFeedback({ type: 'wrong', correctAnswer: currentQuestion.answer, time: questionTime });
+    }
+    
+    setShowFeedback(true);
+    
+    setTimeout(() => {
+      nextQuestion();
+    }, 1500);
+  };
+
+  const nextQuestion = () => {
+    setShowFeedback(false);
+    setFeedback(null);
+    setUserAnswer('');
+    
+    if (isMultiplayer) {
+      const nextPlayer = currentPlayer === 1 ? 2 : 1;
+      setCurrentPlayer(nextPlayer);
+      
+      const totalQuestionsAnswered = questionNumber;
+      
+      if (totalQuestionsAnswered >= numberOfQuestions * 2) {
+        finishGame();
+        return;
+      }
+      
+      setQuestionNumber(totalQuestionsAnswered + 1);
+      switchPlayer();
+    } else {
+      if (questionNumber >= numberOfQuestions) {
+        finishGame();
+        return;
+      }
+      
+      setQuestionNumber(questionNumber + 1);
+      setCurrentQuestion(generateQuestion(gradeLevel));
+      setCurrentQuestionStartTime(Date.now());
+    }
+  };
+
+  const cancelGame = () => {
+    // Spiel abbrechen - zurück zum Menü ohne Wertung
+    setGameState('menu');
+    setIsMultiplayer(false);
+    setQuestionNumber(1);
+    setScore(0);
+    setPlayer1Score(0);
+    setPlayer2Score(0);
+    setPlayer1Time(0);
+    setPlayer2Time(0);
+    setCurrentPlayer(1);
+    setShowFeedback(false);
+    setFeedback(null);
+  };
+
+  const finishGame = () => {
+    const endTime = Date.now();
+    const finalTotalTime = (endTime - startTime) / 1000;
+    
+    if (isMultiplayer) {
+      const settings1 = gradeLevelSettings[player1.level];
+      const settings2 = gradeLevelSettings[player2.level];
+      
+      const perf1 = calculatePerformance(player1Score, numberOfQuestions, player1Time, settings1.targetTimePerQuestion);
+      const perf2 = calculatePerformance(player2Score, numberOfQuestions, player2Time, settings2.targetTimePerQuestion);
+      
+      setFinalResult({
+        isMultiplayer: true,
+        player1: {
+          name: player1.name,
+          score: player1Score,
+          total: numberOfQuestions,
+          time: player1Time,
+          performance: perf1
+        },
+        player2: {
+          name: player2.name,
+          score: player2Score,
+          total: numberOfQuestions,
+          time: player2Time,
+          performance: perf2
+        },
+        winner: perf1.overallScore > perf2.overallScore ? player1.name : 
+               perf2.overallScore > perf1.overallScore ? player2.name : 'Unentschieden'
+      });
+    } else {
+      const settings = gradeLevelSettings[gradeLevel];
+      const performance = calculatePerformance(score, numberOfQuestions, finalTotalTime, settings.targetTimePerQuestion);
+      
+      // Belohnung oder Strafe basierend auf Rang
+      let selectedRewardOrPenalty = null;
+      
+      if (performance.performanceRank <= 3 && rewards.length > 0) {
+        // Gute Performance: Belohnung passend zum Rang
+        const suitableRewards = rewards.filter(r => r.rank === performance.performanceRank);
+        if (suitableRewards.length > 0) {
+          selectedRewardOrPenalty = suitableRewards[Math.floor(Math.random() * suitableRewards.length)];
+        } else {
+          // Fallback: nächstbeste Belohnung
+          const sortedRewards = [...rewards].sort((a, b) => a.rank - b.rank);
+          selectedRewardOrPenalty = sortedRewards[0];
+        }
+      } else if (performance.performanceRank > 3 && penalties.length > 0) {
+        selectedRewardOrPenalty = penalties[Math.floor(Math.random() * penalties.length)];
+      }
+      
+      setFinalResult({
+        isMultiplayer: false,
+        score,
+        total: numberOfQuestions,
+        time: finalTotalTime,
+        performance,
+        selectedRewardOrPenalty
+      });
+    }
+    
+    setGameState('finished');
+  };
+
+  // Belohnungen verwalten
+  const addReward = () => {
+    if (newRewardPerson.trim() && newRewardText.trim()) {
+      const updated = [...rewards, { 
+        person: newRewardPerson.trim(), 
+        reward: newRewardText.trim(),
+        rank: newRewardRank
+      }];
+      saveRewards(updated);
+      setNewRewardPerson('');
+      setNewRewardText('');
+      setNewRewardRank(3);
+    }
+  };
+
+  const deleteReward = (index) => {
+    const updated = rewards.filter((_, i) => i !== index);
+    saveRewards(updated);
+  };
+
+  const addPenalty = () => {
+    if (newPenalty.trim()) {
+      const updated = [...penalties, newPenalty.trim()];
+      savePenalties(updated);
+      setNewPenalty('');
+    }
+  };
+
+  const deletePenalty = (index) => {
+    const updated = penalties.filter((_, i) => i !== index);
+    savePenalties(updated);
+  };
+
+  // PWA Installation
+  const handleInstallClick = async () => {
+    if (!deferredPrompt) return;
+    
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    
+    if (outcome === 'accepted') {
+      console.log('PWA wurde installiert');
+    }
+    
+    setDeferredPrompt(null);
+    setShowInstallButton(false);
+  };
+
+  // useEffect: Daten laden & PWA
+  useEffect(() => {
+    loadData();
+    
+    const handleBeforeInstallPrompt = (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+      setShowInstallButton(true);
+    };
+    
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    };
+  }, []);
+
+  // useEffect: Handover Timer
+  useEffect(() => {
+    if (gameState !== 'handover') return;
+    
+    const timer = setInterval(() => {
+      setHandoverTimer((prev) => {
+        if (prev <= 1) {
+          const level = currentPlayer === 1 ? player1.level : player2.level;
+          setGradeLevel(level);
+          setCurrentQuestion(generateQuestion(level));
+          setShowHandover(false);
+          setGameState('playing');
+          setCurrentQuestionStartTime(Date.now());
+          return 5;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    
+    return () => clearInterval(timer);
+  }, [gameState, handoverTimer, currentPlayer]);
+
+  // useEffect: Auto-Focus
+  useEffect(() => {
+    if (gameState === 'playing' && !showFeedback && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [gameState, showFeedback, questionNumber]);
+
+  // Render Helper
+  const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  const getRankLabel = (rank) => {
+    const labels = {
+      1: { text: 'Herausragend', color: 'text-yellow-600', emoji: '🏆' },
+      2: { text: 'Sehr gut', color: 'text-green-600', emoji: '🥈' },
+      3: { text: 'Gut', color: 'text-blue-600', emoji: '🥉' },
+      4: { text: 'Befriedigend', color: 'text-orange-600', emoji: '⭐' },
+      5: { text: 'Mehr üben', color: 'text-gray-600', emoji: '💪' }
+    };
+    return labels[rank] || labels[5];
+  };
+
+  const getRankBadge = (rank) => {
+    const badges = {
+      1: '🏆 Höchstgewinn',
+      2: '🥈 Super Belohnung',
+      3: '🥉 Tolle Belohnung',
+      4: '⭐ Kleine Belohnung',
+      5: '💪 Noch üben'
+    };
+    return badges[rank] || badges[5];
+  };
+
+  // Render Funktionen
+  const renderMenuScreen = () => (
+    <div className="text-center">
+      <div className="flex items-center justify-center mb-6">
+        <GraduationCap className="w-16 h-16 text-purple-600 mr-3" />
+        <h1 className="text-5xl font-bold text-purple-600">
+          Kopfrechnen-Spaß!
+        </h1>
+      </div>
+      
+      <p className="text-gray-600 mb-8 text-lg">
+        Schnelligkeit + Genauigkeit = Bessere Belohnung! 🎯⏱️
+      </p>
+      
+      <div className="mb-6">
+        <h3 className="text-2xl font-bold text-gray-800 mb-4">🎮 Spielmodus wählen</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          <button
+            onClick={() => setGameState('menu')}
+            className="bg-blue-500 hover:scale-105 transform transition-all duration-200 text-white rounded-2xl p-6 shadow-lg hover:shadow-xl"
+          >
+            <User className="w-12 h-12 mx-auto mb-2" />
+            <div className="text-2xl font-bold">Einzelspieler</div>
+            <div className="text-sm opacity-90 mt-1">Zeit-Challenge</div>
+          </button>
+          
+          <button
+            onClick={startMultiplayerSetup}
+            className="bg-green-500 hover:scale-105 transform transition-all duration-200 text-white rounded-2xl p-6 shadow-lg hover:shadow-xl"
+          >
+            <Users className="w-12 h-12 mx-auto mb-2" />
+            <div className="text-2xl font-bold">Mehrspieler</div>
+            <div className="text-sm opacity-90 mt-1">Wer ist schneller?</div>
+          </button>
+        </div>
+      </div>
+      
+      <h3 className="text-xl font-bold text-gray-800 mb-4">📚 Schwierigkeitsgrad (Einzelspieler)</h3>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+        {Object.entries(gradeLevelSettings).map(([level, settings]) => (
+          <button
+            key={level}
+            onClick={() => startGame(parseInt(level))}
+            className="hover:scale-105 transform transition-all duration-200 text-white rounded-2xl p-6 shadow-lg hover:shadow-xl"
+            style={{ 
+              backgroundColor: settings.color === 'green-400' ? '#4ade80' : 
+                             settings.color === 'blue-400' ? '#60a5fa' : 
+                             settings.color === 'orange-500' ? '#f97316' :
+                             settings.color === 'yellow-400' ? '#facc15' : 
+                             settings.color === 'red-400' ? '#f87171' :
+                             settings.color === 'purple-600' ? '#9333ea' : '#60a5fa'
+            }}
+          >
+            <div className="text-3xl font-bold mb-2">{settings.name}</div>
+            <div className="text-sm opacity-90">{settings.description}</div>
+            <div className="mt-3 flex items-center justify-center text-sm">
+              <Zap className="w-4 h-4 mr-1" />
+              Ziel: {settings.targetTimePerQuestion}s pro Aufgabe
+            </div>
+          </button>
+        ))}
+      </div>
+      
+      <div className="flex justify-center gap-4">
+        <button
+          onClick={() => setGameState('settings')}
+          className="flex items-center gap-2 bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-xl transition-colors duration-200"
+        >
+          <Settings className="w-5 h-5" />
+          Einstellungen
+        </button>
+        
+        {showInstallButton && (
+          <button
+            onClick={handleInstallClick}
+            className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-xl transition-colors duration-200"
+          >
+            <Download className="w-5 h-5" />
+            App installieren
+          </button>
+        )}
+      </div>
+    </div>
+  );
+
+  const renderMultiplayerSetup = () => (
+    <div>
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-3xl font-bold text-gray-800">🎮 Mehrspieler einrichten</h2>
+        <button
+          onClick={() => setGameState('menu')}
+          className="text-gray-600 hover:text-gray-800"
+        >
+          <X className="w-8 h-8" />
+        </button>
+      </div>
+      
+      <div className="space-y-6">
+        <div className="bg-blue-50 p-6 rounded-2xl">
+          <h3 className="text-2xl font-bold text-blue-700 mb-4">👤 Spieler 1</h3>
+          <input
+            type="text"
+            value={player1.name}
+            onChange={(e) => setPlayer1({ ...player1, name: e.target.value })}
+            placeholder="Name eingeben"
+            className="w-full border-2 border-blue-300 rounded-lg px-4 py-3 mb-4 text-lg focus:outline-none focus:border-blue-500"
+          />
+          <select
+            value={player1.level}
+            onChange={(e) => setPlayer1({ ...player1, level: parseInt(e.target.value) })}
+            className="w-full border-2 border-blue-300 rounded-lg px-4 py-3 text-lg focus:outline-none focus:border-blue-500"
+          >
+            {Object.entries(gradeLevelSettings).map(([level, settings]) => (
+              <option key={level} value={level}>
+                {settings.name} - {settings.description}
+              </option>
+            ))}
+          </select>
+        </div>
+        
+        <div className="bg-green-50 p-6 rounded-2xl">
+          <h3 className="text-2xl font-bold text-green-700 mb-4">👤 Spieler 2</h3>
+          <input
+            type="text"
+            value={player2.name}
+            onChange={(e) => setPlayer2({ ...player2, name: e.target.value })}
+            placeholder="Name eingeben"
+            className="w-full border-2 border-green-300 rounded-lg px-4 py-3 mb-4 text-lg focus:outline-none focus:border-green-500"
+          />
+          <select
+            value={player2.level}
+            onChange={(e) => setPlayer2({ ...player2, level: parseInt(e.target.value) })}
+            className="w-full border-2 border-green-300 rounded-lg px-4 py-3 text-lg focus:outline-none focus:border-green-500"
+          >
+            {Object.entries(gradeLevelSettings).map(([level, settings]) => (
+              <option key={level} value={level}>
+                {settings.name} - {settings.description}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+      
+      <button
+        onClick={startMultiplayerGame}
+        className="w-full mt-6 bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600 text-white text-2xl font-bold py-4 rounded-2xl transition-all duration-200 hover:scale-105"
+      >
+        🎮 Spiel starten!
+      </button>
+    </div>
+  );
+
+  const renderHandoverScreen = () => {
+    const nextPlayer = currentPlayer === 1 ? player1 : player2;
+    
+    return (
+      <div className="text-center">
+        <div className="mb-8">
+          <Users className="w-24 h-24 text-purple-600 mx-auto mb-4 animate-bounce" />
+          <h2 className="text-4xl font-bold text-gray-800 mb-4">
+            Gerät übergeben!
+          </h2>
+          <p className="text-2xl text-gray-600 mb-6">
+            Nächster Spieler: <span className="font-bold text-purple-600">{nextPlayer.name}</span>
+          </p>
+        </div>
+        
+        <div className="bg-purple-100 rounded-3xl p-12 mb-6">
+          <div className="text-8xl font-bold text-purple-600 mb-4">
+            {handoverTimer}
+          </div>
+          <p className="text-xl text-gray-700">
+            Sekunden bis zur nächsten Aufgabe...
+          </p>
+        </div>
+        
+        <div className="text-lg text-gray-600">
+          Level: <span className="font-bold">{gradeLevelSettings[nextPlayer.level].name}</span>
+        </div>
+      </div>
+    );
+  };
+
+  const renderPlayingScreen = () => {
+    const settings = isMultiplayer 
+      ? gradeLevelSettings[currentPlayer === 1 ? player1.level : player2.level]
+      : gradeLevelSettings[gradeLevel];
+    
+    const totalQuestions = isMultiplayer ? numberOfQuestions * 2 : numberOfQuestions;
+    const progress = (questionNumber / totalQuestions) * 100;
+    
+    const currentPlayerName = isMultiplayer ? (currentPlayer === 1 ? player1.name : player2.name) : null;
+    const currentScore = isMultiplayer ? (currentPlayer === 1 ? player1Score : player2Score) : score;
+    
+    const elapsedTime = isMultiplayer 
+      ? (currentPlayer === 1 ? player1Time : player2Time)
+      : (Date.now() - startTime) / 1000;
+    
+    return (
+      <div>
+        {/* Abbruch-Button */}
+        <div className="flex justify-end mb-4">
+          <button
+            onClick={cancelGame}
+            className="flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl transition-colors duration-200 shadow-md hover:shadow-lg"
+            title="Spiel abbrechen"
+          >
+            <X className="w-5 h-5" />
+            Abbrechen
+          </button>
+        </div>
+
+        {isMultiplayer && (
+          <div className="mb-4 bg-gradient-to-r from-blue-100 to-green-100 p-4 rounded-2xl">
+            <div className="flex justify-between items-center">
+              <div className={`${currentPlayer === 1 ? 'font-bold text-blue-700' : 'text-gray-600'}`}>
+                👤 {player1.name}: {player1Score} ({formatTime(player1Time)})
+              </div>
+              <div className="text-2xl font-bold text-purple-600">
+                {currentPlayerName} ist dran!
+              </div>
+              <div className={`${currentPlayer === 2 ? 'font-bold text-green-700' : 'text-gray-600'}`}>
+                👤 {player2.name}: {player2Score} ({formatTime(player2Time)})
+              </div>
+            </div>
+          </div>
+        )}
+        
+        <div className="flex justify-between items-center mb-6">
+          <div className="text-lg font-bold text-gray-700">
+            ⏱️ Zeit: {formatTime(elapsedTime)}
+          </div>
+          <div className="text-lg font-bold text-purple-600">
+            Ziel: {settings.targetTimePerQuestion}s/Aufgabe
+          </div>
+        </div>
+        
+        <div className="mb-6">
+          <div className="flex justify-between text-sm text-gray-600 mb-2">
+            <span>Aufgabe {questionNumber} von {totalQuestions}</span>
+            <span>{currentScore} richtig</span>
+          </div>
+          <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+            <div 
+              className="bg-gradient-to-r from-purple-500 to-pink-500 h-full transition-all duration-300"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+        </div>
+        
+        {currentQuestion && (
+          <div className="text-center mb-8">
+            {/* Spezielle Aufgaben (Prozent/Dreisatz) */}
+            {currentQuestion.isSpecial ? (
+              <div>
+                <div className="text-4xl font-bold text-gray-800 mb-4">
+                  {currentQuestion.operation === '%' ? '📊 Prozentrechnung' : '🔢 Dreisatz'}
+                </div>
+                <div className="text-5xl font-bold text-purple-600 mb-8">
+                  {currentQuestion.questionText}
+                </div>
+                {currentQuestion.operation === 'dreisatz' && (
+                  <div className="text-2xl text-gray-600 mb-6">
+                    = ? €
+                  </div>
+                )}
+              </div>
+            ) : (
+              /* Normale Rechenaufgaben */
+              <div className="text-7xl font-bold text-gray-800 mb-8">
+                {currentQuestion.num1} {currentQuestion.operation} {currentQuestion.num2} = ?
+              </div>
+            )}
+            
+            <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+              <input
+                ref={inputRef}
+                type="number"
+                value={userAnswer}
+                onChange={(e) => setUserAnswer(e.target.value)}
+                disabled={showFeedback}
+                className="w-full text-4xl text-center border-4 border-purple-300 rounded-2xl px-4 py-4 mb-4 focus:outline-none focus:border-purple-500 disabled:bg-gray-100"
+                placeholder="?"
+                autoComplete="off"
+              />
+              
+              <button
+                type="submit"
+                disabled={showFeedback || !userAnswer}
+                className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white text-2xl font-bold py-4 rounded-2xl transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+              >
+                Antworten
+              </button>
+            </form>
+          </div>
+        )}
+        
+        {showFeedback && feedback && (
+          <div className={`text-center p-6 rounded-2xl ${
+            feedback.type === 'correct' ? 'bg-green-100 text-green-800' :
+            'bg-red-100 text-red-800'
+          }`}>
+            <div className="text-4xl mb-2">
+              {feedback.type === 'correct' ? '✅ Richtig!' : '❌ Falsch!'}
+            </div>
+            <div className="text-xl mb-2">
+              Zeit: {feedback.time.toFixed(1)}s
+            </div>
+            {feedback.type !== 'correct' && (
+              <div className="text-2xl">
+                Die richtige Antwort ist: <strong>{feedback.correctAnswer}</strong>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const renderSettingsScreen = () => (
+    <div>
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-3xl font-bold text-gray-800">Einstellungen</h2>
+        <button
+          onClick={() => setGameState('menu')}
+          className="text-gray-600 hover:text-gray-800"
+        >
+          <X className="w-8 h-8" />
+        </button>
+      </div>
+      
+      <div className="mb-8">
+        <h3 className="text-2xl font-bold text-gray-800 mb-4">🎯 Anzahl der Aufgaben</h3>
+        <div className="flex items-center gap-4">
+          <input
+            type="number"
+            min="5"
+            max="50"
+            value={numberOfQuestions}
+            onChange={(e) => saveNumberOfQuestions(parseInt(e.target.value) || 10)}
+            className="w-32 border-2 border-gray-300 rounded-lg px-4 py-2 text-lg focus:outline-none focus:border-purple-500"
+          />
+          <span className="text-gray-600">Aufgaben pro Runde</span>
+        </div>
+      </div>
+      
+      <div className="mb-8">
+        <div className="flex items-center gap-2 mb-4">
+          <Gift className="w-6 h-6 text-green-600" />
+          <h3 className="text-2xl font-bold text-gray-800">Belohnungen mit Ranking</h3>
+        </div>
+        <p className="text-sm text-gray-600 mb-4">
+          Rang 1 = Höchstgewinn (beste Performance), Rang 5 = Kleinste Belohnung
+        </p>
+        
+        <div className="space-y-2 mb-4 max-h-60 overflow-y-auto">
+          {rewards.sort((a, b) => a.rank - b.rank).map((reward, index) => (
+            <div key={index} className="flex items-center justify-between bg-green-50 p-3 rounded-xl">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">{getRankBadge(reward.rank).split(' ')[0]}</span>
+                <div>
+                  <div className="font-bold text-green-700">{reward.person}: {reward.reward}</div>
+                  <div className="text-xs text-gray-600">{getRankBadge(reward.rank)}</div>
+                </div>
+              </div>
+              <button
+                onClick={() => deleteReward(rewards.indexOf(reward))}
+                className="text-red-500 hover:text-red-700"
+              >
+                <Trash2 className="w-5 h-5" />
+              </button>
+            </div>
+          ))}
+        </div>
+        
+        <div className="space-y-2">
+          <input
+            type="text"
+            value={newRewardPerson}
+            onChange={(e) => setNewRewardPerson(e.target.value)}
+            placeholder="Person (z.B. Mama)"
+            className="w-full border-2 border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-green-500"
+          />
+          <input
+            type="text"
+            value={newRewardText}
+            onChange={(e) => setNewRewardText(e.target.value)}
+            placeholder="Belohnung (z.B. McDonalds)"
+            className="w-full border-2 border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-green-500"
+          />
+          <div className="flex items-center gap-2">
+            <label className="text-gray-700 font-semibold">Rang:</label>
+            <select
+              value={newRewardRank}
+              onChange={(e) => setNewRewardRank(parseInt(e.target.value))}
+              className="flex-1 border-2 border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-green-500"
+            >
+              <option value={1}>1 - Höchstgewinn 🏆</option>
+              <option value={2}>2 - Super Belohnung 🥈</option>
+              <option value={3}>3 - Tolle Belohnung 🥉</option>
+              <option value={4}>4 - Kleine Belohnung ⭐</option>
+              <option value={5}>5 - Mini Belohnung 💪</option>
+            </select>
+          </div>
+          <button
+            onClick={addReward}
+            className="w-full flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg transition-colors duration-200"
+          >
+            <Plus className="w-5 h-5" />
+            Belohnung hinzufügen
+          </button>
+        </div>
+      </div>
+      
+      <div>
+        <div className="flex items-center gap-2 mb-4">
+          <Frown className="w-6 h-6 text-orange-600" />
+          <h3 className="text-2xl font-bold text-gray-800">Aufgaben bei schwacher Leistung</h3>
+        </div>
+        
+        <div className="space-y-2 mb-4 max-h-60 overflow-y-auto">
+          {penalties.map((penalty, index) => (
+            <div key={index} className="flex items-center justify-between bg-orange-50 p-3 rounded-xl">
+              <span className="text-gray-700">{penalty}</span>
+              <button
+                onClick={() => deletePenalty(index)}
+                className="text-red-500 hover:text-red-700"
+              >
+                <Trash2 className="w-5 h-5" />
+              </button>
+            </div>
+          ))}
+        </div>
+        
+        <div className="space-y-2">
+          <input
+            type="text"
+            value={newPenalty}
+            onChange={(e) => setNewPenalty(e.target.value)}
+            placeholder="Neue Aufgabe"
+            className="w-full border-2 border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-orange-500"
+          />
+          <button
+            onClick={addPenalty}
+            className="w-full flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-lg transition-colors duration-200"
+          >
+            <Plus className="w-5 h-5" />
+            Aufgabe hinzufügen
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderFinishedScreen = () => {
+    if (finalResult.isMultiplayer) {
+      const rankLabel1 = getRankLabel(finalResult.player1.performance.performanceRank);
+      const rankLabel2 = getRankLabel(finalResult.player2.performance.performanceRank);
+      
+      return (
+        <div className="text-center">
+          <div className="mb-6">
+            <Trophy className="w-24 h-24 text-yellow-500 mx-auto mb-4 animate-bounce" />
+            <h2 className="text-4xl font-bold text-gray-800 mb-6">
+              🎮 Spielende!
+            </h2>
+          </div>
+          
+          <div className="space-y-4 mb-6">
+            <div className="p-6 rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-300">
+              <div className="text-2xl font-bold mb-2">
+                👤 {finalResult.player1.name}
+              </div>
+              <div className="text-5xl font-bold text-purple-600 mb-2">
+                {finalResult.player1.performance.overallScore} Punkte
+              </div>
+              <div className="text-lg mb-2">
+                {finalResult.player1.score} von {finalResult.player1.total} richtig
+              </div>
+              <div className="text-lg mb-2">
+                Zeit: {formatTime(finalResult.player1.time)} (Ø {finalResult.player1.performance.avgTimePerQuestion}s)
+              </div>
+              <div className={`text-xl font-bold ${rankLabel1.color}`}>
+                {rankLabel1.emoji} {rankLabel1.text}
+              </div>
+            </div>
+            
+            <div className="p-6 rounded-2xl bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300">
+              <div className="text-2xl font-bold mb-2">
+                👤 {finalResult.player2.name}
+              </div>
+              <div className="text-5xl font-bold text-purple-600 mb-2">
+                {finalResult.player2.performance.overallScore} Punkte
+              </div>
+              <div className="text-lg mb-2">
+                {finalResult.player2.score} von {finalResult.player2.total} richtig
+              </div>
+              <div className="text-lg mb-2">
+                Zeit: {formatTime(finalResult.player2.time)} (Ø {finalResult.player2.performance.avgTimePerQuestion}s)
+              </div>
+              <div className={`text-xl font-bold ${rankLabel2.color}`}>
+                {rankLabel2.emoji} {rankLabel2.text}
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-yellow-100 p-6 rounded-2xl mb-6">
+            <div className="text-3xl font-bold text-yellow-800">
+              {finalResult.winner === 'Unentschieden' 
+                ? '🤝 Unentschieden!' 
+                : `🏆 ${finalResult.winner} gewinnt!`}
+            </div>
+          </div>
+          
+          <button
+            onClick={() => setGameState('menu')}
+            className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white text-2xl font-bold py-4 px-8 rounded-2xl transition-all duration-200 hover:scale-105"
+          >
+            Zurück zum Hauptmenü
+          </button>
+        </div>
+      );
+    }
+    
+    const rankLabel = getRankLabel(finalResult.performance.performanceRank);
+    
+    return (
+      <div className="text-center">
+        <div className="mb-6">
+          <Award className="w-24 h-24 text-yellow-500 mx-auto mb-4 animate-bounce" />
+          
+          <h2 className="text-4xl font-bold text-gray-800 mb-4">
+            Geschafft! 🎉
+          </h2>
+          
+          <div className="bg-gradient-to-br from-purple-100 to-pink-100 p-6 rounded-2xl mb-4">
+            <div className="text-6xl font-bold text-purple-600 mb-2">
+              {finalResult.performance.overallScore}
+            </div>
+            <div className="text-xl text-gray-700">Gesamt-Punkte</div>
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-2 gap-4 mb-6">
+          <div className="bg-green-100 p-4 rounded-xl">
+            <div className="text-3xl font-bold text-green-700">
+              {finalResult.performance.accuracyScore}%
+            </div>
+            <div className="text-sm text-gray-600">Genauigkeit</div>
+            <div className="text-xs text-gray-500 mt-1">
+              {finalResult.score} von {finalResult.total}
+            </div>
+          </div>
+          
+          <div className="bg-blue-100 p-4 rounded-xl">
+            <div className="text-3xl font-bold text-blue-700">
+              {finalResult.performance.timeScore}
+            </div>
+            <div className="text-sm text-gray-600">Geschwindigkeit</div>
+            <div className="text-xs text-gray-500 mt-1">
+              Ø {finalResult.performance.avgTimePerQuestion}s
+            </div>
+          </div>
+        </div>
+        
+        <div className="bg-gray-100 p-4 rounded-xl mb-6">
+          <div className="text-lg text-gray-600 mb-2">
+            Gesamtzeit: <strong>{formatTime(finalResult.time)}</strong>
+          </div>
+          <div className="text-sm text-gray-500">
+            Ziel war: {formatTime(finalResult.performance.targetTime)}
+          </div>
+        </div>
+        
+        <div className={`p-6 rounded-2xl mb-6 ${
+          finalResult.performance.performanceRank <= 3 ? 'bg-gradient-to-br from-yellow-100 to-orange-100' : 'bg-orange-100'
+        }`}>
+          <div className={`text-3xl font-bold mb-3 ${rankLabel.color}`}>
+            {rankLabel.emoji} {rankLabel.text}
+          </div>
+          
+          {finalResult.selectedRewardOrPenalty && (
+            <div className="text-xl mt-4">
+              {finalResult.performance.performanceRank <= 3 ? (
+                <>
+                  <div className="font-bold mb-2">🎁 Deine Belohnung:</div>
+                  <div>
+                    <span className="font-bold text-green-700">
+                      {finalResult.selectedRewardOrPenalty.person}
+                    </span>
+                    {': '}
+                    <span className="text-gray-700">
+                      {finalResult.selectedRewardOrPenalty.reward}
+                    </span>
+                  </div>
+                  <div className="text-sm text-gray-600 mt-2">
+                    {getRankBadge(finalResult.selectedRewardOrPenalty.rank)}
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="font-bold mb-2">🎯 Deine Aufgabe:</div>
+                  <div className="text-gray-700">{finalResult.selectedRewardOrPenalty}</div>
+                  <div className="text-sm text-gray-600 mt-2">Beim nächsten Mal wird's besser! 💪</div>
+                </>
+              )}
+            </div>
+          )}
+        </div>
+        
+        <button
+          onClick={() => setGameState('menu')}
+          className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white text-2xl font-bold py-4 px-8 rounded-2xl transition-all duration-200 hover:scale-105"
+        >
+          Zurück zum Hauptmenü
+        </button>
+      </div>
+    );
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-purple-400 via-pink-400 to-blue-400 flex items-center justify-center p-4 relative overflow-hidden">
+      <AnimatedBackground />
+      <div className="bg-white rounded-3xl shadow-2xl p-8 max-w-2xl w-full max-h-screen overflow-y-auto relative z-10">
+        {gameState === 'menu' && renderMenuScreen()}
+        {gameState === 'multiplayer-setup' && renderMultiplayerSetup()}
+        {gameState === 'playing' && renderPlayingScreen()}
+        {gameState === 'handover' && renderHandoverScreen()}
+        {gameState === 'settings' && renderSettingsScreen()}
+        {gameState === 'finished' && renderFinishedScreen()}
+      </div>
+    </div>
+  );
+}
+
+export default App;
