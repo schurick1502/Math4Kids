@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useCallback, memo } from 'react';
 import { 
   Trophy, Star, Timer, Heart, Settings, 
   Plus, Trash2, Gift, Frown, GraduationCap, Download, X, Users, User,
@@ -26,36 +26,104 @@ const DEFAULT_PENALTIES = [
   'Mache 3 Purzelbäume'
 ];
 
-// Animierte Hintergrund-Komponente
-function AnimatedBackground() {
-  const symbols = ['➕', '➖', '✖️', '➗', '🟰', '🎯', '⭐', '✨', '🌟', '💫', '🎈', '🎨', '🎪', '🎭'];
-  const colors = ['text-yellow-300', 'text-pink-300', 'text-blue-300', 'text-purple-300', 'text-green-300', 'text-red-300'];
+// Erweiterte Geräte-Erkennung für Performance-Optimierung
+const detectDevicePerformance = () => {
+  const ua = navigator.userAgent;
+  const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua);
+  const hardwareConcurrency = navigator.hardwareConcurrency || 2;
+  const deviceMemory = navigator.deviceMemory || 4;
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  const effectiveType = connection?.effectiveType || '4g';
+  
+  // Sehr langsame Geräte: 2 Kerne oder weniger, oder weniger als 2GB RAM, oder langsame Verbindung
+  const isVeryLowEnd = isMobile && (hardwareConcurrency <= 2 || deviceMemory <= 2 || effectiveType === '2g' || effectiveType === 'slow-2g');
+  
+  // Langsamere Geräte: 4 Kerne oder weniger, oder weniger als 4GB RAM
+  const isLowEnd = isMobile && (hardwareConcurrency <= 4 || deviceMemory <= 4);
+  
+  return { isVeryLowEnd, isLowEnd, isMobile };
+};
+
+// Generiere einmalig die Floating-Elemente Daten (Performance-Optimierung)
+const generateFloatingElements = () => {
+  const device = detectDevicePerformance();
+  
+  // Sehr langsame Geräte: Keine Floating-Elemente
+  if (device.isVeryLowEnd) {
+    return [];
+  }
+  
+  const symbols = ['➕', '➖', '✖️', '➗', '🟰', '🎯', '⭐', '✨', '🌟', '💫'];
+  const colors = ['text-yellow-300', 'text-pink-300', 'text-blue-300', 'text-purple-300', 'text-green-300'];
+  
+  // Reduziere Elemente basierend auf Geräteleistung
+  const elementCount = device.isLowEnd ? 4 : 8;
+  
+  return Array.from({ length: elementCount }, (_, i) => {
+    const left = Math.random() * 100;
+    const top = Math.random() * 100;
+    const fontSize = Math.random() * 1.2 + 0.8; // Weiter reduziert
+    const delay = Math.random() * 5;
+    const duration = Math.random() * 15 + 20; // Langsamere Animationen
+    const symbol = symbols[Math.floor(Math.random() * symbols.length)];
+    const color = colors[i % colors.length];
+    
+    return { left, top, fontSize, delay, duration, symbol, color };
+  });
+};
+
+// Animierte Hintergrund-Komponente (memoized für Performance)
+const AnimatedBackground = memo(() => {
+  const device = useMemo(() => detectDevicePerformance(), []);
+  const floatingElements = useMemo(() => generateFloatingElements(), []);
+  
+  // Blur-Effekte für sehr langsame Geräte deaktivieren
+  const blurClass = device.isVeryLowEnd ? 'blur-lg' : device.isLowEnd ? 'blur-xl' : 'blur-2xl';
+  const blobOpacity = device.isVeryLowEnd ? 0.3 : device.isLowEnd ? 0.5 : 0.6;
+  
+  // Weniger Blob-Elemente für langsamere Geräte
+  const showBlobs = !device.isVeryLowEnd;
   
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none">
-      <div className="absolute top-0 left-0 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
-      <div className="absolute top-0 right-0 w-96 h-96 bg-pink-400 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
-      <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
+      {/* Blur-Effekte angepasst basierend auf Geräteleistung */}
+      {showBlobs && (
+        <>
+          <div className={`absolute top-0 left-0 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter ${blurClass} animate-blob`} 
+               style={{ opacity: blobOpacity, willChange: 'transform' }}></div>
+          {!device.isLowEnd && (
+            <>
+              <div className={`absolute top-0 right-0 w-96 h-96 bg-pink-400 rounded-full mix-blend-multiply filter ${blurClass} animate-blob animation-delay-2000`} 
+                   style={{ opacity: blobOpacity, willChange: 'transform' }}></div>
+              <div className={`absolute bottom-0 left-1/2 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter ${blurClass} animate-blob animation-delay-4000`} 
+                   style={{ opacity: blobOpacity, willChange: 'transform' }}></div>
+            </>
+          )}
+        </>
+      )}
       
-      {[...Array(20)].map((_, i) => (
+      {floatingElements.map((elem, i) => (
         <div
           key={i}
-          className={`absolute ${colors[i % colors.length]} animate-float`}
+          className={`absolute ${elem.color} animate-float`}
           style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            fontSize: `${Math.random() * 2 + 1}rem`,
-            animationDelay: `${Math.random() * 5}s`,
-            animationDuration: `${Math.random() * 10 + 15}s`,
-            opacity: 0.3
+            left: `${elem.left}%`,
+            top: `${elem.top}%`,
+            fontSize: `${elem.fontSize}rem`,
+            animationDelay: `${elem.delay}s`,
+            animationDuration: `${elem.duration}s`,
+            opacity: 0.3,
+            willChange: 'transform'
           }}
         >
-          {symbols[Math.floor(Math.random() * symbols.length)]}
+          {elem.symbol}
         </div>
       ))}
     </div>
   );
-}
+});
+
+AnimatedBackground.displayName = 'AnimatedBackground';
 
 function App() {
   // Game State
@@ -157,8 +225,8 @@ function App() {
     }
   };
 
-  // Bewertungs-Funktion
-  const calculatePerformance = (correctAnswers, totalQuestions, totalSeconds, targetSecondsPerQuestion) => {
+  // Bewertungs-Funktion (memoized mit useCallback)
+  const calculatePerformance = useCallback((correctAnswers, totalQuestions, totalSeconds, targetSecondsPerQuestion) => {
     const accuracyScore = (correctAnswers / totalQuestions) * 100;
     const targetTotalTime = totalQuestions * targetSecondsPerQuestion;
     const avgTimePerQuestion = totalSeconds / totalQuestions;
@@ -193,7 +261,7 @@ function App() {
       avgTimePerQuestion: avgTimePerQuestion.toFixed(1),
       targetTime: targetTotalTime
     };
-  };
+  }, []);
 
   // LocalStorage Funktionen
   const loadData = () => {
@@ -253,8 +321,8 @@ function App() {
     }
   };
 
-  // Aufgabengenerierung
-  const generateQuestion = (level) => {
+  // Aufgabengenerierung (memoized mit useCallback)
+  const generateQuestion = useCallback((level) => {
     const settings = gradeLevelSettings[level];
     const operation = settings.ops[Math.floor(Math.random() * settings.ops.length)];
     
@@ -339,7 +407,7 @@ function App() {
     }
     
     return { num1, num2, operation, answer };
-  };
+  }, []);
 
   // Singleplayer Spiel-Logik
   const startGame = (grade) => {
@@ -608,7 +676,7 @@ function App() {
     };
   }, []);
 
-  // useEffect: Handover Timer
+  // useEffect: Handover Timer (optimiert - handoverTimer aus dependencies entfernt)
   useEffect(() => {
     if (gameState !== 'handover') return;
     
@@ -628,7 +696,7 @@ function App() {
     }, 1000);
     
     return () => clearInterval(timer);
-  }, [gameState, handoverTimer, currentPlayer]);
+  }, [gameState, currentPlayer, player1.level, player2.level, generateQuestion]);
 
   // useEffect: Auto-Focus
   useEffect(() => {
@@ -637,14 +705,14 @@ function App() {
     }
   }, [gameState, showFeedback, questionNumber]);
 
-  // Render Helper
-  const formatTime = (seconds) => {
+  // Render Helper (memoized für Performance)
+  const formatTime = useCallback((seconds) => {
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
     return `${mins}:${secs.toString().padStart(2, '0')}`;
-  };
+  }, []);
 
-  const getRankLabel = (rank) => {
+  const getRankLabel = useCallback((rank) => {
     const labels = {
       1: { text: 'Herausragend', color: 'text-yellow-600', emoji: '🏆' },
       2: { text: 'Sehr gut', color: 'text-green-600', emoji: '🥈' },
@@ -653,9 +721,9 @@ function App() {
       5: { text: 'Mehr üben', color: 'text-gray-600', emoji: '💪' }
     };
     return labels[rank] || labels[5];
-  };
+  }, []);
 
-  const getRankBadge = (rank) => {
+  const getRankBadge = useCallback((rank) => {
     const badges = {
       1: '🏆 Höchstgewinn',
       2: '🥈 Super Belohnung',
@@ -664,7 +732,7 @@ function App() {
       5: '💪 Noch üben'
     };
     return badges[rank] || badges[5];
-  };
+  }, []);
 
   // Render Funktionen
   const renderMenuScreen = () => (
@@ -849,7 +917,8 @@ function App() {
     );
   };
 
-  const renderPlayingScreen = () => {
+  // Berechnungen für Playing Screen memoized
+  const playingScreenData = useMemo(() => {
     const settings = isMultiplayer 
       ? gradeLevelSettings[currentPlayer === 1 ? player1.level : player2.level]
       : gradeLevelSettings[gradeLevel];
@@ -862,7 +931,13 @@ function App() {
     
     const elapsedTime = isMultiplayer 
       ? (currentPlayer === 1 ? player1Time : player2Time)
-      : (Date.now() - startTime) / 1000;
+      : startTime ? (Date.now() - startTime) / 1000 : 0;
+    
+    return { settings, totalQuestions, progress, currentPlayerName, currentScore, elapsedTime };
+  }, [isMultiplayer, currentPlayer, player1, player2, gradeLevel, numberOfQuestions, questionNumber, player1Score, player2Score, score, player1Time, player2Time, startTime]);
+
+  const renderPlayingScreen = () => {
+    const { settings, totalQuestions, progress, currentPlayerName, currentScore, elapsedTime } = playingScreenData;
     
     return (
       <div>

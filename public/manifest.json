@@ -3,6 +3,7 @@
   "short_name": "Mathe",
   "description": "Motivierendes Kopfrechnen-Spiel für Kinder",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#9333ea",
   "theme_color": "#9333ea",
@@ -21,7 +22,11 @@
       "purpose": "any maskable"
     }
   ],
-  "categories": ["education", "games"]
+  "categories": ["education", "games"],
+  "screenshots": [],
+  "shortcuts": [],
+  "share_target": null,
+  "prefer_related_applications": false
 }
 
 

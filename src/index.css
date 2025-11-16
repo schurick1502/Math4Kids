@@ -25,47 +25,53 @@ input[type="number"]::-webkit-inner-spin-button {
   margin: 0;
 }
 
-/* Animationen für den Hintergrund */
+/* Animationen für den Hintergrund - GPU-optimiert */
 @keyframes blob {
   0%, 100% {
-    transform: translate(0, 0) scale(1);
+    transform: translate3d(0, 0, 0) scale(1);
   }
   25% {
-    transform: translate(20px, -50px) scale(1.1);
+    transform: translate3d(20px, -50px, 0) scale(1.1);
   }
   50% {
-    transform: translate(-20px, 20px) scale(0.9);
+    transform: translate3d(-20px, 20px, 0) scale(0.9);
   }
   75% {
-    transform: translate(50px, 50px) scale(1.05);
+    transform: translate3d(50px, 50px, 0) scale(1.05);
   }
 }
 
 @keyframes float {
   0%, 100% {
-    transform: translateY(0) rotate(0deg);
+    transform: translate3d(0, 0, 0) rotate(0deg);
     opacity: 0.3;
   }
   25% {
-    transform: translateY(-20px) rotate(5deg);
+    transform: translate3d(0, -20px, 0) rotate(5deg);
     opacity: 0.5;
   }
   50% {
-    transform: translateY(-40px) rotate(-5deg);
+    transform: translate3d(0, -40px, 0) rotate(-5deg);
     opacity: 0.3;
   }
   75% {
-    transform: translateY(-20px) rotate(3deg);
+    transform: translate3d(0, -20px, 0) rotate(3deg);
     opacity: 0.4;
   }
 }
 
 .animate-blob {
   animation: blob 7s infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .animate-float {
   animation: float 20s ease-in-out infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .animation-delay-2000 {
@@ -74,5 +80,47 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .animation-delay-4000 {
   animation-delay: 4s;
+}
+
+/* Reduzierte Animationen für langsamere Geräte */
+@media (prefers-reduced-motion: reduce) {
+  .animate-blob,
+  .animate-float {
+    animation: none;
+  }
+}
+
+/* Performance-Optimierung für langsamere Geräte */
+@media (max-width: 768px) {
+  .animate-blob {
+    animation-duration: 12s; /* Langsamer = weniger GPU-Last */
+  }
+  .animate-float {
+    animation-duration: 30s;
+  }
+}
+
+/* Weitere Optimierungen für sehr langsame Geräte */
+@media (max-width: 480px) {
+  .animate-blob {
+    animation-duration: 15s;
+  }
+  .animate-float {
+    animation-duration: 35s;
+  }
+}
+
+/* CPU-intensive Animationen für schwache Geräte reduzieren */
+@media (prefers-reduced-motion: reduce) {
+  .animate-blob,
+  .animate-float {
+    animation: none !important;
+  }
+  
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 

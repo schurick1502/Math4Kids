@@ -58,7 +58,17 @@ Siehe: **USB-STICK-ANLEITUNG.md**
 ## 🔧 Problemlösung
 
 ### App lädt nicht?
-→ Nutze eine "HTTP Server" App aus dem Play Store
+→ Nutze eine "HTTP Server" App aus dem Play Store  
+→ **Oder:** Nutze den lokalen HTTP-Server - siehe **SCHNELLSTART-HTTP-SERVER.md**
+
+### Auf Smartphone über WiFi testen?
+→ Siehe **SCHNELLSTART-HTTP-SERVER.md** für lokalen HTTP-Server
+
+### Chrome-Berechtigungen prüfen?
+→ Siehe **CHROME-BERECHTIGUNGEN.md** für alle erforderlichen Einstellungen
+
+### Als PWA-App installieren?
+→ Siehe **PWA-INSTALLATION.md** für komplette Installationsanleitung
 
 ### Styles fehlen?
 → Alle Dateien müssen kopiert sein (auch der `assets` Ordner!)

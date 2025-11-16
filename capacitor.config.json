@@ -1,0 +1,9 @@
+{
+  "appId": "de.math4kids.app",
+  "appName": "Math4Kids",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  }
+}

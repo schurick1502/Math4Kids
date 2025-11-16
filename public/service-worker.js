@@ -2,7 +2,8 @@ const CACHE_NAME = 'kopfrechnen-v1';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/manifest.json'
+  '/manifest.json',
+  '/service-worker.js'
 ];
 
 // Installation - Cache erstellen
@@ -30,34 +31,47 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Fetch - Cache-First Strategie
+// Fetch - Cache-First Strategie mit Network-Fallback
 self.addEventListener('fetch', (event) => {
+  // Nur GET-Requests cachen
+  if (event.request.method !== 'GET') {
+    return;
+  }
+  
+  // Externe Ressourcen nicht cachen
+  if (!event.request.url.startsWith(self.location.origin)) {
+    return;
+  }
+  
   event.respondWith(
     caches.match(event.request)
-      .then((response) => {
-        // Cache hit - return response
-        if (response) {
-          return response;
+      .then((cachedResponse) => {
+        // Cache hit - return cached response
+        if (cachedResponse) {
+          return cachedResponse;
         }
         
-        // Clone the request
-        const fetchRequest = event.request.clone();
-        
-        return fetch(fetchRequest).then((response) => {
+        // Cache miss - fetch from network
+        return fetch(event.request).then((response) => {
           // Check if valid response
           if (!response || response.status !== 200 || response.type !== 'basic') {
             return response;
           }
           
-          // Clone the response
+          // Clone the response for caching
           const responseToCache = response.clone();
           
-          caches.open(CACHE_NAME)
-            .then((cache) => {
-              cache.put(event.request, responseToCache);
-            });
+          // Cache the response
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseToCache);
+          });
           
           return response;
+        }).catch(() => {
+          // Network error - return offline fallback if available
+          if (event.request.destination === 'document') {
+            return caches.match('/index.html');
+          }
         });
       })
   );

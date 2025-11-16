@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android Icon Generator - Math4Kids</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            color: #333;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #9333ea;
+            text-align: center;
+        }
+        .sizes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .icon-item {
+            text-align: center;
+            padding: 15px;
+            background: #f3e8ff;
+            border-radius: 10px;
+        }
+        canvas {
+            border: 2px solid #9333ea;
+            border-radius: 8px;
+            background: white;
+            margin: 10px 0;
+        }
+        button {
+            background: linear-gradient(135deg, #9333ea, #ec4899);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: scale(1.05);
+        }
+        .button-group {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .info {
+            background: #e0e7ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #9333ea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Android Icon Generator - Math4Kids</h1>
+        
+        <div class="info">
+            <h3>📋 Anleitung:</h3>
+            <ol>
+                <li>Klicke auf "Alle Icons generieren"</li>
+                <li>Rechtsklick auf jedes Icon → "Bild speichern unter..."</li>
+                <li>Speichere die Icons in den entsprechenden Ordnern:
+                    <ul>
+                        <li><code>mipmap-mdpi/ic_launcher.png</code> (48x48)</li>
+                        <li><code>mipmap-hdpi/ic_launcher.png</code> (72x72)</li>
+                        <li><code>mipmap-xhdpi/ic_launcher.png</code> (96x96)</li>
+                        <li><code>mipmap-xxhdpi/ic_launcher.png</code> (144x144)</li>
+                        <li><code>mipmap-xxxhdpi/ic_launcher.png</code> (192x192)</li>
+                    </ul>
+                </li>
+                <li>Wiederhole für <code>ic_launcher_foreground.png</code> und <code>ic_launcher_round.png</code></li>
+            </ol>
+        </div>
+
+        <div class="button-group">
+            <button onclick="generateAllIcons()">🎨 Alle Icons generieren</button>
+            <button onclick="downloadAllIcons()">⬇️ Alle Icons herunterladen</button>
+        </div>
+
+        <h3>📐 Icon-Größen:</h3>
+        <div class="sizes">
+            <div class="icon-item">
+                <canvas id="canvas-mdpi" width="48" height="48"></canvas>
+                <p><strong>mdpi</strong><br>48x48</p>
+                <button onclick="downloadIcon('mdpi', 48)">Download</button>
+            </div>
+            <div class="icon-item">
+                <canvas id="canvas-hdpi" width="72" height="72"></canvas>
+                <p><strong>hdpi</strong><br>72x72</p>
+                <button onclick="downloadIcon('hdpi', 72)">Download</button>
+            </div>
+            <div class="icon-item">
+                <canvas id="canvas-xhdpi" width="96" height="96"></canvas>
+                <p><strong>xhdpi</strong><br>96x96</p>
+                <button onclick="downloadIcon('xhdpi', 96)">Download</button>
+            </div>
+            <div class="icon-item">
+                <canvas id="canvas-xxhdpi" width="144" height="144"></canvas>
+                <p><strong>xxhdpi</strong><br>144x144</p>
+                <button onclick="downloadIcon('xxhdpi', 144)">Download</button>
+            </div>
+            <div class="icon-item">
+                <canvas id="canvas-xxxhdpi" width="192" height="192"></canvas>
+                <p><strong>xxxhdpi</strong><br>192x192</p>
+                <button onclick="downloadIcon('xxxhdpi', 192)">Download</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function generateIcon(size, canvasId) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            
+            // Hintergrund - Violett Gradient
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#9333ea');
+            gradient.addColorStop(0.5, '#ec4899');
+            gradient.addColorStop(1, '#3b82f6');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, size, size);
+            
+            // Weißer Kreis in der Mitte
+            ctx.fillStyle = 'white';
+            ctx.beginPath();
+            ctx.arc(size/2, size/2, size * 0.35, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Text "✖➕"
+            ctx.fillStyle = '#9333ea';
+            ctx.font = `bold ${size * 0.35}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('✖➕', size/2, size/2);
+        }
+
+        function generateAllIcons() {
+            const sizes = [
+                { size: 48, id: 'canvas-mdpi' },
+                { size: 72, id: 'canvas-hdpi' },
+                { size: 96, id: 'canvas-xhdpi' },
+                { size: 144, id: 'canvas-xxhdpi' },
+                { size: 192, id: 'canvas-xxxhdpi' }
+            ];
+            
+            sizes.forEach(({ size, id }) => {
+                generateIcon(size, id);
+            });
+        }
+
+        function downloadIcon(density, size) {
+            const canvas = document.getElementById(`canvas-${density}`);
+            const link = document.createElement('a');
+            link.download = `ic_launcher_${density}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        function downloadAllIcons() {
+            const densities = ['mdpi', 'hdpi', 'xhdpi', 'xxhdpi', 'xxxhdpi'];
+            densities.forEach((density, index) => {
+                setTimeout(() => {
+                    const sizes = { mdpi: 48, hdpi: 72, xhdpi: 96, xxhdpi: 144, xxxhdpi: 192 };
+                    downloadIcon(density, sizes[density]);
+                }, index * 300);
+            });
+        }
+
+        // Automatisch beim Laden generieren
+        window.onload = function() {
+            generateAllIcons();
+        };
+    </script>
+</body>
+</html>
+
