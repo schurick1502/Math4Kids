@@ -1,0 +1,7 @@
+# Signing-Keys (NIEMALS in Git!)
+*.jks
+*.keystore
+keystore.properties
+
+# Build outputs
+build/

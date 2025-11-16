@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Theme Colors - Math4Kids Purple -->
+    <color name="colorPrimary">#9333ea</color>
+    <color name="colorPrimaryDark">#7c3aed</color>
+    <color name="colorAccent">#ec4899</color>
+    <color name="purple_500">#9333ea</color>
+    <color name="purple_600">#7c3aed</color>
+    <color name="purple_700">#6d28d9</color>
+    <color name="splash_background">#9333ea</color>
+</resources>
+
