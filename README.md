@@ -7,6 +7,10 @@
 [![Made with React](https://img.shields.io/badge/Made%20with-React-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
 [![Built with Vite](https://img.shields.io/badge/Built%20with-Vite-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/)
 
+<p align="center">
+  <img src="assets/promo-banner.png" width="400" alt="Math4Kids Promo">
+</p>
+
 Eine motivierende Progressive Web App (PWA) und native Android-App für Kinder von Klasse 1-4 zum Üben von Kopfrechnen.
 
 ## 📥 Download
