@@ -27,9 +27,10 @@ A motivating Progressive Web App (PWA) and native Android app for children in gr
 ## 📸 Screenshots
 
 <p align="center">
-  <img src="screenshots/01-startseite.png" width="250" alt="Home Screen">
-  <img src="screenshots/02-spiel-aufgabe.png" width="250" alt="Game Task">
-  <img src="screenshots/03-einstellungen.png" width="250" alt="Settings">
+  <img src="screenshots/01-home-screen.png" width="250" alt="Home Screen">
+  <img src="screenshots/02-game-task.png" width="250" alt="Game Task">
+  <img src="screenshots/03-settings.png" width="250" alt="Settings">
+  <img src="screenshots/04-multiplayer.png" width="250" alt="Multiplayer Setup">
 </p>
 
 ## ✨ Features
