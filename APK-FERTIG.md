@@ -1,126 +1,126 @@
-# 🎉 APK ERFOLGREICH ERSTELLT!
+# 🎉 APK SUCCESSFULLY CREATED!
 
-## ✅ Deine APK ist fertig!
+## ✅ Your APK is ready!
 
-**APK liegt hier:**
+**APK located here:**
 ```
 C:\projekte\Math4Kids\android\app\build\outputs\apk\debug\app-debug.apk
 ```
 
-**Größe:** Ca. 5-10 MB
+**Size:** Approx. 5-10 MB
 
 ---
 
-## 📱 APK auf Android-Gerät installieren
+## 📱 Install APK on Android Device
 
-### **Methode 1: USB-Kabel (Einfachste)**
+### **Method 1: USB Cable (Easiest)**
 
-1. **Android-Gerät mit USB verbinden**
-2. **APK-Datei kopieren:**
-   - Öffne Windows Explorer
-   - Gehe zu: `C:\projekte\Math4Kids\android\app\build\outputs\apk\debug\`
-   - **app-debug.apk** kopieren
-   - Auf Android-Gerät: **Downloads**-Ordner öffnen
-   - **Paste** (Datei einfügen)
+1. **Connect Android device with USB**
+2. **Copy APK file:**
+   - Open Windows Explorer
+   - Go to: `C:\projekte\Math4Kids\android\app\build\outputs\apk\debug\`
+   - Copy **app-debug.apk**
+   - On Android device: Open **Downloads** folder
+   - **Paste** (insert file)
 
-3. **Auf Android-Gerät installieren:**
-   - **Datei-Manager** auf Android öffnen
-   - **Downloads**-Ordner öffnen
-   - **app-debug.apk** antippen
-   - **"Installieren"** wählen
-   - **Falls Warnung:** "Von unbekannter Quelle installieren" erlauben
-   - **"Installieren"** nochmal klicken
+3. **Install on Android device:**
+   - Open **File Manager** on Android
+   - Open **Downloads** folder
+   - Tap **app-debug.apk**
+   - Select **"Install"**
+   - **If warning:** Allow "Install from unknown source"
+   - Click **"Install"** again
 
-4. **✅ FERTIG!** App ist installiert!
+4. **✅ DONE!** App is installed!
 
 ---
 
-### **Methode 2: Per E-Mail/Cloud**
+### **Method 2: Via Email/Cloud**
 
-1. **APK hochladen:**
+1. **Upload APK:**
    - Google Drive: https://drive.google.com
    - Dropbox: https://dropbox.com
-   - Oder andere Cloud-Service
+   - Or other cloud service
 
-2. **Link auf Android-Gerät öffnen:**
-   - Link auf Smartphone öffnen
-   - APK herunterladen
-   - APK öffnen → **"Installieren"**
-
----
-
-### **Methode 3: Per E-Mail an dich selbst**
-
-1. **E-Mail erstellen** (an dich selbst)
-2. **APK als Anhang anhängen:**
-   - Anhang hinzufügen
-   - Datei wählen: `C:\projekte\Math4Kids\android\app\build\outputs\apk\debug\app-debug.apk`
-3. **Senden**
-4. **Auf Android-Gerät:**
-   - E-Mail öffnen
-   - Anhang öffnen
-   - **"Installieren"** wählen
+2. **Open link on Android device:**
+   - Open link on smartphone
+   - Download APK
+   - Open APK → **"Install"**
 
 ---
 
-## ⚠️ Falls Warnung beim Installieren
+### **Method 3: Via Email to Yourself**
 
-**Auf Android-Gerät:**
-
-**Ältere Android-Versionen:**
-1. **Einstellungen** → **Sicherheit**
-2. **"Unbekannte Quellen"** aktivieren
-3. **ODER:** **"Von unbekannten Quellen installieren"** erlauben
-
-**Neuere Android-Versionen (Android 8+):**
-- Bei Installation erscheint Warnung: "Diese App ist von einem unbekannten Entwickler"
-- **"Trotzdem installieren"** oder **"Installieren"** wählen
-- System fragt nochmal nach Bestätigung
+1. **Create email** (to yourself)
+2. **Attach APK as attachment:**
+   - Add attachment
+   - Select file: `C:\projekte\Math4Kids\android\app\build\outputs\apk\debug\app-debug.apk`
+3. **Send**
+4. **On Android device:**
+   - Open email
+   - Open attachment
+   - Select **"Install"**
 
 ---
 
-## 🔄 Neue APK erstellen (bei Code-Änderungen)
+## ⚠️ If Warning When Installing
 
-**Wenn du den Code geändert hast:**
+**On Android device:**
+
+**Older Android versions:**
+1. **Settings** → **Security**
+2. **"Unknown sources"** activate
+3. **OR:** **"Install from unknown sources"** allow
+
+**Newer Android versions (Android 8+):**
+- Warning appears during installation: "This app is from an unknown developer"
+- Select **"Install anyway"** or **"Install"**
+- System asks for confirmation again
+
+---
+
+## 🔄 Create New APK (when code changes)
+
+**If you changed the code:**
 
 ```powershell
 cd C:\projekte\Math4Kids
 npm run apk:debug
 ```
 
-**⏳ Warte 1-2 Minuten**
+**⏳ Wait 1-2 minutes**
 
-**Neue APK liegt wieder hier:**
+**New APK is located here again:**
 ```
 C:\projekte\Math4Kids\android\app\build\outputs\apk\debug\app-debug.apk
 ```
 
-**Alte APK wird überschrieben!**
+**Old APK is overwritten!**
 
 ---
 
-## 📦 AAB für Google Play Store
+## 📦 AAB for Google Play Store
 
-**Für Play Store brauchst du ein AAB (Android App Bundle):**
+**For Play Store you need an AAB (Android App Bundle):**
 
 ```powershell
 cd C:\projekte\Math4Kids
 npm run aab:release
 ```
 
-**⚠️ HINWEIS:** Release-AAB benötigt Signing (Keystore). Siehe `APK-ERSTELLEN.md` für Details.
+**⚠️ NOTE:** Release AAB requires signing (keystore). See `APK-ERSTELLEN.md` for details.
 
-**ODER in Android Studio:**
+**OR in Android Studio:**
 - **Build** → **Build Bundle(s) / APK(s)** → **Build Bundle(s)**
 
-**AAB liegt dann in:**
+**AAB then located at:**
 ```
 C:\projekte\Math4Kids\android\app\build\outputs\bundle\release\app-release.aab
 ```
 
 ---
 
-## 🎯 Schnellstart - APK erneut erstellen
+## 🎯 Quick Start - Create APK Again
 
 **Copy & Paste in PowerShell:**
 
@@ -129,19 +129,18 @@ cd C:\projekte\Math4Kids
 npm run apk:debug
 ```
 
-**Fertig! APK ist fertig! 🎉**
+**Done! APK is ready! 🎉**
 
 ---
 
-## 📋 Verfügbare Commands
+## 📋 Available Commands
 
-| Command | Was passiert? |
+| Command | What happens? |
 |---------|---------------|
-| `npm run apk:debug` | Erstellt Debug-APK (für Tests) |
-| `npm run apk:release` | Erstellt Release-APK (benötigt Signing) |
-| `npm run aab:release` | Erstellt AAB für Play Store (benötigt Signing) |
+| `npm run apk:debug` | Creates debug APK (for tests) |
+| `npm run apk:release` | Creates release APK (requires signing) |
+| `npm run aab:release` | Creates AAB for Play Store (requires signing) |
 
 ---
 
-**Viel Erfolg! 🎉**
-
+**Good luck! 🎉**

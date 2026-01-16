@@ -1,6 +1,6 @@
-# ⚡ APK ERSTELLEN - Super einfach!
+# ⚡ CREATE APK - Super Easy!
 
-## 🎯 Debug-APK erstellen (Zum Testen)
+## 🎯 Create Debug APK (For Testing)
 
 ### **Copy & Paste in PowerShell:**
 
@@ -9,69 +9,68 @@ cd C:\projekte\Math4Kids
 npm run apk:debug
 ```
 
-**⏳ Warte 1-2 Minuten!**
+**⏳ Wait 1-2 minutes!**
 
-**Fertig! 🎉**
+**Done! 🎉**
 
-**APK liegt hier:**
+**APK located here:**
 ```
 C:\projekte\Math4Kids\android\app\build\outputs\apk\debug\app-debug.apk
 ```
 
 ---
 
-## 📱 APK auf Android-Gerät installieren
+## 📱 Install APK on Android Device
 
-1. **APK auf Smartphone kopieren** (USB, E-Mail, Cloud)
-2. **Auf Smartphone:** APK öffnen
-3. **"Installieren"** antippen
-4. **Falls Warnung:** "Trotzdem installieren" wählen
+1. **Copy APK to smartphone** (USB, email, cloud)
+2. **On smartphone:** Open APK
+3. **Tap "Install"**
+4. **If warning:** Select "Install anyway"
 
-**Fertig!** ✅
+**Done!** ✅
 
 ---
 
-## 📦 Für Google Play Store (AAB erstellen)
+## 📦 For Google Play Store (Create AAB)
 
-**Für Play Store brauchst du ein AAB:**
+**For Play Store you need an AAB:**
 
 ```powershell
 cd C:\projekte\Math4Kids
 npm run aab:release
 ```
 
-**⏳ Warte 1-2 Minuten!**
+**⏳ Wait 1-2 minutes!**
 
-**AAB liegt hier:**
+**AAB located here:**
 ```
 C:\projekte\Math4Kids\android\app\build\outputs\bundle\release\app-release.aab
 ```
 
-**Das AAB hochladen in Google Play Console!**
+**Upload the AAB to Google Play Console!**
 
 ---
 
-## 🔒 Release-APK (Optional - Mit Signing)
+## 🔒 Release APK (Optional - With Signing)
 
-**Für Release-APK brauchst du Signing (einmalig einrichten):**
+**For release APK you need signing (set up once):**
 
-**1. Keystore erstellen:**
+**1. Create keystore:**
 ```powershell
 cd C:\projekte\Math4Kids\android\app
 keytool -genkey -v -keystore math4kids-release-key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias math4kids
 ```
 
-**2. Passwort in `keystore.properties` eintragen** (Datei erstellen)
+**2. Enter password in `keystore.properties`** (create file)
 
-**3. Release-APK bauen:**
+**3. Build release APK:**
 ```powershell
 cd C:\projekte\Math4Kids
 npm run apk:release
 ```
 
-**Detaillierte Anleitung:** Siehe `APK-ERSTELLEN.md`
+**Detailed instructions:** See `APK-ERSTELLEN.md`
 
 ---
 
-**🎉 Das war's! APK ist fertig!**
-
+**🎉 That's it! APK is ready!**

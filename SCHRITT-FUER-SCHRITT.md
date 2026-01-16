@@ -1,350 +1,350 @@
-# 🎯 SCHRITT-FÜR-SCHRITT: Math4Kids App starten
+# 🎯 STEP BY STEP: Start Math4Kids App
 
-## ❓ Wo genau hast du Probleme?
+## ❓ Where exactly are you having problems?
 
-### **Problem 1: "npm" funktioniert nicht?**
-→ Siehe **Abschnitt A** unten
+### **Problem 1: "npm" doesn't work?**
+→ See **Section A** below
 
-### **Problem 2: Android Studio öffnet sich nicht?**
-→ Siehe **Abschnitt B** unten
+### **Problem 2: Android Studio doesn't open?**
+→ See **Section B** below
 
-### **Problem 3: App baut nicht?**
-→ Siehe **Abschnitt C** unten
+### **Problem 3: App doesn't build?**
+→ See **Section C** below
 
-### **Problem 4: App crasht beim Start?**
-→ Siehe **Abschnitt D** unten
+### **Problem 4: App crashes on start?**
+→ See **Section D** below
 
-### **Problem 5: Ich verstehe gar nichts?**
-→ Starte bei **"FÜR ANFÄNGER"** unten
-
----
-
-## 👶 FÜR ANFÄNGER - Alles von Anfang an
-
-### **Voraussetzungen prüfen:**
-
-**1. Ist Node.js installiert?**
-- Öffne PowerShell
-- Tippe: `node --version`
-- **Sollte eine Version anzeigen** (z.B. v18.17.0)
-- **Wenn Fehler:** Node.js installieren von https://nodejs.org/
-
-**2. Ist Android Studio installiert?**
-- Android Studio auf dem Computer installiert?
-- **Wenn nein:** Installieren von https://developer.android.com/studio
-
-**3. Ist das Projekt vorhanden?**
-- Ordner `C:\projekte\Math4Kids` vorhanden?
-- **Wenn nein:** Projekt nicht gefunden
+### **Problem 5: I don't understand anything?**
+→ Start at **"FOR BEGINNERS"** below
 
 ---
 
-## 📝 SCHRITT 1: PowerShell öffnen
+## 👶 FOR BEGINNERS - Everything from the Start
+
+### **Check Prerequisites:**
+
+**1. Is Node.js installed?**
+- Open PowerShell
+- Type: `node --version`
+- **Should show a version** (e.g. v18.17.0)
+- **If error:** Install Node.js from https://nodejs.org/
+
+**2. Is Android Studio installed?**
+- Is Android Studio installed on the computer?
+- **If not:** Install from https://developer.android.com/studio
+
+**3. Does the project exist?**
+- Folder `C:\projekte\Math4Kids` exists?
+- **If not:** Project not found
+
+---
+
+## 📝 STEP 1: Open PowerShell
 
 **Windows:**
-1. Windows-Taste drücken
-2. "PowerShell" tippen
-3. "Windows PowerShell" öffnen
+1. Press Windows key
+2. Type "PowerShell"
+3. Open "Windows PowerShell"
 
-**ODER:**
-1. Im Projekt-Ordner: `C:\projekte\Math4Kids`
-2. Rechtsklick → "PowerShell hier öffnen"
+**OR:**
+1. In project folder: `C:\projekte\Math4Kids`
+2. Right-click → "Open PowerShell here"
 
 ---
 
-## 📝 SCHRITT 2: Ins Projekt-Verzeichnis wechseln
+## 📝 STEP 2: Navigate to Project Directory
 
-**In PowerShell tippen:**
+**Type in PowerShell:**
 ```powershell
 cd C:\projekte\Math4Kids
 ```
 
-**Enter drücken**
+**Press Enter**
 
-**Prüfe ob es geklappt hat:**
-- In der Zeile sollte stehen: `PS C:\projekte\Math4Kids>`
+**Check if it worked:**
+- The line should say: `PS C:\projekte\Math4Kids>`
 
 ---
 
-## 📝 SCHRITT 3: Prüfe ob alles da ist
+## 📝 STEP 3: Check if Everything is There
 
-**In PowerShell tippen:**
+**Type in PowerShell:**
 ```powershell
 dir
 ```
 
-**Enter drücken**
+**Press Enter**
 
-**Was du sehen solltest:**
+**What you should see:**
 - `package.json` ✅
-- `android` (Ordner) ✅
-- `dist` (Ordner) ✅
-- `src` (Ordner) ✅
+- `android` (folder) ✅
+- `dist` (folder) ✅
+- `src` (folder) ✅
 
-**Falls etwas fehlt:** Sag mir was fehlt!
+**If something is missing:** Tell me what's missing!
 
 ---
 
-## 📝 SCHRITT 4: Dependencies installieren (einmalig)
+## 📝 STEP 4: Install Dependencies (one time)
 
-**In PowerShell tippen:**
+**Type in PowerShell:**
 ```powershell
 npm install
 ```
 
-**Enter drücken**
+**Press Enter**
 
-**⏳ Warte bis fertig!** (kann 1-2 Minuten dauern)
+**⏳ Wait until done!** (can take 1-2 minutes)
 
-**Sollte zeigen:** "added X packages" oder "up to date"
+**Should show:** "added X packages" or "up to date"
 
 ---
 
-## 📝 SCHRITT 5: App bauen
+## 📝 STEP 5: Build App
 
-**In PowerShell tippen:**
+**Type in PowerShell:**
 ```powershell
 npm run build
 ```
 
-**Enter drücken**
+**Press Enter**
 
-**⏳ Warte bis fertig!** (10-30 Sekunden)
+**⏳ Wait until done!** (10-30 seconds)
 
-**Sollte zeigen:** "✓ built in X.XXs"
+**Should show:** "✓ built in X.XXs"
 
-**Falls Fehler:** Kopiere die Fehlermeldung und sag mir Bescheid!
+**If error:** Copy the error message and let me know!
 
 ---
 
-## 📝 SCHRITT 6: Android-Projekt syncen
+## 📝 STEP 6: Sync Android Project
 
-**In PowerShell tippen:**
+**Type in PowerShell:**
 ```powershell
 npx cap sync android
 ```
 
-**Enter drücken**
+**Press Enter**
 
-**⏳ Warte bis fertig!** (2-5 Sekunden)
+**⏳ Wait until done!** (2-5 seconds)
 
-**Sollte zeigen:** "Sync finished in X.XXs"
+**Should show:** "Sync finished in X.XXs"
 
-**Falls Fehler:** Kopiere die Fehlermeldung!
+**If error:** Copy the error message!
 
 ---
 
-## 📝 SCHRITT 7: Android Studio öffnen
+## 📝 STEP 7: Open Android Studio
 
-**In PowerShell tippen:**
+**Type in PowerShell:**
 ```powershell
 npm run android
 ```
 
-**Enter drücken**
+**Press Enter**
 
-**Was passieren sollte:**
-- Android Studio startet automatisch
-- Projekt wird geöffnet
+**What should happen:**
+- Android Studio starts automatically
+- Project is opened
 
-**Falls nichts passiert oder Fehler:**
-→ Siehe **Abschnitt B** unten
-
----
-
-## 📝 SCHRITT 8: In Android Studio - Gradle Sync
-
-**Was du siehst:**
-- Unten im Fenster: "Gradle Sync running..." oder ähnlich
-- ⏳ **WARTE bis fertig!** (2-5 Minuten beim ersten Mal)
-
-**Falls Sync fehlschlägt:**
-1. Klicke oben auf "Sync Project with Gradle Files" (Elefanten-Icon)
-2. ODER: **File** → **Sync Project with Gradle Files**
-
-**Falls immer noch Fehler:**
-→ Siehe **Abschnitt B** unten
+**If nothing happens or error:**
+→ See **Section B** below
 
 ---
 
-## 📝 SCHRITT 9: Emulator oder Gerät wählen
+## 📝 STEP 8: In Android Studio - Gradle Sync
 
-**Option A - Emulator (empfohlen für den Anfang):**
+**What you see:**
+- At the bottom of window: "Gradle Sync running..." or similar
+- ⏳ **WAIT until done!** (2-5 minutes the first time)
 
-1. Oben in Android Studio: Dropdown-Menü (neben ▶️ Button)
-2. Falls kein Gerät da ist:
-   - Klicke auf "Device Manager" Icon
-   - Oder: **Tools** → **Device Manager**
-3. Klicke **"+ Create Device"**
-4. Wähle ein Gerät (z.B. "Pixel 5")
-5. Klicke **Next**
-6. Wähle System Image (z.B. "Android 13")
-7. Klicke **Download** (falls nötig)
-8. Klicke **Next** → **Finish**
-9. Warte bis Emulator startet (1-2 Minuten)
+**If Sync fails:**
+1. Click on "Sync Project with Gradle Files" at top (elephant icon)
+2. OR: **File** → **Sync Project with Gradle Files**
 
-**Option B - Echtgerät (Android-Smartphone):**
-
-1. Smartphone mit USB-Kabel verbinden
-2. Smartphone: **Einstellungen** → **Über das Telefon**
-3. **Build-Nummer** 7x antippen (bis "Du bist jetzt ein Entwickler!" erscheint)
-4. Smartphone: **Einstellungen** → **Entwickleroptionen**
-5. **USB-Debugging** aktivieren
-6. Auf Computer: "USB-Debugging erlauben?" → **OK** klicken
-7. In Android Studio sollte Smartphone erscheinen
+**If still errors:**
+→ See **Section B** below
 
 ---
 
-## 📝 SCHRITT 10: App starten
+## 📝 STEP 9: Select Emulator or Device
+
+**Option A - Emulator (recommended for beginners):**
+
+1. At top in Android Studio: Dropdown menu (next to ▶️ button)
+2. If no device there:
+   - Click on "Device Manager" icon
+   - Or: **Tools** → **Device Manager**
+3. Click **"+ Create Device"**
+4. Select a device (e.g. "Pixel 5")
+5. Click **Next**
+6. Select System Image (e.g. "Android 13")
+7. Click **Download** (if needed)
+8. Click **Next** → **Finish**
+9. Wait until emulator starts (1-2 minutes)
+
+**Option B - Real Device (Android smartphone):**
+
+1. Connect smartphone with USB cable
+2. Smartphone: **Settings** → **About phone**
+3. Tap **Build number** 7 times (until "You are now a developer!" appears)
+4. Smartphone: **Settings** → **Developer options**
+5. Enable **USB Debugging**
+6. On computer: Click **OK** on "Allow USB debugging?"
+7. In Android Studio the smartphone should appear
+
+---
+
+## 📝 STEP 10: Start App
 
 **In Android Studio:**
 
-1. Gerät/Emulator wählen (Dropdown oben)
-2. Klicke **▶️ Run** (grüner Play-Button oben)
-   - ODER drücke **Shift+F10**
+1. Select device/emulator (dropdown at top)
+2. Click **▶️ Run** (green Play button at top)
+   - OR press **Shift+F10**
 
-**Was passieren sollte:**
-- App wird gebaut (unten: "Building...")
-- App wird installiert (unten: "Installing...")
-- App startet automatisch! ✅
-
----
-
-## 🔧 ABSCHNITT A: "npm" funktioniert nicht
-
-### **Fehler: "npm ist nicht als Befehl erkannt"**
-
-**Lösung:**
-1. Node.js installieren: https://nodejs.org/
-2. Lade "LTS" Version herunter
-3. Installiere (Standard-Einstellungen)
-4. **Computer neu starten**
-5. PowerShell neu öffnen
-6. Tippe: `node --version`
-7. Sollte Version anzeigen
+**What should happen:**
+- App is built (bottom: "Building...")
+- App is installed (bottom: "Installing...")
+- App starts automatically! ✅
 
 ---
 
-## 🔧 ABSCHNITT B: Android Studio öffnet sich nicht
+## 🔧 SECTION A: "npm" doesn't work
 
-### **Fehler: "npm run android" macht nichts**
+### **Error: "npm is not recognized as a command"**
 
-**Lösung 1 - Android Studio manuell öffnen:**
+**Solution:**
+1. Install Node.js: https://nodejs.org/
+2. Download "LTS" version
+3. Install (default settings)
+4. **Restart computer**
+5. Open PowerShell again
+6. Type: `node --version`
+7. Should show version
 
-1. Android Studio starten (normale Installation)
+---
+
+## 🔧 SECTION B: Android Studio doesn't open
+
+### **Error: "npm run android" does nothing**
+
+**Solution 1 - Open Android Studio manually:**
+
+1. Start Android Studio (normal installation)
 2. **File** → **Open**
-3. Navigiere zu: `C:\projekte\Math4Kids`
-4. Wähle den **`android`** Ordner ⚠️ **WICHTIG: android Ordner!**
-5. Klicke **OK**
+3. Navigate to: `C:\projekte\Math4Kids`
+4. Select the **`android`** folder ⚠️ **IMPORTANT: android folder!**
+5. Click **OK**
 
-**Lösung 2 - Prüfe ob Android Studio installiert ist:**
+**Solution 2 - Check if Android Studio is installed:**
 
-- Android Studio auf Computer installiert?
-- **Wenn nein:** Installieren von https://developer.android.com/studio
-- Nach Installation: Computer neu starten
+- Is Android Studio installed on computer?
+- **If not:** Install from https://developer.android.com/studio
+- After installation: Restart computer
 
-**Lösung 3 - Android Studio-Pfad prüfen:**
+**Solution 3 - Check Android Studio path:**
 
-Android Studio muss in PATH sein. Falls nicht:
-1. Android Studio öffnen
-2. **File** → **Settings** (oder **Configure** → **Settings**)
+Android Studio must be in PATH. If not:
+1. Open Android Studio
+2. **File** → **Settings** (or **Configure** → **Settings**)
 3. **Appearance & Behavior** → **System Settings** → **Android SDK**
-4. SDK Location kopieren
+4. Copy SDK Location
 5. In PowerShell:
 ```powershell
-$env:ANDROID_HOME = "C:\Users\DeinName\AppData\Local\Android\Sdk"
+$env:ANDROID_HOME = "C:\Users\YourName\AppData\Local\Android\Sdk"
 ```
 
 ---
 
-## 🔧 ABSCHNITT C: App baut nicht
+## 🔧 SECTION C: App doesn't build
 
-### **Fehler beim "npm run build"**
+### **Error on "npm run build"**
 
-**Häufige Fehler:**
+**Common errors:**
 
 **1. "Cannot find module..."**
-**Lösung:**
+**Solution:**
 ```powershell
 npm install
 ```
 
 **2. "Error: Cannot find file..."**
-**Lösung:** Prüfe ob du im richtigen Ordner bist:
+**Solution:** Check if you're in the right folder:
 ```powershell
 cd C:\projekte\Math4Kids
 dir
 ```
 
-**3. Andere Fehler:**
-**→ Kopiere die KOMPLETTE Fehlermeldung und sag mir Bescheid!**
+**3. Other errors:**
+**→ Copy the COMPLETE error message and let me know!**
 
 ---
 
-## 🔧 ABSCHNITT D: App crasht beim Start
+## 🔧 SECTION D: App crashes on start
 
-### **Problem: App startet nicht oder crasht**
+### **Problem: App doesn't start or crashes**
 
-**Lösung 1 - Logs prüfen:**
+**Solution 1 - Check logs:**
 
-1. In Android Studio: Unten auf **Logcat** Tab klicken
-2. Filter: "ERROR" oder "FATAL"
-3. Kopiere die Fehlermeldung
+1. In Android Studio: Click on **Logcat** tab at bottom
+2. Filter: "ERROR" or "FATAL"
+3. Copy the error message
 
-**Lösung 2 - App neu installieren:**
+**Solution 2 - Reinstall app:**
 
 ```powershell
-# Cache bereinigen
+# Clear cache
 cd C:\projekte\Math4Kids
 npm run build:android
 
-# Dann in Android Studio:
+# Then in Android Studio:
 # Build → Clean Project
 # Build → Rebuild Project
 ```
 
-**Lösung 3 - Emulator/Gerät neu starten:**
+**Solution 3 - Restart emulator/device:**
 
-- Emulator: AVD Manager → Gerät → Stop → Start
-- Gerät: Neustart
+- Emulator: AVD Manager → Device → Stop → Start
+- Device: Restart
 
 ---
 
-## 📞 HILFE: Was genau funktioniert nicht?
+## 📞 HELP: What exactly isn't working?
 
-**Sag mir bitte:**
+**Please tell me:**
 
-1. **Welcher Schritt?** (Schritt 1-10)
-2. **Was tippst du ein?** (genaue Commands)
-3. **Was erscheint?** (Fehlermeldung kopieren)
-4. **Was soll passieren?** (was erwartest du)
+1. **Which step?** (Step 1-10)
+2. **What did you type?** (exact commands)
+3. **What appeared?** (copy error message)
+4. **What should happen?** (what do you expect)
 
-**Beispiel:**
+**Example:**
 ```
-Schritt: 5 (App bauen)
+Step: 5 (Build app)
 Command: npm run build
-Fehler: "Cannot find module 'vite'"
-Erwartung: App sollte gebaut werden
+Error: "Cannot find module 'vite'"
+Expected: App should be built
 ```
 
 ---
 
-## ✅ CHECKLISTE - Ist alles da?
+## ✅ CHECKLIST - Is Everything There?
 
-**Vor dem Start prüfen:**
+**Check before starting:**
 
-- [ ] Node.js installiert? (`node --version` zeigt Version)
-- [ ] npm installiert? (`npm --version` zeigt Version)
-- [ ] Android Studio installiert?
-- [ ] Projekt vorhanden? (`C:\projekte\Math4Kids`)
-- [ ] Im richtigen Ordner? (`cd C:\projekte\Math4Kids`)
-- [ ] Dependencies installiert? (`npm install` durchgeführt)
+- [ ] Node.js installed? (`node --version` shows version)
+- [ ] npm installed? (`npm --version` shows version)
+- [ ] Android Studio installed?
+- [ ] Project exists? (`C:\projekte\Math4Kids`)
+- [ ] In correct folder? (`cd C:\projekte\Math4Kids`)
+- [ ] Dependencies installed? (`npm install` done)
 
 ---
 
-## 🚀 ALLES IN EINEM - Copy & Paste
+## 🚀 ALL IN ONE - Copy & Paste
 
-**Kopiere das hier in PowerShell (alles auf einmal):**
+**Copy this into PowerShell (all at once):**
 
 ```powershell
 cd C:\projekte\Math4Kids
@@ -354,12 +354,11 @@ npx cap sync android
 npm run android
 ```
 
-**Dann in Android Studio:**
-1. Warte auf Gradle Sync
-2. Emulator/Gerät wählen
-3. ▶️ Run klicken
+**Then in Android Studio:**
+1. Wait for Gradle Sync
+2. Select emulator/device
+3. Click ▶️ Run
 
 ---
 
-**Sag mir genau, wo du stecken bleibst! Dann helfe ich dir weiter! 🎯**
-
+**Tell me exactly where you're stuck! Then I'll help you further! 🎯**

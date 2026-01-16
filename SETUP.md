@@ -1,85 +1,82 @@
-# 🚀 Schnellstart-Anleitung
+# 🚀 Quick Start Guide
 
-## ⚡ In 3 Schritten zur fertigen App
+## ⚡ Ready in 3 Steps
 
-### Schritt 1: Dependencies installieren
+### Step 1: Install Dependencies
 ```bash
 npm install
 ```
 
-### Schritt 2: Icons erstellen
-Du hast **3 Optionen**:
+### Step 2: Create Icons
+You have **3 options**:
 
-#### Option A: Automatischer Icon-Generator (Empfohlen für Schnellstart)
-1. Öffne `create-icons.html` im Browser (Doppelklick)
-2. Klicke auf "Icons generieren"
-3. Rechtsklick auf jedes Icon → "Bild speichern unter..."
-4. Speichere als `icon-192.png` und `icon-512.png` im `public/` Ordner
+#### Option A: Automatic Icon Generator (Recommended for Quick Start)
+1. Open `create-icons.html` in browser (double-click)
+2. Click "Generate icons"
+3. Right-click on each icon → "Save image as..."
+4. Save as `icon-192.png` and `icon-512.png` in `public/` folder
 
 #### Option B: Online Icon Generator
-1. Gehe zu [realfavicongenerator.net](https://realfavicongenerator.net)
-2. Lade ein Bild/Emoji hoch (z.B. 🧮 Screenshot)
-3. Generiere Icons und lade sie herunter
-4. Benenne sie um zu `icon-192.png` und `icon-512.png`
-5. Speichere sie im `public/` Ordner
+1. Go to [realfavicongenerator.net](https://realfavicongenerator.net)
+2. Upload an image/emoji (e.g. 🧮 screenshot)
+3. Generate icons and download them
+4. Rename to `icon-192.png` and `icon-512.png`
+5. Save them in `public/` folder
 
-#### Option C: Eigene Icons (Photoshop, GIMP, etc.)
-1. Erstelle zwei PNG-Dateien: 192x192 und 512x512 Pixel
-2. Empfohlenes Design: Mathe-Symbol mit violettem Hintergrund (#9333ea)
-3. Speichere als `icon-192.png` und `icon-512.png` im `public/` Ordner
+#### Option C: Custom Icons (Photoshop, GIMP, etc.)
+1. Create two PNG files: 192x192 and 512x512 pixels
+2. Recommended design: Math symbol with purple background (#9333ea)
+3. Save as `icon-192.png` and `icon-512.png` in `public/` folder
 
-### Schritt 3: App starten
+### Step 3: Start App
 ```bash
 npm run dev
 ```
 
-Fertig! Die App läuft jetzt unter `http://localhost:5173` 🎉
+Done! The app is now running at `http://localhost:5173` 🎉
 
 ---
 
 ## 📱 Production Build & Deployment
 
-### Lokal bauen und testen:
+### Build and test locally:
 ```bash
 npm run build
 npm run preview
 ```
 
-### Deployen (z.B. auf Netlify):
-1. Repository auf GitHub pushen
-2. Mit Netlify verbinden
+### Deploy (e.g. on Netlify):
+1. Push repository to GitHub
+2. Connect with Netlify
 3. Build Command: `npm run build`
 4. Publish Directory: `dist`
 5. Deploy! 🚀
 
 ---
 
-## ✅ Checkliste vor dem ersten Start
+## ✅ Checklist Before First Start
 
-- [ ] Node.js installiert? (`node --version`)
-- [ ] Dependencies installiert? (`npm install`)
-- [ ] Icons erstellt? (`public/icon-192.png` und `public/icon-512.png`)
-- [ ] Development Server läuft? (`npm run dev`)
-
----
-
-## 🆘 Hilfe
-
-**Problem: "npm nicht gefunden"**
-→ Installiere Node.js von [nodejs.org](https://nodejs.org)
-
-**Problem: "Port 5173 bereits belegt"**
-→ Beende andere Vite-Prozesse oder ändere den Port in `vite.config.js`
-
-**Problem: Icons werden nicht angezeigt**
-→ Stelle sicher, dass die Dateien `icon-192.png` und `icon-512.png` im `public/` Ordner existieren
-
-**Problem: Service Worker funktioniert nicht lokal**
-→ Das ist normal! Service Worker funktionieren nur über HTTPS. Teste auf einem Hosting-Service.
+- [ ] Node.js installed? (`node --version`)
+- [ ] Dependencies installed? (`npm install`)
+- [ ] Icons created? (`public/icon-192.png` and `public/icon-512.png`)
+- [ ] Development server running? (`npm run dev`)
 
 ---
 
-**Viel Erfolg! 🎉**
+## 🆘 Help
 
+**Problem: "npm not found"**
+→ Install Node.js from [nodejs.org](https://nodejs.org)
 
+**Problem: "Port 5173 already in use"**
+→ Stop other Vite processes or change the port in `vite.config.js`
 
+**Problem: Icons not displayed**
+→ Make sure files `icon-192.png` and `icon-512.png` exist in `public/` folder
+
+**Problem: Service Worker doesn't work locally**
+→ That's normal! Service Workers only work over HTTPS. Test on a hosting service.
+
+---
+
+**Good luck! 🎉**

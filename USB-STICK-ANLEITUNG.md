@@ -1,34 +1,34 @@
-# 📱 USB-Stick Installation für Smartphone
+# 📱 USB Stick Installation for Smartphone
 
-## 🎯 Übersicht
+## 🎯 Overview
 
-Diese Anleitung zeigt dir, wie du die Kopfrechnen-App vom USB-Stick auf deinem Smartphone nutzen kannst.
-
----
-
-## 📦 Was du brauchst
-
-1. **USB-Stick** (mindestens 50 MB frei)
-2. **USB-OTG-Adapter** (falls dein Smartphone keinen USB-C hat)
-3. **Smartphone** (Android oder iPhone mit Dateimanager)
-4. **Einen der folgenden Wege:**
-   - **Option A**: Dateimanager mit HTML-Unterstützung (empfohlen)
-   - **Option B**: Portable HTTP-Server App
-   - **Option C**: PWA installieren (einmalig)
+This guide shows you how to use the Mental Math app from a USB stick on your smartphone.
 
 ---
 
-## 🚀 Methode 1: Direkt mit Dateimanager (Einfachste Lösung)
+## 📦 What You Need
 
-### Schritt 1: USB-Stick vorbereiten
+1. **USB stick** (at least 50 MB free)
+2. **USB-OTG adapter** (if your smartphone doesn't have USB-C)
+3. **Smartphone** (Android or iPhone with File Manager)
+4. **One of the following methods:**
+   - **Option A**: File manager with HTML support (recommended)
+   - **Option B**: Portable HTTP server app
+   - **Option C**: Install PWA (one time)
 
-1. Öffne den `dist` Ordner in diesem Projekt
-2. Kopiere **ALLE** Dateien und Ordner aus `dist/` auf deinen USB-Stick
+---
+
+## 🚀 Method 1: Directly with File Manager (Easiest Solution)
+
+### Step 1: Prepare USB Stick
+
+1. Open the `dist` folder in this project
+2. Copy **ALL** files and folders from `dist/` to your USB stick
    - `index.html`
    - `manifest.json`
    - `service-worker.js`
-   - `assets/` Ordner (mit allen CSS und JS Dateien)
-   - `icon-192.png` und `icon-512.png` (falls vorhanden)
+   - `assets/` folder (with all CSS and JS files)
+   - `icon-192.png` and `icon-512.png` (if present)
 
 ```
 USB-Stick/
@@ -42,170 +42,167 @@ USB-Stick/
     └── index-CrXrU95H.js
 ```
 
-### Schritt 2: Auf dem Smartphone öffnen
+### Step 2: Open on Smartphone
 
 **Android:**
-1. Stecke den USB-Stick ein (mit OTG-Adapter falls nötig)
-2. Öffne einen **Dateimanager** (z.B. "Dateien", "Files", "Solid Explorer")
-3. Navigiere zum USB-Stick
-4. Tippe auf `index.html`
-5. Wähle "Mit Browser öffnen" oder "Chrome/Firefox"
-6. ✅ Die App startet!
+1. Insert USB stick (with OTG adapter if needed)
+2. Open a **File Manager** (e.g. "Files", "Solid Explorer")
+3. Navigate to USB stick
+4. Tap `index.html`
+5. Select "Open with Browser" or "Chrome/Firefox"
+6. ✅ App is running!
 
 **iPhone/iPad:**
-1. Benötigt Lightning-auf-USB-Adapter
-2. App "Dateien" öffnen
-3. Zum USB-Stick navigieren
-4. `index.html` antippen
-5. Mit Safari öffnen
+1. Need Lightning-to-USB adapter
+2. Open "Files" app
+3. Navigate to USB stick
+4. Tap `index.html`
+5. Open with Safari
 
 ---
 
-## 🌐 Methode 2: Mit HTTP-Server App (Für beste Performance)
+## 🌐 Method 2: With HTTP Server App (For Best Performance)
 
-Wenn die direkte Methode nicht funktioniert, nutze einen lokalen Server:
+If the direct method doesn't work, use a local server:
 
 ### Android: Simple HTTP Server App
 
-1. **Installiere eine Server-App:**
-   - "Simple HTTP Server" (kostenlos im Play Store)
+1. **Install a server app:**
+   - "Simple HTTP Server" (free in Play Store)
    - "HTTP Server - Simple HTTP"
    - "Tiny Web Server"
 
-2. **Starte die App:**
-   - Wähle den USB-Stick als Root-Verzeichnis
-   - Starte den Server
-   - Öffne die angezeigte URL (z.B. http://localhost:8080)
-   - ✅ App läuft!
+2. **Start the app:**
+   - Select USB stick as root directory
+   - Start the server
+   - Open the displayed URL (e.g. http://localhost:8080)
+   - ✅ App is running!
 
-### iPhone: Nutze "Documents by Readdle"
+### iPhone: Use "Documents by Readdle"
 
-1. Installiere "Documents by Readdle" (kostenlos)
-2. Importiere die Dateien vom USB-Stick
-3. Tippe auf `index.html`
-4. Wähle "In Browser öffnen"
-
----
-
-## 📱 Methode 3: PWA Installation (Beste Lösung!)
-
-**Einmalig installieren, dann ohne USB-Stick nutzbar:**
-
-1. Öffne die App **EINMALIG** mit Methode 1 oder 2
-2. Im Browser (Chrome/Safari):
-   - **Android Chrome**: Tippe auf ⋮ → "Zum Startbildschirm hinzufügen"
-   - **iPhone Safari**: Tippe auf 📤 → "Zum Home-Bildschirm"
-3. Die App wird installiert wie eine echte App
-4. ✅ Jetzt kannst du den USB-Stick entfernen!
-5. Starte die App vom Homescreen
-
-**Vorteile:**
-- Funktioniert offline
-- Keine USB-Stick mehr nötig
-- Schneller Start
-- Sieht aus wie eine echte App
+1. Install "Documents by Readdle" (free)
+2. Import files from USB stick
+3. Tap `index.html`
+4. Select "Open in Browser"
 
 ---
 
-## 🔧 Problemlösung
+## 📱 Method 3: PWA Installation (Best Solution!)
 
-### Problem: "Datei kann nicht geöffnet werden"
+**Install once, then usable without USB stick:**
 
-**Lösung:**
-- Nutze Methode 2 (HTTP-Server App)
-- Oder installiere die App als PWA (Methode 3)
+1. Open the app **ONCE** with Method 1 or 2
+2. In browser (Chrome/Safari):
+   - **Android Chrome**: Tap ⋮ → "Add to Home screen"
+   - **iPhone Safari**: Tap 📤 → "Add to Home Screen"
+3. The app is installed like a real app
+4. ✅ Now you can remove the USB stick!
+5. Start the app from home screen
 
-### Problem: "Styles werden nicht geladen"
+**Advantages:**
+- Works offline
+- No USB stick needed anymore
+- Fast start
+- Looks like a real app
 
-**Grund:** Relative Pfade funktionieren nicht
-**Lösung:** 
-- Nutze HTTP-Server App
-- Alle Dateien müssen im selben Ordner sein
+---
 
-### Problem: "Service Worker funktioniert nicht"
+## 🔧 Troubleshooting
 
-**Normal!** Service Worker benötigen:
-- HTTPS oder
+### Problem: "File cannot be opened"
+
+**Solution:**
+- Use Method 2 (HTTP server app)
+- Or install the app as PWA (Method 3)
+
+### Problem: "Styles are not loaded"
+
+**Reason:** Relative paths don't work
+**Solution:**
+- Use HTTP server app
+- All files must be in same folder
+
+### Problem: "Service Worker doesn't work"
+
+**Normal!** Service Workers need:
+- HTTPS or
 - localhost
 
-**Lösung:** Nutze PWA-Installation (Methode 3)
+**Solution:** Use PWA installation (Method 3)
 
-### Problem: USB-Stick wird nicht erkannt
+### Problem: USB stick not recognized
 
-**Prüfe:**
-- USB-OTG-Unterstützung deines Smartphones
-- Dateisystem: FAT32 oder exFAT (nicht NTFS)
-- USB-Stick ist funktionsfähig
-
----
-
-## 📋 Schritt-für-Schritt für Anfänger
-
-### Komplette Anleitung (Android):
-
-1. **USB-Stick formatieren:**
-   - Am PC: Rechtsklick → Formatieren → FAT32
-
-2. **Dateien kopieren:**
-   - Öffne: `C:\projekte\Math4Kids\dist\`
-   - Markiere ALLES (Strg+A)
-   - Kopiere auf USB-Stick (Strg+C, dann Strg+V auf Stick)
-
-3. **Auf Smartphone:**
-   - USB-Stick einstecken (mit Adapter)
-   - "Dateien"-App öffnen
-   - USB-Stick antippen
-   - `index.html` antippen
-   - "Mit Chrome öffnen"
-   - **Fertig!** 🎉
-
-4. **Als App installieren (optional):**
-   - In Chrome: Menü (⋮) → "Zum Startbildschirm hinzufügen"
-   - Icon antippen
-   - Jetzt kannst du USB-Stick entfernen!
+**Check:**
+- USB-OTG support of your smartphone
+- File system: FAT32 or exFAT (not NTFS)
+- USB stick is functional
 
 ---
 
-## 💡 Tipps
+## 📋 Step by Step for Beginners
 
-1. **Daten bleiben erhalten:**
-   - Belohnungen und Einstellungen werden im Browser gespeichert
-   - Beim Löschen der Browser-Daten gehen sie verloren
+### Complete Guide (Android):
 
-2. **Mehrere Geräte:**
-   - Die App läuft auf jedem Gerät mit dem USB-Stick
-   - Aber: Fortschritt wird NICHT zwischen Geräten synchronisiert
+1. **Format USB stick:**
+   - On PC: Right-click → Format → FAT32
+
+2. **Copy files:**
+   - Open: `C:\projekte\Math4Kids\dist\`
+   - Select ALL (Ctrl+A)
+   - Copy to USB stick (Ctrl+C, then Ctrl+V on stick)
+
+3. **On smartphone:**
+   - Insert USB stick (with adapter)
+   - Open "Files" app
+   - Tap USB stick
+   - Tap `index.html`
+   - "Open with Chrome"
+   - **Done!** 🎉
+
+4. **Install as app (optional):**
+   - In Chrome: Menu (⋮) → "Add to Home screen"
+   - Tap icon
+   - Now you can remove USB stick!
+
+---
+
+## 💡 Tips
+
+1. **Data is preserved:**
+   - Rewards and settings are saved in browser
+   - When clearing browser data they are lost
+
+2. **Multiple devices:**
+   - The app runs on any device with the USB stick
+   - But: Progress is NOT synced between devices
 
 3. **Updates:**
-   - Neuen Build erstellen: `npm run build`
-   - Neue Dateien aus `dist/` auf USB-Stick kopieren
-   - Alte Dateien überschreiben
+   - Create new build: `npm run build`
+   - Copy new files from `dist/` to USB stick
+   - Overwrite old files
 
-4. **Offline-Nutzung:**
-   - Nach PWA-Installation: komplett offline nutzbar
-   - Keine Internetverbindung nötig
-
----
-
-## 🎮 Empfohlene Lösung
-
-**Für beste Erfahrung:**
-
-1. USB-Stick mit allen Dateien vorbereiten
-2. **EINMALIG** auf Smartphone mit USB öffnen
-3. Als PWA installieren
-4. USB-Stick entfernen
-5. App vom Homescreen nutzen
-
-So hast du:
-- ✅ Keine USB-Stick mehr nötig
-- ✅ Schneller Start
-- ✅ Offline-fähig
-- ✅ Sieht aus wie echte App
+4. **Offline use:**
+   - After PWA installation: completely usable offline
+   - No internet connection needed
 
 ---
 
-**Viel Spaß beim Rechnen! 🎯✨**
+## 🎮 Recommended Solution
 
+**For best experience:**
 
+1. Prepare USB stick with all files
+2. Open on smartphone **ONCE** with USB
+3. Install as PWA
+4. Remove USB stick
+5. Use app from home screen
 
+This gives you:
+- ✅ No USB stick needed anymore
+- ✅ Fast start
+- ✅ Offline capable
+- ✅ Looks like real app
+
+---
+
+**Have fun with mental math! 🎯✨**

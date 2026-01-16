@@ -1,180 +1,179 @@
 # 🌐 GitHub Pages Deployment
 
-## ✨ Die App ist jetzt online verfügbar!
+## ✨ The app is now available online!
 
-### 🔗 URL (nach Aktivierung):
+### 🔗 URL (after activation):
 ```
 https://schurick1502.github.io/Math4Kids/
 ```
 
 ---
 
-## 🚀 Automatisches Deployment
+## 🚀 Automatic Deployment
 
-### Was passiert automatisch:
+### What happens automatically:
 
-1. **Bei jedem Push zu `main`:**
-   - GitHub Actions startet automatisch
-   - Dependencies werden installiert
-   - Production Build wird erstellt
-   - App wird auf GitHub Pages deployed
-   - URL wird aktualisiert
+1. **On every push to `main`:**
+   - GitHub Actions starts automatically
+   - Dependencies are installed
+   - Production build is created
+   - App is deployed to GitHub Pages
+   - URL is updated
 
-2. **Dauer:** ~2-3 Minuten
+2. **Duration:** ~2-3 minutes
 
-3. **Status prüfen:**
+3. **Check status:**
    - GitHub Repository → Actions Tab
-   - Grüner Haken ✅ = Erfolgreich deployed
+   - Green checkmark ✅ = Successfully deployed
 
 ---
 
-## ⚙️ Erstmaliges Setup (nur einmal nötig)
+## ⚙️ First-time Setup (only needed once)
 
-### Schritt 1: GitHub Pages aktivieren
+### Step 1: Enable GitHub Pages
 
-1. Gehe zu: https://github.com/schurick1502/Math4Kids/settings/pages
+1. Go to: https://github.com/schurick1502/Math4Kids/settings/pages
 
-2. **Source:** Wähle "GitHub Actions"
+2. **Source:** Select "GitHub Actions"
 
-3. **Fertig!** Die App wird beim nächsten Push automatisch deployed
+3. **Done!** The app will be automatically deployed on the next push
 
-### Schritt 2: Warten auf ersten Deploy
+### Step 2: Wait for First Deploy
 
-- Der erste Deploy startet automatisch nach dem Push
-- Dauert ca. 2-3 Minuten
-- Prüfe den Status unter: https://github.com/schurick1502/Math4Kids/actions
+- The first deploy starts automatically after the push
+- Takes about 2-3 minutes
+- Check status at: https://github.com/schurick1502/Math4Kids/actions
 
 ---
 
-## 📱 Die App nutzen
+## 📱 Using the App
 
 ### Online (GitHub Pages):
 ```
 https://schurick1502.github.io/Math4Kids/
 ```
 
-**Vorteile:**
-- ✅ Keine Installation nötig
-- ✅ Immer die neueste Version
-- ✅ Von überall erreichbar
-- ✅ Direkt am Smartphone nutzbar
-- ✅ Als PWA installierbar
+**Advantages:**
+- ✅ No installation needed
+- ✅ Always the latest version
+- ✅ Accessible from anywhere
+- ✅ Directly usable on smartphone
+- ✅ Installable as PWA
 
-### Als PWA installieren:
+### Install as PWA:
 
 **Android Chrome:**
-1. Öffne die URL
-2. Browser-Menü (⋮) → "Zum Startbildschirm hinzufügen"
-3. Wie eine echte App nutzen!
+1. Open the URL
+2. Browser menu (⋮) → "Add to Home screen"
+3. Use like a real app!
 
 **iPhone Safari:**
-1. Öffne die URL
-2. Teilen-Button (📤) → "Zum Home-Bildschirm"
-3. Fertig!
+1. Open the URL
+2. Share button (📤) → "Add to Home Screen"
+3. Done!
 
 ---
 
-## 🔄 Updates deployen
+## 🔄 Deploy Updates
 
-**Super einfach:**
+**Super easy:**
 ```bash
 git add .
-git commit -m "Deine Änderung"
+git commit -m "Your change"
 git push
 ```
 
-→ Automatisch in 2-3 Minuten online! 🚀
+→ Automatically online in 2-3 minutes! 🚀
 
 ---
 
-## 🛠️ Lokale Entwicklung
+## 🛠️ Local Development
 
 ```bash
-# Lokal testen
+# Test locally
 npm run dev
 
-# Build erstellen (wie GitHub Actions)
+# Create build (like GitHub Actions)
 npm run build
 
-# Build lokal testen
+# Test build locally
 npm run preview
 ```
 
 ---
 
-## 📊 Deployment-Status prüfen
+## 📊 Check Deployment Status
 
 1. **GitHub Actions:**
    https://github.com/schurick1502/Math4Kids/actions
 
-2. **Grüner Haken ✅:**
-   - Deploy erfolgreich
-   - App ist online
+2. **Green checkmark ✅:**
+   - Deploy successful
+   - App is online
 
-3. **Roter X ❌:**
-   - Deploy fehlgeschlagen
-   - Details im Action-Log
+3. **Red X ❌:**
+   - Deploy failed
+   - Details in Action log
 
 ---
 
-## 🎯 Was deployed wird:
+## 🎯 What Gets Deployed:
 
-Aus dem `dist/` Ordner:
-- `index.html` (Hauptseite)
+From the `dist/` folder:
+- `index.html` (Main page)
 - `assets/` (CSS + JavaScript)
 - `manifest.json` (PWA Config)
-- `service-worker.js` (Offline-Modus)
-- Icons (falls vorhanden)
+- `service-worker.js` (Offline mode)
+- Icons (if present)
 
 ---
 
-## 💡 Tipps
+## 💡 Tips
 
 ### Custom Domain (optional):
-1. Domain bei Provider kaufen
-2. CNAME-Record auf `schurick1502.github.io` setzen
-3. In Repository Settings → Pages → Custom Domain eintragen
+1. Buy domain from provider
+2. Set CNAME record to `schurick1502.github.io`
+3. Enter in Repository Settings → Pages → Custom Domain
 
 ### Analytics (optional):
-- Google Analytics einbinden
-- Besucher-Statistiken verfolgen
+- Add Google Analytics
+- Track visitor statistics
 
 ### Performance:
-- App ist optimiert (nur 196 KB)
-- Lädt sehr schnell
-- Funktioniert auch offline (nach erstem Besuch)
+- App is optimized (only 196 KB)
+- Loads very fast
+- Works offline too (after first visit)
 
 ---
 
-## 🔒 Sicherheit
+## 🔒 Security
 
-- **HTTPS:** Automatisch aktiviert durch GitHub Pages
-- **PWA:** Benötigt HTTPS (funktioniert also perfekt!)
-- **Keine Serverkosten:** Komplett kostenlos
-
----
-
-## 🌍 Verfügbarkeit
-
-- **Weltweit erreichbar**
-- **Keine Limits** (für normale Nutzung)
-- **99.9% Uptime** durch GitHub
-- **Schnelle CDN-Server** weltweit
+- **HTTPS:** Automatically enabled by GitHub Pages
+- **PWA:** Requires HTTPS (so it works perfectly!)
+- **No server costs:** Completely free
 
 ---
 
-## ✅ Checkliste
+## 🌍 Availability
 
-Nach dem ersten Push:
-
-- [ ] GitHub Actions Workflow läuft (Actions Tab)
-- [ ] GitHub Pages ist aktiviert (Settings → Pages)
-- [ ] Deploy erfolgreich (grüner Haken)
-- [ ] App unter URL erreichbar: https://schurick1502.github.io/Math4Kids/
-- [ ] PWA Installation funktioniert
-- [ ] Offline-Modus funktioniert
+- **Globally accessible**
+- **No limits** (for normal usage)
+- **99.9% uptime** through GitHub
+- **Fast CDN servers** worldwide
 
 ---
 
-**Die App ist jetzt für jeden nutzbar - einfach URL teilen! 🎉**
+## ✅ Checklist
 
+After the first push:
+
+- [ ] GitHub Actions Workflow runs (Actions Tab)
+- [ ] GitHub Pages is enabled (Settings → Pages)
+- [ ] Deploy successful (green checkmark)
+- [ ] App accessible at URL: https://schurick1502.github.io/Math4Kids/
+- [ ] PWA installation works
+- [ ] Offline mode works
+
+---
+
+**The app is now usable by anyone - just share the URL! 🎉**

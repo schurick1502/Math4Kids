@@ -1,278 +1,277 @@
-# 📱 Math4Kids - Android Installation & Nutzung
+# 📱 Math4Kids - Android Installation & Usage
 
-## 🎯 Schnellstart für Android
+## 🎯 Quick Start for Android
 
-**Die einfachste Methode, Math4Kids auf deinem Android-Smartphone zu nutzen:**
-
----
-
-## 🚀 Methode 1: HTTP-Server (Empfohlen - Beste Performance)
-
-### Schritt 1: ZIP-Datei entpacken
-
-1. **ZIP-Datei** `Math4Kids-Vertrieb.zip` herunterladen/erhalten
-2. **Entpacken** in einen Ordner (z.B. "Math4Kids")
-3. **Ordner** öffnen
+**The easiest method to use Math4Kids on your Android smartphone:**
 
 ---
 
-### Schritt 2: HTTP-Server starten
+## 🚀 Method 1: HTTP Server (Recommended - Best Performance)
 
-**Option A - Mit Android HTTP-Server App (Empfohlen):**
+### Step 1: Extract ZIP File
 
-1. **"HTTP Server - Simple HTTP"** aus dem Play Store installieren:
+1. **Download/receive ZIP file** `Math4Kids-Distribution.zip`
+2. **Extract** to a folder (e.g. "Math4Kids")
+3. **Open** folder
+
+---
+
+### Step 2: Start HTTP Server
+
+**Option A - With Android HTTP Server App (Recommended):**
+
+1. **Install "HTTP Server - Simple HTTP"** from Play Store:
    - https://play.google.com/store/apps/details?id=com.elvenworks.simpleserver
-   - Oder ähnliche Apps: "Tiny Web Server", "Simple HTTP Server"
+   - Or similar apps: "Tiny Web Server", "Simple HTTP Server"
 
-2. **App öffnen** → **"Select Folder"** wählen
-3. **Math4Kids-Ordner** auswählen (mit allen Dateien)
-4. **"Start Server"** antippen
-5. **URL wird angezeigt** (z.B. `http://192.168.1.100:8080`)
+2. **Open app** → **"Select Folder"**
+3. **Select Math4Kids folder** (with all files)
+4. **Tap "Start Server"**
+5. **URL is displayed** (e.g. `http://192.168.1.100:8080`)
 
-**Option B - Mit Computer im gleichen WiFi:**
+**Option B - With computer on same WiFi:**
 
-1. **Computer und Android** müssen im **gleichen WiFi** sein
-2. **Windows:** `SERVER-START.bat` doppelklicken
-3. **Linux/Mac:** `SERVER-START.sh` ausführen
-4. **Oder:** `node server.js` (falls Node.js installiert)
-5. **IP-Adresse** wird im Terminal angezeigt
-
----
-
-### Schritt 3: Auf Android-Smartphone öffnen
-
-1. **Chrome-Browser** auf Android öffnen
-2. **Adressleiste** antippen
-3. **URL eingeben** (z.B. `http://192.168.1.100:8080`)
-   - Von HTTP-Server App angezeigt
-   - Oder vom Computer-Terminal
-4. **Enter** antippen
-5. ✅ **App läuft!**
+1. **Computer and Android** must be on **same WiFi**
+2. **Windows:** Double-click `SERVER-START.bat`
+3. **Linux/Mac:** Run `SERVER-START.sh`
+4. **Or:** `node server.js` (if Node.js is installed)
+5. **IP address** is shown in terminal
 
 ---
 
-### Schritt 4: Als App installieren (Optional, aber empfohlen!)
+### Step 3: Open on Android Smartphone
 
-**Nachdem die App im Browser geöffnet ist:**
-
-1. **Chrome-Menü** öffnen (⋮ oben rechts)
-2. **"Zum Startbildschirm hinzufügen"** wählen
-   - Oder: **"App installieren"** (wenn angezeigt)
-3. **"Hinzufügen"** antippen
-4. ✅ **App-Icon** erscheint auf dem Homescreen
-
-**Jetzt kannst du:**
-- ✅ **Server beenden** (nicht mehr nötig!)
-- ✅ **App vom Homescreen** starten
-- ✅ **Offline nutzen** (Service Worker cached alles)
-- ✅ **Wie eine echte App** verwenden
+1. **Open Chrome browser** on Android
+2. **Tap address bar**
+3. **Enter URL** (e.g. `http://192.168.1.100:8080`)
+   - Shown by HTTP Server App
+   - Or from computer terminal
+4. **Tap Enter**
+5. ✅ **App is running!**
 
 ---
 
-## 📦 Methode 2: USB-Stick (Für Offline-Nutzung)
+### Step 4: Install as App (Optional, but recommended!)
 
-### Schritt 1: USB-Stick vorbereiten
+**After the app is open in browser:**
 
-1. **USB-Stick** auf **FAT32** formatieren (falls nötig)
-2. **Math4Kids-Ordner** komplett auf USB-Stick kopieren
-3. **USB-Stick** aus dem Computer entfernen
+1. **Open Chrome menu** (⋮ top right)
+2. **Select "Add to Home screen"**
+   - Or: **"Install app"** (if displayed)
+3. **Tap "Add"**
+4. ✅ **App icon** appears on home screen
 
----
-
-### Schritt 2: USB-Stick auf Android
-
-1. **USB-OTG-Adapter** verwenden (falls nötig)
-2. **USB-Stick** auf Android einstecken
-3. **Benachrichtigung** sollte erscheinen: "USB-Gerät angeschlossen"
-
----
-
-### Schritt 3: Mit Android HTTP-Server App öffnen
-
-1. **"HTTP Server - Simple HTTP"** App öffnen
-2. **"Select Folder"** → **USB-Stick** wählen
-3. **Math4Kids-Ordner** auf USB-Stick auswählen
-4. **"Start Server"** antippen
-5. **URL im Browser öffnen** (z.B. `http://localhost:8080`)
-6. ✅ **App läuft!**
+**Now you can:**
+- ✅ **Stop server** (no longer needed!)
+- ✅ **Start app from home screen**
+- ✅ **Use offline** (Service Worker caches everything)
+- ✅ **Use like a real app**
 
 ---
 
-## 🎮 App nutzen
+## 📦 Method 2: USB Stick (For Offline Use)
 
-### Nach der Installation:
+### Step 1: Prepare USB Stick
 
-1. **App-Icon** auf Homescreen antippen
-2. **App startet** (wie eine echte App!)
-3. **Keine Browser-Leiste** mehr sichtbar
-4. ✅ **Funktioniert offline** (nach erstem Laden)
+1. **Format USB stick** to **FAT32** (if needed)
+2. **Copy Math4Kids folder** completely to USB stick
+3. **Remove USB stick** from computer
 
 ---
 
-## ⚙️ Android-Einstellungen prüfen
+### Step 2: USB Stick on Android
 
-### Chrome-Berechtigungen (wichtig!):
+1. **Use USB-OTG adapter** (if needed)
+2. **Insert USB stick** into Android
+3. **Notification** should appear: "USB device connected"
 
-1. **Chrome öffnen** → **Menü (⋮)** → **Einstellungen**
-2. **Website-Einstellungen** öffnen
-3. **Prüfe folgende Einstellungen:**
+---
 
-   - ✅ **JavaScript** → **"Erlaubt"** (Standard: ✅)
-   - ✅ **Cookies** → **"Cookies zulassen"** (Standard: ✅)
-   - ✅ **Service Worker** → **Erlaubt** (Standard: ✅)
-   - ✅ **App-Installationen** → **Erlaubt** (für PWA)
+### Step 3: Open with Android HTTP Server App
 
-4. **Wichtig:** Nicht im **Inkognito-Modus** verwenden!
+1. **Open "HTTP Server - Simple HTTP"** app
+2. **"Select Folder"** → **Choose USB stick**
+3. **Select Math4Kids folder** on USB stick
+4. **Tap "Start Server"**
+5. **Open URL in browser** (e.g. `http://localhost:8080`)
+6. ✅ **App is running!**
+
+---
+
+## 🎮 Using the App
+
+### After installation:
+
+1. **Tap app icon** on home screen
+2. **App starts** (like a real app!)
+3. **No browser bar** visible anymore
+4. ✅ **Works offline** (after first load)
+
+---
+
+## ⚙️ Check Android Settings
+
+### Chrome Permissions (important!):
+
+1. **Open Chrome** → **Menu (⋮)** → **Settings**
+2. **Open Site Settings**
+3. **Check these settings:**
+
+   - ✅ **JavaScript** → **"Allowed"** (Default: ✅)
+   - ✅ **Cookies** → **"Allow cookies"** (Default: ✅)
+   - ✅ **Service Worker** → **Allowed** (Default: ✅)
+   - ✅ **App installations** → **Allowed** (for PWA)
+
+4. **Important:** Don't use in **Incognito mode**!
 
 ---
 
 ## 🔧 Troubleshooting
 
-### ❌ App lädt nicht / "Seite nicht erreichbar"
+### ❌ App doesn't load / "Page not reachable"
 
-**Ursache:** Server läuft nicht oder falsche URL
+**Cause:** Server not running or wrong URL
 
-**Lösung:**
-1. ✅ Prüfe, ob Server läuft (App sollte "Server läuft" zeigen)
-2. ✅ Prüfe URL (muss mit `http://` beginnen)
-3. ✅ Computer und Android im **gleichen WiFi**?
-4. ✅ Firewall auf Computer erlaubt Port 8080?
-
----
-
-### ❌ "App kann nicht installiert werden"
-
-**Ursache:** PWA-Installation benötigt HTTPS oder localhost
-
-**Lösung:**
-1. ✅ Nutze **HTTP-Server** (localhost funktioniert)
-2. ✅ Nicht über `file://` öffnen (USB-Stick direkt)
-3. ✅ Chrome-Berechtigungen prüfen (siehe oben)
+**Solution:**
+1. ✅ Check if server is running (App should show "Server running")
+2. ✅ Check URL (must start with `http://`)
+3. ✅ Computer and Android on **same WiFi**?
+4. ✅ Firewall on computer allows port 8080?
 
 ---
 
-### ❌ Daten werden nicht gespeichert
+### ❌ "App cannot be installed"
 
-**Ursache:** localStorage funktioniert nicht
+**Cause:** PWA installation needs HTTPS or localhost
 
-**Lösung:**
-1. ✅ Cookies müssen erlaubt sein (Chrome-Einstellungen)
-2. ✅ Nicht im **Inkognito-Modus**
-3. ✅ Browser-Cache nicht geleert haben
-
----
-
-### ❌ Service Worker funktioniert nicht
-
-**Ursache:** Service Worker benötigt HTTP/HTTPS
-
-**Lösung:**
-1. ✅ Nutze **HTTP-Server** (localhost funktioniert)
-2. ✅ Nicht über `file://` öffnen
-3. ✅ URL muss mit `http://` oder `https://` beginnen
+**Solution:**
+1. ✅ Use **HTTP server** (localhost works)
+2. ✅ Don't open via `file://` (USB stick directly)
+3. ✅ Check Chrome permissions (see above)
 
 ---
 
-### ❌ "Keine Internetverbindung" (nach Installation)
+### ❌ Data is not saved
 
-**Das ist OK!** Die App funktioniert **offline**.
+**Cause:** localStorage not working
 
-**Prüfen:**
-1. ✅ Service Worker wurde registriert?
-   - Chrome-Menü → "App-Informationen"
-   - "Service Worker" sollte "aktiviert" sein
-2. ✅ App wurde bereits einmal geladen? (für Cache)
-
----
-
-## 📋 Checkliste für Android-Installation
-
-Vor der Nutzung prüfen:
-
-- [ ] ✅ ZIP-Datei entpackt
-- [ ] ✅ HTTP-Server gestartet (App oder Computer)
-- [ ] ✅ Android und Computer im **gleichen WiFi** (bei Computer-Server)
-- [ ] ✅ Chrome-Browser auf Android installiert
-- [ ] ✅ JavaScript aktiviert (Standard: ✅)
-- [ ] ✅ Cookies erlaubt (Standard: ✅)
-- [ ] ✅ Service Worker erlaubt (Standard: ✅)
-- [ ] ✅ Nicht im Inkognito-Modus
+**Solution:**
+1. ✅ Cookies must be allowed (Chrome settings)
+2. ✅ Not in **Incognito mode**
+3. ✅ Don't clear browser cache
 
 ---
 
-## 💡 Tipps für beste Performance
+### ❌ Service Worker not working
 
-### Performance-Optimierungen:
+**Cause:** Service Worker needs HTTP/HTTPS
 
-1. **HTTP-Server nutzen** (nicht USB-Stick direkt)
-   - Bessere Performance
-   - Service Worker funktioniert
-   - PWA-Installation möglich
-
-2. **Als PWA installieren**
-   - Offline-Funktion
-   - Schneller Start
-   - Wie echte App
-
-3. **Chrome verwenden** (empfohlen)
-   - Beste PWA-Unterstützung
-   - Service Worker funktioniert am besten
-
-4. **WiFi-Verbindung**
-   - Erstes Laden über WiFi (für Cache)
-   - Danach offline nutzbar
+**Solution:**
+1. ✅ Use **HTTP server** (localhost works)
+2. ✅ Don't open via `file://`
+3. ✅ URL must start with `http://` or `https://`
 
 ---
 
-## 🎯 Empfohlene Android-Apps
+### ❌ "No internet connection" (after installation)
 
-### HTTP-Server Apps:
+**That's OK!** The app works **offline**.
 
-1. **"HTTP Server - Simple HTTP"** (Empfohlen)
+**Check:**
+1. ✅ Service Worker was registered?
+   - Chrome menu → "App info"
+   - "Service Worker" should be "activated"
+2. ✅ App was loaded at least once? (for cache)
+
+---
+
+## 📋 Checklist for Android Installation
+
+Check before use:
+
+- [ ] ✅ ZIP file extracted
+- [ ] ✅ HTTP server started (App or computer)
+- [ ] ✅ Android and computer on **same WiFi** (for computer server)
+- [ ] ✅ Chrome browser installed on Android
+- [ ] ✅ JavaScript enabled (Default: ✅)
+- [ ] ✅ Cookies allowed (Default: ✅)
+- [ ] ✅ Service Worker allowed (Default: ✅)
+- [ ] ✅ Not in Incognito mode
+
+---
+
+## 💡 Tips for Best Performance
+
+### Performance Optimizations:
+
+1. **Use HTTP server** (not USB stick directly)
+   - Better performance
+   - Service Worker works
+   - PWA installation possible
+
+2. **Install as PWA**
+   - Offline function
+   - Faster start
+   - Like real app
+
+3. **Use Chrome** (recommended)
+   - Best PWA support
+   - Service Worker works best
+
+4. **WiFi connection**
+   - First load via WiFi (for cache)
+   - Then usable offline
+
+---
+
+## 🎯 Recommended Android Apps
+
+### HTTP Server Apps:
+
+1. **"HTTP Server - Simple HTTP"** (Recommended)
    - https://play.google.com/store/apps/details?id=com.elvenworks.simpleserver
-   - Einfach zu bedienen
-   - Funktioniert mit USB-Stick
+   - Easy to use
+   - Works with USB stick
 
 2. **"Tiny Web Server"**
-   - Alternative HTTP-Server App
-   - Ebenfalls einfach zu nutzen
+   - Alternative HTTP server app
+   - Also easy to use
 
 3. **"Simple HTTP Server"**
-   - Weitere Alternative
-   - Funktioniert ähnlich
+   - Another alternative
+   - Works similarly
 
 ---
 
-## 🚀 Schnellstart (3 Schritte)
+## 🚀 Quick Start (3 Steps)
 
-**1. ZIP entpacken**
+**1. Extract ZIP**
 
-**2. HTTP-Server App installieren & starten**
+**2. Install & start HTTP server app**
 
-**3. URL im Chrome-Browser öffnen & als App installieren**
+**3. Open URL in Chrome browser & install as app**
 
-**Fertig! ✅**
-
----
-
-## 📱 App-Features auf Android
-
-Nach der Installation:
-
-- ✅ **6 Schwierigkeitsstufen** (Klasse 1-4, 1x1, Erwachsene)
-- ✅ **Zeit-Messung** mit Statistiken
-- ✅ **Belohnungs-System** nach Performance
-- ✅ **Multiplayer-Modus** für 2 Spieler
-- ✅ **Prozentrechnung & Dreisatz** (Erwachsene)
-- ✅ **Offline-Funktion** (funktioniert ohne Internet)
-- ✅ **Schneller Start** (wie echte App)
-- ✅ **Keine Browser-Leiste** (Vollbild-Modus)
+**Done! ✅**
 
 ---
 
-## 🎉 Viel Erfolg!
+## 📱 App Features on Android
 
-**Viel Spaß beim Kopfrechnen auf deinem Android-Smartphone! 🎯✨**
+After installation:
 
-Bei Problemen: Siehe **INSTALLATION.txt** im ZIP-Ordner für detaillierte Hilfe.
+- ✅ **6 difficulty levels** (Grade 1-4, Multiplication tables, Adults)
+- ✅ **Time measurement** with statistics
+- ✅ **Reward system** based on performance
+- ✅ **Multiplayer mode** for 2 players
+- ✅ **Percentage calculation & Rule of Three** (Adults)
+- ✅ **Offline function** (works without internet)
+- ✅ **Fast start** (like real app)
+- ✅ **No browser bar** (fullscreen mode)
 
+---
+
+## 🎉 Good Luck!
+
+**Have fun with mental math on your Android smartphone! 🎯✨**
+
+For problems: See **INSTALLATION.txt** in ZIP folder for detailed help.

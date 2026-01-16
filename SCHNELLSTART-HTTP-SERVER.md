@@ -1,149 +1,148 @@
-# 🚀 Schnellstart: HTTP-Server für Smartphone
+# 🚀 Quick Start: HTTP Server for Smartphone
 
-## ⚡ Mit lokalem HTTP-Server über WiFi
+## ⚡ With Local HTTP Server via WiFi
 
-Diese Methode ist ideal, wenn du die App auf deinem Smartphone testen möchtest, ohne USB-Stick oder Dateien zu kopieren.
-
----
-
-## 📋 Voraussetzungen
-
-1. ✅ Computer und Smartphone müssen im **selben WiFi-Netzwerk** sein
-2. ✅ Die App muss gebaut sein: `npm run build`
-3. ✅ Node.js muss installiert sein (für den Server)
+This method is ideal when you want to test the app on your smartphone without USB stick or copying files.
 
 ---
 
-## 🎯 Schritt-für-Schritt Anleitung
+## 📋 Prerequisites
 
-### 1️⃣ App bauen (falls noch nicht geschehen)
+1. ✅ Computer and smartphone must be on the **same WiFi network**
+2. ✅ The app must be built: `npm run build`
+3. ✅ Node.js must be installed (for the server)
+
+---
+
+## 🎯 Step by Step Guide
+
+### 1️⃣ Build App (if not done yet)
 
 ```powershell
 npm run build
 ```
 
-Das erstellt die optimierten Dateien im `dist` Ordner.
+This creates the optimized files in the `dist` folder.
 
 ---
 
-### 2️⃣ HTTP-Server starten
+### 2️⃣ Start HTTP Server
 
-**Auf dem Computer (Windows PowerShell):**
+**On the computer (Windows PowerShell):**
 
 ```powershell
 npm run serve
 ```
 
-**Alternative (andere Port):**
+**Alternative (different port):**
 ```powershell
 $env:PORT=8081; npm run serve
 ```
 
-**Erwartete Ausgabe:**
+**Expected output:**
 ```
-🚀 HTTP-Server gestartet!
+🚀 HTTP Server started!
 
-📱 Lokale IP-Adresse: http://192.168.1.100:8080
+📱 Local IP address: http://192.168.1.100:8080
 💻 Localhost:        http://localhost:8080
 
-📂 Wird bereitgestellt aus: C:\projekte\Math4Kids\dist
+📂 Being served from: C:\projekte\Math4Kids\dist
 
-📱 Auf Smartphone öffnen:
-   1. Verbinde Smartphone mit demselben WiFi-Netzwerk
-   2. Öffne Browser auf Smartphone
-   3. Gehe zu: http://192.168.1.100:8080
+📱 Open on smartphone:
+   1. Connect smartphone to the same WiFi network
+   2. Open browser on smartphone
+   3. Go to: http://192.168.1.100:8080
 
-⏹️  Server stoppen: Strg+C
+⏹️  Stop server: Ctrl+C
 ```
 
 ---
 
-### 3️⃣ Auf Smartphone öffnen
+### 3️⃣ Open on Smartphone
 
 **Android (Chrome/Firefox):**
-1. Öffne den Browser auf deinem Smartphone
-2. Tippe die IP-Adresse ein, die im Terminal angezeigt wird
-   - Beispiel: `http://192.168.1.100:8080`
-3. ✅ Die App läuft jetzt auf deinem Smartphone!
+1. Open the browser on your smartphone
+2. Type the IP address shown in the terminal
+   - Example: `http://192.168.1.100:8080`
+3. ✅ The app is now running on your smartphone!
 
 **iPhone (Safari):**
-1. Öffne Safari auf deinem iPhone
-2. Tippe die IP-Adresse ein
-   - Beispiel: `http://192.168.1.100:8080`
-3. ✅ Die App läuft jetzt auf deinem iPhone!
+1. Open Safari on your iPhone
+2. Type the IP address
+   - Example: `http://192.168.1.100:8080`
+3. ✅ The app is now running on your iPhone!
 
 ---
 
 ## 🔧 Troubleshooting
 
-### ❌ "Port ist bereits belegt"
-**Lösung:** Verwende einen anderen Port:
+### ❌ "Port is already in use"
+**Solution:** Use a different port:
 ```powershell
 $env:PORT=8081; npm run serve
 ```
 
-### ❌ Smartphone kann nicht verbinden
-**Prüfe:**
-- ✅ Computer und Smartphone sind im **selben WiFi-Netzwerk**?
-- ✅ Firewall auf dem Computer blockiert den Port nicht?
-- ✅ Die IP-Adresse ist korrekt?
+### ❌ Smartphone cannot connect
+**Check:**
+- ✅ Computer and smartphone on **same WiFi network**?
+- ✅ Firewall on computer not blocking the port?
+- ✅ IP address is correct?
 
-**Windows Firewall öffnen:**
-1. Windows Defender Firewall öffnen
-2. "Erweiterte Einstellungen" → "Eingehende Regeln"
-3. Neue Regel: Port 8080 (TCP) erlauben
+**Open Windows Firewall:**
+1. Open Windows Defender Firewall
+2. "Advanced settings" → "Inbound Rules"
+3. New rule: Allow port 8080 (TCP)
 
-### ❌ IP-Adresse stimmt nicht
-**Manuelle IP-Adresse finden:**
+### ❌ IP address is wrong
+**Find IP address manually:**
 ```powershell
 ipconfig
 ```
-Suche nach "IPv4-Adresse" unter deinem WiFi-Adapter (nicht Ethernet!).
+Look for "IPv4 Address" under your WiFi adapter (not Ethernet!).
 
 ---
 
-## 📱 Als App installieren (optional)
+## 📱 Install as App (optional)
 
-Nachdem die App im Browser geöffnet ist:
+After the app is open in browser:
 
 **Android Chrome:**
-- Menü (⋮) → "Zum Startbildschirm hinzufügen"
+- Menu (⋮) → "Add to Home screen"
 
 **iPhone Safari:**
-- Teilen (📤) → "Zum Home-Bildschirm"
+- Share (📤) → "Add to Home Screen"
 
-**Vorteil:**
-- ✅ Läuft wie eine echte App
-- ✅ Funktioniert offline (Service Worker)
-
----
-
-## 🛑 Server stoppen
-
-Im Terminal drücke: **Strg+C**
+**Advantage:**
+- ✅ Runs like a real app
+- ✅ Works offline (Service Worker)
 
 ---
 
-## 💡 Tipps
+## 🛑 Stop Server
 
-1. **WiFi-Netzwerk:** Beide Geräte müssen im **gleichen Netzwerk** sein
-2. **Firewall:** Windows Firewall muss Port 8080 erlauben
-3. **Performance:** Die App läuft jetzt über das lokale Netzwerk - super schnell!
-4. **Hot Reload:** Server neu starten nach `npm run build`
-5. **Chrome-Einstellungen:** Siehe **CHROME-BERECHTIGUNGEN.md** für erforderliche Berechtigungen
-6. **PWA-Installation:** Nach dem Start kannst du die App als PWA installieren - siehe **PWA-INSTALLATION.md**
+In terminal press: **Ctrl+C**
 
 ---
 
-## 🎯 Vorteile dieser Methode
+## 💡 Tips
 
-- ✅ Kein USB-Stick nötig
-- ✅ Keine Dateien kopieren
-- ✅ Live-Updates möglich (nach `npm run build`)
-- ✅ Testen auf echtem Smartphone
-- ✅ Funktioniert mit mehreren Geräten gleichzeitig
+1. **WiFi network:** Both devices must be on **same network**
+2. **Firewall:** Windows Firewall must allow port 8080
+3. **Performance:** The app runs over local network now - super fast!
+4. **Hot Reload:** Restart server after `npm run build`
+5. **Chrome settings:** See **CHROME-BERECHTIGUNGEN.md** for required permissions
+6. **PWA installation:** After starting, you can install the app as PWA - see **PWA-INSTALLATION.md**
 
 ---
 
-**Viel Erfolg! 🎯✨**
+## 🎯 Advantages of This Method
 
+- ✅ No USB stick needed
+- ✅ No copying files
+- ✅ Live updates possible (after `npm run build`)
+- ✅ Test on real smartphone
+- ✅ Works with multiple devices at once
+
+---
+
+**Good luck! 🎯✨**

@@ -1,220 +1,219 @@
-# 🔐 Chrome-Berechtigungen für Math4Kids
+# 🔐 Chrome Permissions for Math4Kids
 
-## 📱 Welche Berechtigungen müssen im Chrome-Browser erlaubt sein?
+## 📱 What permissions must be allowed in Chrome browser?
 
-Diese Anleitung zeigt dir, welche Einstellungen im Chrome-Browser auf deinem Smartphone aktiviert sein müssen, damit die App vollständig funktioniert.
-
----
-
-## ✅ Erforderliche Berechtigungen & Einstellungen
-
-### 1️⃣ **JavaScript aktivieren** (KRITISCH - Standard: ✅ AN)
-
-**Ohne JavaScript funktioniert die App nicht!**
-
-**Prüfen:**
-- Chrome → Menü (⋮) → Einstellungen → Website-Einstellungen → JavaScript
-- ✅ Muss **AKTIVIERT** sein
-
-**Standard:** JavaScript ist standardmäßig aktiviert.
+This guide shows you which settings must be enabled in the Chrome browser on your smartphone for the app to work fully.
 
 ---
 
-### 2️⃣ **Cookies erlauben** (ERFORDERLICH für localStorage)
+## ✅ Required Permissions & Settings
 
-**Die App nutzt localStorage zum Speichern von:**
-- Belohnungen
-- Strafaufgaben  
-- Anzahl der Fragen
+### 1️⃣ **Enable JavaScript** (CRITICAL - Default: ✅ ON)
 
-**Prüfen:**
-- Chrome → Menü (⋮) → Einstellungen → Website-Einstellungen → Cookies
-- ✅ "Cookies zulassen" muss **AKTIVIERT** sein
+**Without JavaScript the app won't work!**
 
-**Wichtig:** 
-- Im **Inkognito-Modus** funktioniert localStorage nicht richtig!
-- Nutze die App im **normalen Browser-Modus**
+**Check:**
+- Chrome → Menu (⋮) → Settings → Site Settings → JavaScript
+- ✅ Must be **ENABLED**
 
-**Einstellungen ändern:**
-1. Chrome → Menü (⋮) → **Einstellungen**
-2. **Website-Einstellungen** → **Cookies**
-3. ✅ Stelle sicher, dass "Cookies zulassen" **AKTIVIERT** ist
+**Default:** JavaScript is enabled by default.
 
 ---
 
-### 3️⃣ **Service Worker erlauben** (FÜR OFFLINE-FUNKTION)
+### 2️⃣ **Allow Cookies** (REQUIRED for localStorage)
 
-**Service Worker ermöglicht:**
-- Offline-Funktionalität
-- PWA-Installation
-- Schnellerer App-Start
+**The app uses localStorage to save:**
+- Rewards
+- Penalty tasks
+- Number of questions
 
-**Prüfen:**
-- Chrome → Menü (⋮) → Einstellungen → **Website-Einstellungen**
-- Service Worker sollte standardmäßig erlaubt sein
+**Check:**
+- Chrome → Menu (⋮) → Settings → Site Settings → Cookies
+- ✅ "Allow cookies" must be **ENABLED**
 
-**Bei Problemen:**
-- Entferne alle **blockierten Websites** in den Website-Einstellungen
-- Stelle sicher, dass die Website nicht blockiert ist
+**Important:**
+- In **Incognito mode** localStorage doesn't work properly!
+- Use the app in **normal browser mode**
 
----
-
-### 4️⃣ **PWA-Installation erlauben** (OPTIONAL - für App-Installation)
-
-**Damit du die App als App installieren kannst:**
-
-**Prüfen:**
-- Chrome → Menü (⋮) → Einstellungen → **Website-Einstellungen**
-- **App-Installationen** muss **ERLAUBT** sein
-
-**Wichtig für PWA:**
-- App muss über **HTTPS** oder **localhost** geladen werden
-- Bei USB-Stick-Dateien funktioniert PWA-Installation **nicht** (nutze HTTP-Server)
+**Change settings:**
+1. Chrome → Menu (⋮) → **Settings**
+2. **Site Settings** → **Cookies**
+3. ✅ Make sure "Allow cookies" is **ENABLED**
 
 ---
 
-### 5️⃣ **Pop-ups erlauben** (FÜR INSTALL-PROMPT)
+### 3️⃣ **Allow Service Worker** (FOR OFFLINE FUNCTION)
 
-**Falls ein Install-Banner erscheinen soll:**
+**Service Worker enables:**
+- Offline functionality
+- PWA installation
+- Faster app start
 
-**Prüfen:**
-- Chrome → Menü (⋮) → Einstellungen → Website-Einstellungen → **Pop-ups und Weiterleitungen**
-- Für die Website **ERLAUBEN** (falls Install-Prompt nicht erscheint)
+**Check:**
+- Chrome → Menu (⋮) → Settings → **Site Settings**
+- Service Worker should be allowed by default
 
----
-
-## 🚫 Was NICHT blockiert werden darf
-
-### ❌ **Keine Website-Blockierung**
-- Die Website/IP-Adresse sollte nicht in der Blockliste sein
-
-### ❌ **Kein Inkognito-Modus**
-- localStorage funktioniert nicht richtig im Inkognito-Modus
-- Nutze den **normalen Browser-Modus**
-
-### ❌ **Keine Ad-Blocker**
-- Manche Ad-Blocker können Service Worker blockieren
-- Deaktiviere Ad-Blocker für die Website (falls Probleme auftreten)
+**If problems:**
+- Remove all **blocked websites** in site settings
+- Make sure the website is not blocked
 
 ---
 
-## 🔍 So prüfst du die Einstellungen
+### 4️⃣ **Allow PWA Installation** (OPTIONAL - for app installation)
 
-### Schritt-für-Schritt (Android Chrome):
+**So you can install the app as an app:**
 
-1. **Chrome öffnen** auf dem Smartphone
-2. **Menü** (⋮) oben rechts antippen
-3. **Einstellungen** wählen
-4. **Website-Einstellungen** wählen
-5. **Folgende Punkte prüfen:**
+**Check:**
+- Chrome → Menu (⋮) → Settings → **Site Settings**
+- **App installations** must be **ALLOWED**
 
-   - ✅ **JavaScript** → "Erlaubt" (Standard)
-   - ✅ **Cookies** → "Cookies zulassen" (Standard)
-   - ✅ **Pop-ups** → "Blockiert" ist OK (kann bei Bedarf erlaubt werden)
-   - ✅ **Service Worker** → Sollte erlaubt sein (Standard)
+**Important for PWA:**
+- App must be loaded via **HTTPS** or **localhost**
+- For USB stick files, PWA installation does **NOT** work (use HTTP server)
 
 ---
 
-## 🛠️ Häufige Probleme & Lösungen
+### 5️⃣ **Allow Pop-ups** (FOR INSTALL PROMPT)
 
-### Problem: Daten werden nicht gespeichert
+**If an install banner should appear:**
 
-**Ursache:** localStorage funktioniert nicht
-
-**Lösung:**
-1. ✅ Cookies müssen erlaubt sein
-2. ✅ Nicht im Inkognito-Modus
-3. ✅ Browser-Cache nicht geleert haben
+**Check:**
+- Chrome → Menu (⋮) → Settings → Site Settings → **Pop-ups and redirects**
+- **ALLOW** for the website (if install prompt doesn't appear)
 
 ---
 
-### Problem: Service Worker wird nicht registriert
+## 🚫 What MUST NOT Be Blocked
 
-**Ursache:** Service Worker benötigt HTTPS oder localhost
+### ❌ **No Website Blocking**
+- The website/IP address should not be in the block list
 
-**Lösung:**
-- Nutze **HTTP-Server** (siehe `SCHNELLSTART-HTTP-SERVER.md`)
-- Oder deploye auf einem Server mit HTTPS
+### ❌ **No Incognito Mode**
+- localStorage doesn't work properly in Incognito mode
+- Use **normal browser mode**
 
-**Bei lokalen Dateien (file://):**
-- Service Worker funktioniert **nicht**
-- Nutze einen lokalen HTTP-Server
-
----
-
-### Problem: PWA-Installation funktioniert nicht
-
-**Ursache:** PWA benötigt HTTPS oder localhost
-
-**Lösung:**
-1. ✅ Nutze HTTP-Server (localhost funktioniert)
-2. ✅ Oder deploye auf HTTPS-Server
-3. ✅ Install-Berechtigung in Chrome prüfen
+### ❌ **No Ad Blockers**
+- Some ad blockers can block Service Worker
+- Disable ad blocker for the website (if problems occur)
 
 ---
 
-### Problem: App lädt nicht richtig
+## 🔍 How to Check Settings
 
-**Mögliche Ursachen:**
+### Step by Step (Android Chrome):
 
-1. **JavaScript deaktiviert?**
-   - ✅ JavaScript muss aktiviert sein
+1. **Open Chrome** on smartphone
+2. **Tap Menu** (⋮) top right
+3. **Select Settings**
+4. **Select Site Settings**
+5. **Check these items:**
 
-2. **Cookies blockiert?**
-   - ✅ Cookies müssen erlaubt sein
-
-3. **Website blockiert?**
-   - ✅ Entferne Website aus Blockliste
-
-4. **Verbindungsprobleme?**
-   - ✅ WiFi-Verbindung prüfen
-   - ✅ IP-Adresse korrekt?
+   - ✅ **JavaScript** → "Allowed" (Default)
+   - ✅ **Cookies** → "Allow cookies" (Default)
+   - ✅ **Pop-ups** → "Blocked" is OK (can be allowed if needed)
+   - ✅ **Service Worker** → Should be allowed (Default)
 
 ---
 
-## 📋 Checkliste vor dem Start
+## 🛠️ Common Problems & Solutions
 
-Bevor du die App nutzt, stelle sicher:
+### Problem: Data is not saved
 
-- [ ] ✅ JavaScript ist aktiviert
-- [ ] ✅ Cookies sind erlaubt
-- [ ] ✅ Nicht im Inkognito-Modus
-- [ ] ✅ Website/IP ist nicht blockiert
-- [ ] ✅ WiFi-Verbindung funktioniert (bei HTTP-Server)
-- [ ] ✅ Service Worker ist erlaubt (für Offline-Funktion)
+**Cause:** localStorage not working
 
----
-
-## 💡 Empfohlene Chrome-Einstellungen
-
-### Für beste Performance:
-
-1. **Normaler Browser-Modus** (nicht Inkognito)
-2. **JavaScript aktiviert** ✅
-3. **Cookies erlaubt** ✅
-4. **Service Worker erlaubt** ✅
-5. **Pop-ups blockiert** (OK, kann bei Bedarf erlaubt werden)
-6. **Website nicht blockiert** ✅
+**Solution:**
+1. ✅ Cookies must be allowed
+2. ✅ Not in Incognito mode
+3. ✅ Don't clear browser cache
 
 ---
 
-## 🎯 Zusammenfassung
+### Problem: Service Worker is not registered
 
-**Muss aktiviert sein:**
+**Cause:** Service Worker needs HTTPS or localhost
+
+**Solution:**
+- Use **HTTP server** (see `SCHNELLSTART-HTTP-SERVER.md`)
+- Or deploy on server with HTTPS
+
+**For local files (file://):**
+- Service Worker does **NOT** work
+- Use a local HTTP server
+
+---
+
+### Problem: PWA installation doesn't work
+
+**Cause:** PWA needs HTTPS or localhost
+
+**Solution:**
+1. ✅ Use HTTP server (localhost works)
+2. ✅ Or deploy on HTTPS server
+3. ✅ Check install permission in Chrome
+
+---
+
+### Problem: App doesn't load properly
+
+**Possible causes:**
+
+1. **JavaScript disabled?**
+   - ✅ JavaScript must be enabled
+
+2. **Cookies blocked?**
+   - ✅ Cookies must be allowed
+
+3. **Website blocked?**
+   - ✅ Remove website from block list
+
+4. **Connection problems?**
+   - ✅ Check WiFi connection
+   - ✅ IP address correct?
+
+---
+
+## 📋 Checklist Before Starting
+
+Before using the app, make sure:
+
+- [ ] ✅ JavaScript is enabled
+- [ ] ✅ Cookies are allowed
+- [ ] ✅ Not in Incognito mode
+- [ ] ✅ Website/IP is not blocked
+- [ ] ✅ WiFi connection works (for HTTP server)
+- [ ] ✅ Service Worker is allowed (for offline function)
+
+---
+
+## 💡 Recommended Chrome Settings
+
+### For best performance:
+
+1. **Normal browser mode** (not Incognito)
+2. **JavaScript enabled** ✅
+3. **Cookies allowed** ✅
+4. **Service Worker allowed** ✅
+5. **Pop-ups blocked** (OK, can be allowed if needed)
+6. **Website not blocked** ✅
+
+---
+
+## 🎯 Summary
+
+**Must be enabled:**
 - ✅ JavaScript
 - ✅ Cookies
 
-**Sollte aktiviert sein:**
-- ✅ Service Worker (für Offline-Funktion)
-- ✅ App-Installationen (für PWA-Installation)
+**Should be enabled:**
+- ✅ Service Worker (for offline function)
+- ✅ App installations (for PWA installation)
 
-**Nicht erforderlich:**
-- ❌ Kamera
-- ❌ Mikrofon
-- ❌ Standort
-- ❌ Benachrichtigungen
+**Not required:**
+- ❌ Camera
+- ❌ Microphone
+- ❌ Location
+- ❌ Notifications
 
 ---
 
-**Viel Erfolg! 🎯✨**
-
+**Good luck! 🎯✨**

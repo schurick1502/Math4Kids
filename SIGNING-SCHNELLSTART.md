@@ -1,14 +1,14 @@
-# 🔐 SIGNING EINRICHTEN - In 3 Schritten!
+# 🔐 SET UP SIGNING - In 3 Steps!
 
-## ⚠️ Problem: Google Play Console braucht signiertes AAB
+## ⚠️ Problem: Google Play Console Needs Signed AAB
 
-**Fehler:** "Alle hochgeladenen Bundles müssen signiert sein"
+**Error:** "All uploaded bundles must be signed"
 
-**Lösung:** Keystore erstellen und AAB signieren
+**Solution:** Create keystore and sign AAB
 
 ---
 
-## 🚀 Schritt 1: Keystore erstellen (einmalig)
+## 🚀 Step 1: Create Keystore (one time)
 
 **In PowerShell:**
 
@@ -17,38 +17,38 @@ cd C:\projekte\Math4Kids\android\app
 keytool -genkey -v -keystore math4kids-release-key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias math4kids
 ```
 
-**Fragen die gestellt werden:**
-- **Passwort:** Wähle ein Passwort (MERKEN!) ⚠️
-- **Name:** Dein Name
-- **Organisation:** (Enter drücken = optional)
-- **Stadt:** Deine Stadt
-- **Bundesland:** Dein Bundesland
-- **Ländercode:** DE
+**Questions that will be asked:**
+- **Password:** Choose a password (REMEMBER!) ⚠️
+- **Name:** Your name
+- **Organization:** (Press Enter = optional)
+- **City:** Your city
+- **State:** Your state
+- **Country code:** US
 
-**⚠️ WICHTIG: Passwort merken!**
+**⚠️ IMPORTANT: Remember password!**
 
 ---
 
-## 🚀 Schritt 2: Passwort eintragen
+## 🚀 Step 2: Enter Password
 
-**Öffne die Datei:**
+**Open the file:**
 ```
 C:\projekte\Math4Kids\android\app\keystore.properties
 ```
 
-**Ersetze:**
+**Replace:**
 ```properties
-storePassword=DEIN_PASSWORT_HIER_ERSETZEN
-keyPassword=DEIN_PASSWORT_HIER_ERSETZEN
+storePassword=REPLACE_YOUR_PASSWORD_HERE
+keyPassword=REPLACE_YOUR_PASSWORD_HERE
 ```
 
-**Mit deinem Passwort** (das du bei Schritt 1 gewählt hast)
+**With your password** (that you chose in step 1)
 
-**Speichern!**
+**Save!**
 
 ---
 
-## 🚀 Schritt 3: Signiertes AAB erstellen
+## 🚀 Step 3: Create Signed AAB
 
 **In PowerShell:**
 
@@ -57,56 +57,55 @@ cd C:\projekte\Math4Kids
 npm run aab:release
 ```
 
-**⏳ Warte 1-2 Minuten**
+**⏳ Wait 1-2 minutes**
 
-**✅ Fertig! AAB ist jetzt signiert!**
+**✅ Done! AAB is now signed!**
 
 ---
 
-## 📤 Schritt 4: Signiertes AAB hochladen
+## 📤 Step 4: Upload Signed AAB
 
 **In Google Play Console:**
 
-1. **"Internen Testrelease erstellen"** öffnen
-2. **AAB hochladen:**
+1. **Open "Create internal test release"**
+2. **Upload AAB:**
    - `C:\projekte\Math4Kids\android\app\build\outputs\bundle\release\app-release.aab`
-3. **✅ Kein Fehler mehr!** AAB ist signiert!
+3. **✅ No error anymore!** AAB is signed!
 
 ---
 
-## ✅ Fertig!
+## ✅ Done!
 
-**Das war's! Dein AAB ist jetzt signiert und kann in Play Console hochgeladen werden! 🎉**
-
----
-
-## ⚠️ WICHTIG: Keystore-Backup!
-
-**Erstelle ein Backup des Keystores:**
-- Datei: `android\app\math4kids-release-key.jks`
-- **Sichere auf:** USB-Stick, Cloud, etc.
-- **Ohne Keystore = keine Updates möglich!**
+**That's it! Your AAB is now signed and can be uploaded to Play Console! 🎉**
 
 ---
 
-## 🔄 Für zukünftige Updates
+## ⚠️ IMPORTANT: Keystore Backup!
 
-**Bei jedem Update:**
+**Create a backup of the keystore:**
+- File: `android\app\math4kids-release-key.jks`
+- **Save to:** USB stick, cloud, etc.
+- **Without keystore = no updates possible!**
 
-1. **Version erhöhen** (in `build.gradle`):
+---
+
+## 🔄 For Future Updates
+
+**For every update:**
+
+1. **Increase version** (in `build.gradle`):
    - `versionCode: 1` → `2` → `3` ...
    - `versionName: "1.0.0"` → `1.0.1"` → ...
 
-2. **Signiertes AAB erstellen:**
+2. **Create signed AAB:**
    ```powershell
    npm run aab:release
    ```
 
-3. **AAB hochladen** in Play Console
+3. **Upload AAB** to Play Console
 
-**Fertig!**
+**Done!**
 
 ---
 
-**Viel Erfolg! 🎉**
-
+**Good luck! 🎉**

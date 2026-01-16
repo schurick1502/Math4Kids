@@ -1,131 +1,130 @@
-# 🔧 Android Studio Projekt-Fehler beheben
+# 🔧 Fix Android Studio Project Errors
 
 ## ❌ Problem: "configureNewProject should be used with new projects only"
 
-Dieser Fehler tritt auf, wenn Android Studio ein bestehendes Projekt als neues Projekt öffnet.
+This error occurs when Android Studio opens an existing project as a new project.
 
 ---
 
-## ✅ Lösung 1: Cache bereinigen (Empfohlen)
+## ✅ Solution 1: Clear Cache (Recommended)
 
-### Schritt 1: Cache-Ordner löschen
+### Step 1: Delete Cache Folders
 
-**In PowerShell (im Projekt-Root):**
+**In PowerShell (in project root):**
 ```powershell
-# .idea Ordner löschen (falls vorhanden)
+# Delete .idea folder (if exists)
 Remove-Item -Path "android\.idea" -Recurse -Force -ErrorAction SilentlyContinue
 
-# .gradle Cache löschen
+# Delete .gradle cache
 Remove-Item -Path "android\.gradle" -Recurse -Force -ErrorAction SilentlyContinue
 
-# Build-Ordner löschen
+# Delete build folders
 Remove-Item -Path "android\app\build" -Recurse -Force -ErrorAction SilentlyContinue
 Remove-Item -Path "android\build" -Recurse -Force -ErrorAction SilentlyContinue
 ```
 
-### Schritt 2: Projekt neu öffnen
+### Step 2: Reopen Project
 
-**Option A - Über Android Studio:**
-1. Android Studio schließen
+**Option A - Via Android Studio:**
+1. Close Android Studio
 2. **File** → **Open**
-3. Navigiere zu `C:\projekte\Math4Kids\android`
-4. Wähle den **`android`** Ordner (nicht den Root-Ordner!)
-5. Klicke **OK**
+3. Navigate to `C:\projekte\Math4Kids\android`
+4. Select the **`android`** folder (not the root folder!)
+5. Click **OK**
 
-**Option B - Über Command:**
+**Option B - Via Command:**
 ```powershell
 npm run android
 ```
 
 ---
 
-## ✅ Lösung 2: Projekt korrekt öffnen
+## ✅ Solution 2: Open Project Correctly
 
-### Wichtig: Den richtigen Ordner öffnen!
+### Important: Open the right folder!
 
-**❌ Falsch:**
-- `C:\projekte\Math4Kids` (Root-Ordner)
-- `C:\projekte\Math4Kids\android\app` (nur App-Ordner)
+**❌ Wrong:**
+- `C:\projekte\Math4Kids` (Root folder)
+- `C:\projekte\Math4Kids\android\app` (only App folder)
 
-**✅ Richtig:**
-- `C:\projekte\Math4Kids\android` (Android-Projekt-Ordner)
+**✅ Correct:**
+- `C:\projekte\Math4Kids\android` (Android project folder)
 
-**Die `settings.gradle` Datei muss im geöffneten Ordner sein!**
+**The `settings.gradle` file must be in the opened folder!**
 
 ---
 
-## ✅ Lösung 3: Gradle Sync manuell
+## ✅ Solution 3: Manual Gradle Sync
 
-1. **Android Studio öffnen** (ohne Projekt)
+1. **Open Android Studio** (without project)
 2. **File** → **Open**
-3. Wähle `android` Ordner
-4. Warte auf Gradle Sync (unten in Android Studio)
-5. Falls Sync fehlschlägt: **File** → **Invalidate Caches** → **Invalidate and Restart**
+3. Select `android` folder
+4. Wait for Gradle Sync (bottom of Android Studio)
+5. If Sync fails: **File** → **Invalidate Caches** → **Invalidate and Restart**
 
 ---
 
-## ✅ Lösung 4: Projekt neu generieren (Wenn alles andere fehlschlägt)
+## ✅ Solution 4: Regenerate Project (If all else fails)
 
-**⚠️ WICHTIG:** Nur wenn alle anderen Lösungen nicht funktionieren!
+**⚠️ IMPORTANT:** Only if all other solutions don't work!
 
 ```powershell
-# Backup erstellen (optional)
+# Create backup (optional)
 Copy-Item -Path "android" -Destination "android_backup" -Recurse
 
-# Android-Ordner löschen
+# Delete Android folder
 Remove-Item -Path "android" -Recurse -Force
 
-# Android neu hinzufügen
+# Re-add Android
 npx cap add android
 
-# Sync durchführen
+# Perform sync
 npm run build
 npx cap sync android
 ```
 
-**Dann:** Android Studio neu öffnen mit `npm run android`
+**Then:** Reopen Android Studio with `npm run android`
 
 ---
 
-## 🔍 Prüfen ob Projekt korrekt ist
+## 🔍 Check if Project is Correct
 
-**Sollte vorhanden sein:**
+**Should be present:**
 - ✅ `android/settings.gradle`
 - ✅ `android/build.gradle`
 - ✅ `android/app/build.gradle`
-- ✅ `android/local.properties` (wird automatisch erstellt)
-- ✅ `android/gradle/wrapper/` Ordner
+- ✅ `android/local.properties` (created automatically)
+- ✅ `android/gradle/wrapper/` folder
 
 ---
 
-## 💡 Empfohlener Workflow
+## 💡 Recommended Workflow
 
-1. **Cache bereinigen** (siehe Lösung 1)
-2. **Android Studio schließen**
-3. **Projekt öffnen:**
+1. **Clear cache** (see Solution 1)
+2. **Close Android Studio**
+3. **Open project:**
    ```powershell
    npm run android
    ```
-4. **Warten** bis Gradle Sync fertig ist
-5. **Fertig!**
+4. **Wait** until Gradle Sync is done
+5. **Done!**
 
 ---
 
-## 🚨 Häufige Fehlerquellen
+## 🚨 Common Error Sources
 
-### Fehler 1: Falscher Ordner geöffnet
-- **Problem:** Root-Ordner statt `android` Ordner geöffnet
-- **Lösung:** Sicherstellen, dass `android` Ordner geöffnet wird
+### Error 1: Wrong Folder Opened
+- **Problem:** Root folder opened instead of `android` folder
+- **Solution:** Make sure `android` folder is opened
 
-### Fehler 2: Bestehendes Projekt erkannt
-- **Problem:** `.idea` Ordner vorhanden, Android Studio denkt es ist ein neues Projekt
-- **Lösung:** `.idea` Ordner löschen (siehe Lösung 1)
+### Error 2: Existing Project Detected
+- **Problem:** `.idea` folder present, Android Studio thinks it's a new project
+- **Solution:** Delete `.idea` folder (see Solution 1)
 
-### Fehler 3: Gradle Sync fehlgeschlagen
-- **Problem:** Cache beschädigt
-- **Lösung:** `.gradle` und `build` Ordner löschen (siehe Lösung 1)
+### Error 3: Gradle Sync Failed
+- **Problem:** Cache corrupted
+- **Solution:** Delete `.gradle` and `build` folders (see Solution 1)
 
 ---
 
-**Nach dem Fix:** Das Projekt sollte korrekt in Android Studio öffnen! 🎉
-
+**After the fix:** The project should open correctly in Android Studio! 🎉

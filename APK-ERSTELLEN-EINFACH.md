@@ -1,92 +1,92 @@
-# 📦 APK ERSTELLEN - Die einfachste Methode!
+# 📦 CREATE APK - The Easiest Method!
 
-## ⚡ Methode 1: Über Android Studio (EMPFOHLEN - Funktioniert immer!)
+## ⚡ Method 1: Via Android Studio (RECOMMENDED - Always works!)
 
-### **Schritt 1: Projekt öffnen**
+### **Step 1: Open Project**
 
 ```powershell
 npm run android
 ```
 
-**ODER:**
-- Android Studio öffnen
+**OR:**
+- Open Android Studio
 - **File** → **Open**
-- Wähle: `C:\projekte\Math4Kids\android`
+- Select: `C:\projekte\Math4Kids\android`
 
 ---
 
-### **Schritt 2: APK bauen**
+### **Step 2: Build APK**
 
 **In Android Studio:**
 
 1. **Build** → **Build Bundle(s) / APK(s)** → **Build APK(s)**
 
-2. **⏳ Warte 1-2 Minuten**
+2. **⏳ Wait 1-2 minutes**
 
-3. **Notification erscheint:** "APK(s) generated successfully"
+3. **Notification appears:** "APK(s) generated successfully"
 
-4. **Klicke auf "locate"** → APK wird geöffnet!
+4. **Click on "locate"** → APK is opened!
 
-**APK liegt in:**
+**APK located at:**
 ```
 C:\projekte\Math4Kids\android\app\build\outputs\apk\debug\app-debug.apk
 ```
 
-**FERTIG! 🎉**
+**DONE! 🎉**
 
 ---
 
-## ⚡ Methode 2: Über Command Line (Wenn Java installiert ist)
+## ⚡ Method 2: Via Command Line (If Java is installed)
 
-### **Debug-APK:**
+### **Debug APK:**
 
 ```powershell
 cd C:\projekte\Math4Kids
 npm run apk:debug
 ```
 
-**⏳ Warte 1-2 Minuten**
+**⏳ Wait 1-2 minutes**
 
-**APK liegt in:**
+**APK located at:**
 ```
 android\app\build\outputs\apk\debug\app-debug.apk
 ```
 
 ---
 
-## 🔧 Falls Java-Fehler auftritt
+## 🔧 If Java Error Occurs
 
-### **Fehler: "JAVA_HOME is not set"**
+### **Error: "JAVA_HOME is not set"**
 
-**Lösung 1 - Nutze Android Studio (einfachste Methode):**
-→ Siehe **Methode 1** oben
+**Solution 1 - Use Android Studio (easiest method):**
+→ See **Method 1** above
 
-**Lösung 2 - Java installieren:**
-1. JDK installieren (z.B. von Adoptium: https://adoptium.net/)
-2. JAVA_HOME setzen (siehe unten)
-3. Computer neu starten
+**Solution 2 - Install Java:**
+1. Install JDK (e.g. from Adoptium: https://adoptium.net/)
+2. Set JAVA_HOME (see below)
+3. Restart computer
 
-**Lösung 3 - Gradle über Android Studio nutzen:**
-- Android Studio öffnen
-- Terminal in Android Studio öffnen (unten)
-- Dort funktioniert gradlew immer
+**Solution 3 - Use Gradle via Android Studio:**
+- Open Android Studio
+- Open Terminal in Android Studio (bottom)
+- gradlew always works there
 
 ---
 
-## 📱 APK auf Android-Gerät installieren
+## 📱 Install APK on Android Device
 
-### **Schritt 1: APK auf Gerät kopieren**
+### **Step 1: Copy APK to Device**
 
 **Option A - USB:**
-1. Android-Gerät mit USB verbinden
-2. APK-Datei auf Gerät kopieren
+1. Connect Android device with USB
+2. Copy APK file to device
 
-**Option B - E-Mail/Cloud:**
-1. APK hochladen (Google Drive, Dropbox, etc.)
-2. Auf Android-Gerät: Link öffnen
-3. APK herunterladen
+**Option B - Email/Cloud:**
+1. Upload APK (Google Drive, Dropbox, etc.)
+2. On Android device: Open link
+3. Download APK
 
-**Option C - ADB (für Entwickler):**
+**Option C - ADB (for developers):**
 ```powershell
 cd C:\projekte\Math4Kids\android\app\build\outputs\apk\debug
 adb install app-debug.apk
@@ -94,89 +94,88 @@ adb install app-debug.apk
 
 ---
 
-### **Schritt 2: Auf Android-Gerät installieren**
+### **Step 2: Install on Android Device**
 
-1. **Datei-Manager** auf Android öffnen
-2. **APK-Datei** finden
-3. **APK antippen**
-4. **"Installieren"** wählen
+1. Open **File Manager** on Android
+2. **Find APK file**
+3. **Tap APK**
+4. Select **"Install"**
 
-**Falls Warnung erscheint:**
-- **"Von unbekannter Quelle installieren"** erlauben
-- **"Installieren"** nochmal klicken
+**If warning appears:**
+- Allow **"Install from unknown source"**
+- Click **"Install"** again
 
-**Fertig! ✅** App ist installiert!
+**Done! ✅** App is installed!
 
 ---
 
-## 📦 AAB für Google Play Store
+## 📦 AAB for Google Play Store
 
 ### **In Android Studio:**
 
 1. **Build** → **Build Bundle(s) / APK(s)** → **Build Bundle(s)**
 
-2. **⏳ Warte 1-2 Minuten**
+2. **⏳ Wait 1-2 minutes**
 
 3. **Notification:** "Bundle(s) generated successfully"
 
-4. **Klicke "locate"**
+4. **Click "locate"**
 
-**AAB liegt in:**
+**AAB located at:**
 ```
 C:\projekte\Math4Kids\android\app\build\outputs\bundle\release\app-release.aab
 ```
 
-**Das AAB hochladen in Google Play Console!**
+**Upload the AAB to Google Play Console!**
 
 ---
 
-## 🎯 Schnellstart (Empfohlen!)
+## 🎯 Quick Start (Recommended!)
 
-**Alles was du tun musst:**
+**Everything you need to do:**
 
-1. **Android Studio öffnen:**
+1. **Open Android Studio:**
    ```powershell
    npm run android
    ```
 
-2. **APK bauen:**
+2. **Build APK:**
    - In Android Studio: **Build** → **Build Bundle(s) / APK(s)** → **Build APK(s)**
-   - Warten
-   - Auf "locate" klicken
+   - Wait
+   - Click on "locate"
 
-3. **APK auf Android-Gerät installieren**
+3. **Install APK on Android device**
 
-**FERTIG! 🎉**
+**DONE! 🎉**
 
 ---
 
-## 📋 Wo liegt die APK?
+## 📋 Where is the APK?
 
-**Debug-APK:**
+**Debug APK:**
 ```
 C:\projekte\Math4Kids\android\app\build\outputs\apk\debug\app-debug.apk
 ```
 
-**Release-APK (falls erstellt):**
+**Release APK (if created):**
 ```
 C:\projekte\Math4Kids\android\app\build\outputs\apk\release\app-release.apk
 ```
 
-**AAB für Play Store:**
+**AAB for Play Store:**
 ```
 C:\projekte\Math4Kids\android\app\build\outputs\bundle\release\app-release.aab
 ```
 
 ---
 
-## 💡 Tipps
+## 💡 Tips
 
-1. **Debug-APK** ist zum Testen perfekt
-2. **Release-APK** für Verteilung (benötigt Signing)
-3. **AAB** für Google Play Store (empfohlen!)
-4. **Über Android Studio** ist am einfachsten (keine Java-Probleme)
+1. **Debug APK** is perfect for testing
+2. **Release APK** for distribution (requires signing)
+3. **AAB** for Google Play Store (recommended!)
+4. **Via Android Studio** is easiest (no Java problems)
 
 ---
 
-**🎉 Viel Erfolg!**
-
+**🎉 Good luck!**

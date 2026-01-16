@@ -1,58 +1,58 @@
-# 🔐 Signing für Google Play Store einrichten
+# 🔐 Set Up Signing for Google Play Store
 
-## ⚠️ Problem: "Alle hochgeladenen Bundles müssen signiert sein"
+## ⚠️ Problem: "All uploaded bundles must be signed"
 
-Google Play Console benötigt ein **signiertes AAB** für Release-Builds.
+Google Play Console requires a **signed AAB** for release builds.
 
 ---
 
-## 🚀 Lösung: Keystore erstellen (einmalig)
+## 🚀 Solution: Create Keystore (one time)
 
-### **Schritt 1: Keystore erstellen**
+### **Step 1: Create Keystore**
 
 **In PowerShell:**
 ```powershell
 cd C:\projekte\Math4Kids\android\app
 ```
 
-**Dann:**
+**Then:**
 ```powershell
 keytool -genkey -v -keystore math4kids-release-key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias math4kids
 ```
 
-**Fragen die gestellt werden:**
-- **Keystore-Passwort:** Wähle ein sicheres Passwort (MERKEN!)
-- **Wiederholen:** Passwort nochmal eingeben
-- **Vor- und Nachname:** Dein Name
-- **Organisationseinheit:** (optional, Enter drücken)
-- **Organisation:** Name deiner Organisation (optional)
-- **Stadt:** Deine Stadt
-- **Bundesland:** Dein Bundesland
-- **Ländercode:** DE (oder dein Ländercode, 2 Buchstaben)
+**Questions that will be asked:**
+- **Keystore password:** Choose a secure password (REMEMBER!)
+- **Re-enter:** Enter password again
+- **First and last name:** Your name
+- **Organizational unit:** (optional, press Enter)
+- **Organization:** Name of your organization (optional)
+- **City:** Your city
+- **State:** Your state
+- **Country code:** US (or your country code, 2 letters)
 
-**⚠️ WICHTIG:**
-- **Passwort merken!** Du brauchst es für alle Updates!
-- **Datei sicher aufbewahren!** Ohne Keystore kannst du keine Updates mehr veröffentlichen!
+**⚠️ IMPORTANT:**
+- **Remember password!** You need it for all updates!
+- **Keep file safe!** Without keystore you can't publish updates anymore!
 
 ---
 
-### **Schritt 2: keystore.properties erstellen**
+### **Step 2: Create keystore.properties**
 
-**Öffne:** `android\app\keystore.properties`
+**Open:** `android\app\keystore.properties`
 
-**Ersetze die Passwörter:**
+**Replace the passwords:**
 ```properties
-storePassword=DEIN_PASSWORT_HIER
-keyPassword=DEIN_PASSWORT_HIER
+storePassword=YOUR_PASSWORD_HERE
+keyPassword=YOUR_PASSWORD_HERE
 keyAlias=math4kids
 storeFile=math4kids-release-key.jks
 ```
 
-**⚠️ WICHTIG:** Ersetze `DEIN_PASSWORT_HIER` mit dem Passwort, das du bei Schritt 1 gewählt hast!
+**⚠️ IMPORTANT:** Replace `YOUR_PASSWORD_HERE` with the password you chose in step 1!
 
 ---
 
-### **Schritt 3: Neues signiertes AAB erstellen**
+### **Step 3: Create New Signed AAB**
 
 **In PowerShell:**
 ```powershell
@@ -60,106 +60,105 @@ cd C:\projekte\Math4Kids
 npm run aab:release
 ```
 
-**⏳ Warte 1-2 Minuten**
+**⏳ Wait 1-2 minutes**
 
-**Neues AAB ist signiert! ✅**
+**New AAB is signed! ✅**
 
-**AAB liegt in:**
+**AAB located at:**
 ```
 C:\projekte\Math4Kids\android\app\build\outputs\bundle\release\app-release.aab
 ```
 
 ---
 
-### **Schritt 4: Signiertes AAB in Play Console hochladen**
+### **Step 4: Upload Signed AAB to Play Console**
 
-1. **Google Play Console öffnen**
-2. **"Internen Testrelease erstellen"** oder **"Production Release"**
-3. **AAB hochladen:**
-   - Wähle: `C:\projekte\Math4Kids\android\app\build\outputs\bundle\release\app-release.aab`
+1. **Open Google Play Console**
+2. **"Create internal test release"** or **"Production Release"**
+3. **Upload AAB:**
+   - Select: `C:\projekte\Math4Kids\android\app\build\outputs\bundle\release\app-release.aab`
    - Upload
-4. **✅ Kein Fehler mehr!** AAB ist signiert!
+4. **✅ No error anymore!** AAB is signed!
 
 ---
 
-## 🎯 Schnellstart - Alles in einem
+## 🎯 Quick Start - All in One
 
-**1. Keystore erstellen (einmalig):**
+**1. Create keystore (one time):**
 ```powershell
 cd C:\projekte\Math4Kids\android\app
 keytool -genkey -v -keystore math4kids-release-key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias math4kids
 ```
 
-**2. Passwort in keystore.properties eintragen:**
-- Öffne `android\app\keystore.properties`
-- Ersetze `DEIN_PASSWORT_HIER` mit deinem Passwort
+**2. Enter password in keystore.properties:**
+- Open `android\app\keystore.properties`
+- Replace `YOUR_PASSWORD_HERE` with your password
 
-**3. Signiertes AAB erstellen:**
+**3. Create signed AAB:**
 ```powershell
 cd C:\projekte\Math4Kids
 npm run aab:release
 ```
 
-**4. AAB in Play Console hochladen**
+**4. Upload AAB to Play Console**
 
-**FERTIG! ✅**
-
----
-
-## ⚠️ WICHTIG: Keystore sicher aufbewahren!
-
-**Ohne Keystore kannst du keine Updates mehr veröffentlichen!**
-
-**Empfehlungen:**
-- ✅ **Backup erstellen** (USB-Stick, Cloud, etc.)
-- ✅ **Passwort sicher notieren** (Passwort-Manager)
-- ✅ **Mehrere Kopien** an verschiedenen Orten
-
-**Wenn Keystore verloren geht:**
-- ❌ Keine Updates mehr möglich
-- ❌ Neue App muss erstellt werden
-- ❌ Alle Nutzer müssen neu installieren
+**DONE! ✅**
 
 ---
 
-## 💡 Alternative: Google Play App Signing nutzen
+## ⚠️ IMPORTANT: Keep Keystore Safe!
 
-**Google Play kann Signing automatisch übernehmen!**
+**Without keystore you can't publish updates anymore!**
 
-**Vorgehen:**
-1. Erstelle **Upload-Keystore** (einfacher, für Upload nur)
-2. **AAB hochladen** (mit Upload-Keystore signiert)
-3. **Google Play App Signing aktivieren**
-4. **Google übernimmt Signing** für alle Releases
+**Recommendations:**
+- ✅ **Create backup** (USB stick, cloud, etc.)
+- ✅ **Note password safely** (password manager)
+- ✅ **Multiple copies** in different locations
 
-**Vorteile:**
-- ✅ Google verwaltet Signing-Keys
-- ✅ Keine Gefahr, Keys zu verlieren
-- ✅ Einfacher für Updates
-
-**Für neue Apps:**
-- Google Play App Signing ist **automatisch aktiviert**
-- Upload-Keystore reicht aus
-- Google übernimmt Rest automatisch
+**If keystore is lost:**
+- ❌ No more updates possible
+- ❌ New app must be created
+- ❌ All users must reinstall
 
 ---
 
-## 🔧 Falls Keystore schon existiert
+## 💡 Alternative: Use Google Play App Signing
 
-**Wenn du schon einen Keystore hast:**
+**Google Play can handle signing automatically!**
 
-1. **Keystore-Datei** (`*.jks`) in `android\app\` kopieren
-2. **keystore.properties** anpassen:
-   - Passwort eintragen
-   - Dateiname anpassen
-   - Alias anpassen
+**Procedure:**
+1. Create **Upload keystore** (simpler, only for upload)
+2. **Upload AAB** (signed with upload keystore)
+3. **Enable Google Play App Signing**
+4. **Google handles signing** for all releases
 
-3. **Signiertes AAB erstellen:**
+**Advantages:**
+- ✅ Google manages signing keys
+- ✅ No danger of losing keys
+- ✅ Easier for updates
+
+**For new apps:**
+- Google Play App Signing is **automatically enabled**
+- Upload keystore is sufficient
+- Google handles the rest automatically
+
+---
+
+## 🔧 If Keystore Already Exists
+
+**If you already have a keystore:**
+
+1. **Copy keystore file** (`*.jks`) to `android\app\`
+2. **Adjust keystore.properties:**
+   - Enter password
+   - Adjust filename
+   - Adjust alias
+
+3. **Create signed AAB:**
 ```powershell
 npm run aab:release
 ```
 
 ---
 
-**Viel Erfolg! 🎉**
-
+**Good luck! 🎉**

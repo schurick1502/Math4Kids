@@ -1,95 +1,92 @@
-# 🚀 Schnellstart: USB-Stick für Smartphone
+# 🚀 Quick Start: USB Stick for Smartphone
 
-## ⚡ In 3 Schritten startklar:
+## ⚡ Ready in 3 Steps:
 
-### 1️⃣ **Dateien auf USB-Stick kopieren**
+### 1️⃣ **Copy Files to USB Stick**
 
-**Option A - Automatisch (empfohlen):**
+**Option A - Automatic (recommended):**
 ```powershell
-# Doppelklick auf:
+# Double-click on:
 usb-stick-kopieren.ps1
 ```
-Dann einfach den Anweisungen folgen! ✨
+Then simply follow the instructions! ✨
 
-**Option B - Manuell:**
-1. Öffne den `dist` Ordner
-2. Kopiere **alle** Dateien auf deinen USB-Stick
-3. Fertig!
+**Option B - Manually:**
+1. Open the `dist` folder
+2. Copy **all** files to your USB stick
+3. Done!
 
 ---
 
-### 2️⃣ **Auf Smartphone öffnen**
+### 2️⃣ **Open on Smartphone**
 
 **Android:**
-1. USB-Stick einstecken (ggf. mit OTG-Adapter)
-2. Dateimanager öffnen → USB-Stick
-3. `index.html` antippen
-4. "Mit Chrome öffnen" wählen
-5. ✅ App läuft!
+1. Insert USB stick (with OTG adapter if needed)
+2. Open File Manager → USB stick
+3. Tap `index.html`
+4. Select "Open with Chrome"
+5. ✅ App is running!
 
 **iPhone:**
-1. Lightning-USB-Adapter nutzen
-2. "Dateien"-App → USB-Stick
-3. `index.html` → Mit Safari öffnen
+1. Use Lightning-USB adapter
+2. "Files" app → USB stick
+3. `index.html` → Open with Safari
 
 ---
 
-### 3️⃣ **Als App installieren** (optional, aber empfohlen!)
+### 3️⃣ **Install as App** (optional, but recommended!)
 
 **Android Chrome:**
-- Menü (⋮) → "Zum Startbildschirm hinzufügen"
+- Menu (⋮) → "Add to Home screen"
 
 **iPhone Safari:**
-- Teilen (📤) → "Zum Home-Bildschirm"
+- Share (📤) → "Add to Home Screen"
 
-**Vorteil:**
-- ✅ Kein USB-Stick mehr nötig!
-- ✅ Funktioniert offline
-- ✅ Wie eine echte App
-
----
-
-## 📚 Ausführliche Anleitung
-
-Siehe: **USB-STICK-ANLEITUNG.md**
+**Advantage:**
+- ✅ No USB stick needed anymore!
+- ✅ Works offline
+- ✅ Like a real app
 
 ---
 
-## 🔧 Problemlösung
+## 📚 Detailed Guide
 
-### App lädt nicht?
-→ Nutze eine "HTTP Server" App aus dem Play Store  
-→ **Oder:** Nutze den lokalen HTTP-Server - siehe **SCHNELLSTART-HTTP-SERVER.md**
-
-### Auf Smartphone über WiFi testen?
-→ Siehe **SCHNELLSTART-HTTP-SERVER.md** für lokalen HTTP-Server
-
-### Chrome-Berechtigungen prüfen?
-→ Siehe **CHROME-BERECHTIGUNGEN.md** für alle erforderlichen Einstellungen
-
-### Als PWA-App installieren?
-→ Siehe **PWA-INSTALLATION.md** für komplette Installationsanleitung
-
-### Styles fehlen?
-→ Alle Dateien müssen kopiert sein (auch der `assets` Ordner!)
-
-### USB-Stick wird nicht erkannt?
-→ USB-OTG-Unterstützung prüfen & Stick als FAT32 formatieren
+See: **USB-STICK-ANLEITUNG.md**
 
 ---
 
-## 💡 Das ist drin:
+## 🔧 Problem Solving
 
-- 📚 6 Level (Klasse 1-4, 1x1, Erwachsene)
-- ⏱️ Zeit-Messung mit Statistik
-- 🏆 Belohnungs-System nach Performance
-- 🎮 Multiplayer-Modus
-- 📊 Prozentrechnung & Dreisatz (Erwachsene)
-- 📱 Funktioniert komplett offline
+### App doesn't load?
+→ Use an "HTTP Server" app from the Play Store
+→ **Or:** Use the local HTTP server - see **SCHNELLSTART-HTTP-SERVER.md**
+
+### Test on smartphone via WiFi?
+→ See **SCHNELLSTART-HTTP-SERVER.md** for local HTTP server
+
+### Check Chrome permissions?
+→ See **CHROME-BERECHTIGUNGEN.md** for all required settings
+
+### Install as PWA app?
+→ See **PWA-INSTALLATION.md** for complete installation guide
+
+### Styles missing?
+→ All files must be copied (including the `assets` folder!)
+
+### USB stick not recognized?
+→ Check USB-OTG support & format stick as FAT32
 
 ---
 
-**Viel Erfolg! 🎯✨**
+## 💡 What's Included:
 
+- 📚 6 Levels (Grade 1-4, Multiplication tables, Adults)
+- ⏱️ Time measurement with statistics
+- 🏆 Reward system based on performance
+- 🎮 Multiplayer mode
+- 📊 Percentage calculation & Rule of Three (Adults)
+- 📱 Works completely offline
 
+---
 
+**Good luck! 🎯✨**

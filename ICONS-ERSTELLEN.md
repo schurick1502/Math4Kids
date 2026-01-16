@@ -1,186 +1,185 @@
-# 🎨 Icons für PWA erstellen
+# 🎨 Create Icons for PWA
 
-## 📋 Was wird benötigt?
+## 📋 What's Needed?
 
-Für die PWA-Installation benötigst du **2 Icon-Dateien**:
+For PWA installation you need **2 icon files**:
 
-- `icon-192.png` - 192x192 Pixel (kleines Icon)
-- `icon-512.png` - 512x512 Pixel (großes Icon)
+- `icon-192.png` - 192x192 pixels (small icon)
+- `icon-512.png` - 512x512 pixels (large icon)
 
-**Speicherort:** `public/` Ordner (werden beim Build nach `dist/` kopiert)
+**Location:** `public/` folder (will be copied to `dist/` during build)
 
 ---
 
-## 🚀 Schnellste Methode: Online-Generator
+## 🚀 Fastest Method: Online Generator
 
-### Option 1: RealFaviconGenerator (Empfohlen)
+### Option 1: RealFaviconGenerator (Recommended)
 
-1. **Gehe zu:** https://realfavicongenerator.net
-2. **Lade ein Bild hoch:**
-   - Emoji-Screenshot (🧮, 🎯, ➕✖️)
-   - Oder eigenes Design
-   - Mindestens 512x512 Pixel
-3. **Generiere Icons:**
-   - Wähle "192x192" und "512x512"
-   - Lade beide Icons herunter
-4. **Speichere im Projekt:**
+1. **Go to:** https://realfavicongenerator.net
+2. **Upload an image:**
+   - Emoji screenshot (🧮, 🎯, ➕✖️)
+   - Or your own design
+   - At least 512x512 pixels
+3. **Generate icons:**
+   - Select "192x192" and "512x512"
+   - Download both icons
+4. **Save in project:**
    - `icon-192.png` → `public/icon-192.png`
    - `icon-512.png` → `public/icon-512.png`
 
 ### Option 2: PWA Asset Generator
 
-1. **Gehe zu:** https://github.com/onderceylan/pwa-asset-generator
-2. **Oder nutze:** https://www.pwabuilder.com/imageGenerator
-3. **Lade Bild hoch** und generiere Icons
-4. **Speichere** `icon-192.png` und `icon-512.png` im `public/` Ordner
+1. **Go to:** https://github.com/onderceylan/pwa-asset-generator
+2. **Or use:** https://www.pwabuilder.com/imageGenerator
+3. **Upload image** and generate icons
+4. **Save** `icon-192.png` and `icon-512.png` in `public/` folder
 
 ---
 
-## 🎨 Eigene Icons erstellen
+## 🎨 Create Your Own Icons
 
-### Mit Bildbearbeitungsprogramm:
+### With Image Editing Software:
 
-**Empfohlene Tools:**
-- **GIMP** (kostenlos): https://www.gimp.org
-- **Paint.NET** (Windows, kostenlos)
-- **Photoshop** (kostenpflichtig)
-- **Figma** (Online, kostenlos): https://figma.com
+**Recommended tools:**
+- **GIMP** (free): https://www.gimp.org
+- **Paint.NET** (Windows, free)
+- **Photoshop** (paid)
+- **Figma** (Online, free): https://figma.com
 
-**Schritte:**
+**Steps:**
 
-1. **Neue Datei erstellen:**
-   - Größe: 512x512 Pixel
-   - Hintergrund: Violett (#9333ea) oder transparent
+1. **Create new file:**
+   - Size: 512x512 pixels
+   - Background: Purple (#9333ea) or transparent
 
-2. **Design erstellen:**
-   - Mathe-Symbol (➕, ✖️, 🧮, 🎯)
-   - Oder Text: "Mathe", "1+1", etc.
-   - Bunt und kinderfreundlich
+2. **Create design:**
+   - Math symbol (➕, ✖️, 🧮, 🎯)
+   - Or text: "Math", "1+1", etc.
+   - Colorful and child-friendly
 
-3. **Speichern:**
-   - `icon-512.png` (512x512 Pixel)
-   - `icon-192.png` (192x192 Pixel - verkleinern)
+3. **Save:**
+   - `icon-512.png` (512x512 pixels)
+   - `icon-192.png` (192x192 pixels - resize)
 
-4. **Verkleinern für 192x192:**
-   - In GIMP/Paint.NET: Bild → Größe ändern → 192x192
-   - Speichern als `icon-192.png`
+4. **Resize for 192x192:**
+   - In GIMP/Paint.NET: Image → Scale Image → 192x192
+   - Save as `icon-192.png`
 
 ---
 
-## 📱 Emoji als Icon verwenden
+## 📱 Use Emoji as Icon
 
-### Schnellste Methode:
+### Fastest method:
 
-1. **Emoji auswählen:**
-   - 🧮 (Abakus)
-   - 🎯 (Zielscheibe)
+1. **Choose emoji:**
+   - 🧮 (Abacus)
+   - 🎯 (Target)
    - ➕ (Plus)
-   - ✖️ (Mal)
-   - 🔢 (Zahlen)
+   - ✖️ (Times)
+   - 🔢 (Numbers)
 
-2. **Screenshot machen:**
-   - Emoji in großem Text (z.B. Word, Notepad++)
-   - Screenshot erstellen
-   - Auf 512x512 zuschneiden
+2. **Take screenshot:**
+   - Emoji in large text (e.g. Word, Notepad++)
+   - Take screenshot
+   - Crop to 512x512
 
-3. **Als PNG speichern:**
-   - In Bildbearbeitungsprogramm öffnen
-   - Auf 512x512 und 192x192 zuschneiden
-   - Speichern
+3. **Save as PNG:**
+   - Open in image editor
+   - Crop to 512x512 and 192x192
+   - Save
 
 ---
 
-## ✅ Prüfen ob Icons funktionieren
+## ✅ Check if Icons Work
 
-### Nach dem Build:
+### After build:
 
-1. **Build ausführen:**
+1. **Run build:**
    ```powershell
    npm run build
    ```
 
-2. **Prüfen:**
-   - `dist/icon-192.png` sollte vorhanden sein
-   - `dist/icon-512.png` sollte vorhanden sein
+2. **Check:**
+   - `dist/icon-192.png` should be present
+   - `dist/icon-512.png` should be present
 
-3. **Im Browser testen:**
-   - App öffnen
+3. **Test in browser:**
+   - Open app
    - DevTools (F12) → Application → Manifest
-   - Icons sollten angezeigt werden
+   - Icons should be displayed
 
 ---
 
-## 🎯 Design-Tipps
+## 🎯 Design Tips
 
-### Empfohlene Farben:
+### Recommended colors:
 
-- **Hintergrund:** Violett (#9333ea) - passt zum Theme
-- **Akzente:** Pink, Blau, Gelb - bunt und fröhlich
-- **Text:** Weiß oder Gelb - gut lesbar
+- **Background:** Purple (#9333ea) - matches the theme
+- **Accents:** Pink, Blue, Yellow - colorful and cheerful
+- **Text:** White or Yellow - easy to read
 
-### Empfohlene Symbole:
+### Recommended symbols:
 
-- ➕✖️ (Plus und Mal)
-- 🧮 (Abakus)
-- 🎯 (Zielscheibe)
-- 🔢 (Zahlen)
-- 📚 (Buch)
+- ➕✖️ (Plus and Times)
+- 🧮 (Abacus)
+- 🎯 (Target)
+- 🔢 (Numbers)
+- 📚 (Book)
 
-### Wichtig:
+### Important:
 
-- ✅ **Kontrastreich** - gut sichtbar auf Homescreen
-- ✅ **Einfach** - nicht zu viele Details
-- ✅ **Bunt** - kinderfreundlich
-- ✅ **Rund** - maskable Icons funktionieren besser
+- ✅ **High contrast** - clearly visible on home screen
+- ✅ **Simple** - not too many details
+- ✅ **Colorful** - child-friendly
+- ✅ **Round** - maskable icons work better
 
 ---
 
 ## 🛠️ Troubleshooting
 
-### ❌ Icons werden nicht angezeigt
+### ❌ Icons not displayed
 
-**Ursache:** Icons fehlen oder falscher Pfad
+**Cause:** Icons missing or wrong path
 
-**Lösung:**
-1. ✅ Prüfe, ob Icons im `public/` Ordner sind
-2. ✅ Nach `npm run build` im `dist/` Ordner vorhanden?
-3. ✅ Pfad in `manifest.json` korrekt? (`/icon-192.png`)
-
----
-
-### ❌ Icons sind unscharf
-
-**Ursache:** Falsche Größe oder schlechte Qualität
-
-**Lösung:**
-1. ✅ Verwende **exakt** 192x192 und 512x512 Pixel
-2. ✅ Keine Interpolation beim Verkleinern
-3. ✅ PNG-Format mit guter Qualität
+**Solution:**
+1. ✅ Check if icons are in `public/` folder
+2. ✅ Present in `dist/` folder after `npm run build`?
+3. ✅ Path in `manifest.json` correct? (`/icon-192.png`)
 
 ---
 
-### ❌ PWA-Installation funktioniert nicht
+### ❌ Icons are blurry
 
-**Ursache:** Icons fehlen oder Manifest-Fehler
+**Cause:** Wrong size or poor quality
 
-**Lösung:**
-1. ✅ Icons müssen vorhanden sein
-2. ✅ Manifest muss korrekt sein
-3. ✅ Über HTTPS oder localhost laden (nicht `file://`)
-
----
-
-## 📋 Checkliste
-
-Vor der PWA-Installation:
-
-- [ ] ✅ `icon-192.png` im `public/` Ordner
-- [ ] ✅ `icon-512.png` im `public/` Ordner
-- [ ] ✅ Beide Icons haben exakt die richtige Größe
-- [ ] ✅ Nach `npm run build` in `dist/` vorhanden
-- [ ] ✅ Manifest lädt ohne Fehler (DevTools prüfen)
+**Solution:**
+1. ✅ Use **exactly** 192x192 and 512x512 pixels
+2. ✅ No interpolation when resizing
+3. ✅ PNG format with good quality
 
 ---
 
-**Viel Erfolg! 🎨✨**
+### ❌ PWA installation doesn't work
 
+**Cause:** Icons missing or manifest error
+
+**Solution:**
+1. ✅ Icons must be present
+2. ✅ Manifest must be correct
+3. ✅ Load via HTTPS or localhost (not `file://`)
+
+---
+
+## 📋 Checklist
+
+Before PWA installation:
+
+- [ ] ✅ `icon-192.png` in `public/` folder
+- [ ] ✅ `icon-512.png` in `public/` folder
+- [ ] ✅ Both icons have exactly the right size
+- [ ] ✅ Present in `dist/` after `npm run build`
+- [ ] ✅ Manifest loads without errors (check DevTools)
+
+---
+
+**Good luck! 🎨✨**

@@ -1,12 +1,12 @@
-# 📦 APK ERSTELLEN - Ganz einfach!
+# 📦 CREATE APK - Super Easy!
 
-## ✅ Die einfachste Methode (Über Android Studio)
+## ✅ The Easiest Method (Via Android Studio)
 
-**Diese Methode funktioniert immer, auch ohne Java-Installation!**
+**This method always works, even without Java installation!**
 
 ---
 
-### **Schritt 1: Android Studio öffnen**
+### **Step 1: Open Android Studio**
 
 **In PowerShell:**
 ```powershell
@@ -14,172 +14,171 @@ cd C:\projekte\Math4Kids
 npm run android
 ```
 
-**ODER manuell:**
-- Android Studio öffnen
+**OR manually:**
+- Open Android Studio
 - **File** → **Open**
-- Wähle: `C:\projekte\Math4Kids\android` ⚠️ **android Ordner!**
-- Klicke **OK**
+- Select: `C:\projekte\Math4Kids\android` ⚠️ **android folder!**
+- Click **OK**
 
 ---
 
-### **Schritt 2: APK bauen**
+### **Step 2: Build APK**
 
 **In Android Studio:**
 
-1. **Warte bis Gradle Sync fertig ist** (unten im Fenster)
-   - Beim ersten Mal: 2-5 Minuten
-   - Danach: schnell
+1. **Wait until Gradle Sync is done** (bottom of window)
+   - First time: 2-5 minutes
+   - After that: fast
 
-2. **Build-Menü öffnen:**
-   - Oben: **Build** → **Build Bundle(s) / APK(s)** → **Build APK(s)**
+2. **Open Build menu:**
+   - Top: **Build** → **Build Bundle(s) / APK(s)** → **Build APK(s)**
 
-3. **⏳ Warte 1-2 Minuten**
-   - Unten siehst du: "Building..." → "Build completed"
+3. **⏳ Wait 1-2 minutes**
+   - Bottom shows: "Building..." → "Build completed"
 
-4. **Notification erscheint:**
+4. **Notification appears:**
    - "APK(s) generated successfully" ✅
-   - Klicke auf **"locate"** (oder "Show in Explorer")
+   - Click on **"locate"** (or "Show in Explorer")
 
-5. **APK wird geöffnet! 🎉**
+5. **APK is opened! 🎉**
 
-**APK liegt in:**
+**APK located at:**
 ```
 C:\projekte\Math4Kids\android\app\build\outputs\apk\debug\app-debug.apk
 ```
 
-**FERTIG! ✅**
+**DONE! ✅**
 
 ---
 
-## 📱 APK auf Android-Gerät installieren
+## 📱 Install APK on Android Device
 
-### **Methode 1: USB-Kabel (Einfachste)**
+### **Method 1: USB Cable (Easiest)**
 
-1. **Android-Gerät mit USB verbinden**
-2. **APK-Datei kopieren:**
-   - APK-Datei finden (siehe oben)
-   - Rechtsklick → **Kopieren**
-   - Auf Android-Gerät: **Paste** (z.B. in Downloads-Ordner)
+1. **Connect Android device with USB**
+2. **Copy APK file:**
+   - Find APK file (see above)
+   - Right-click → **Copy**
+   - On Android device: **Paste** (e.g. in Downloads folder)
 
-3. **Auf Android-Gerät:**
-   - **Datei-Manager** öffnen
-   - **Downloads** (oder wo du die APK gespeichert hast)
-   - **app-debug.apk** antippen
-   - **"Installieren"** wählen
-   - **Falls Warnung:** "Von unbekannter Quelle installieren" erlauben
-   - **"Installieren"** nochmal klicken
+3. **On Android device:**
+   - Open **File Manager**
+   - **Downloads** (or where you saved the APK)
+   - Tap **app-debug.apk**
+   - Select **"Install"**
+   - **If warning:** Allow "Install from unknown source"
+   - Click **"Install"** again
 
-4. **✅ FERTIG!** App ist installiert!
+4. **✅ DONE!** App is installed!
 
 ---
 
-### **Methode 2: Per E-Mail/Cloud**
+### **Method 2: Via Email/Cloud**
 
-1. **APK hochladen:**
+1. **Upload APK:**
    - Google Drive: https://drive.google.com
    - Dropbox: https://dropbox.com
-   - Oder andere Cloud-Service
+   - Or other cloud service
 
-2. **Link teilen:**
-   - Link kopieren
-   - Per E-Mail an dich selbst senden
-   - ODER: Direkt auf Smartphone hochladen
+2. **Share link:**
+   - Copy link
+   - Send via email to yourself
+   - OR: Upload directly to smartphone
 
-3. **Auf Android-Gerät:**
-   - Link öffnen
-   - APK herunterladen
-   - APK öffnen → **"Installieren"**
-
----
-
-### **Methode 3: Per E-Mail an dich selbst**
-
-1. **APK per E-Mail senden:**
-   - E-Mail an dich selbst erstellen
-   - APK als Anhang anhängen
-   - Senden
-
-2. **Auf Android-Gerät:**
-   - E-Mail öffnen
-   - Anhang (APK) öffnen
-   - **"Installieren"** wählen
+3. **On Android device:**
+   - Open link
+   - Download APK
+   - Open APK → **"Install"**
 
 ---
 
-## 📦 AAB für Google Play Store erstellen
+### **Method 3: Via Email to Yourself**
 
-**Für Play Store brauchst du ein AAB (Android App Bundle), keine APK!**
+1. **Send APK via email:**
+   - Create email to yourself
+   - Attach APK as attachment
+   - Send
+
+2. **On Android device:**
+   - Open email
+   - Open attachment (APK)
+   - Select **"Install"**
+
+---
+
+## 📦 Create AAB for Google Play Store
+
+**For Play Store you need an AAB (Android App Bundle), not APK!**
 
 ### **In Android Studio:**
 
 1. **Build** → **Build Bundle(s) / APK(s)** → **Build Bundle(s)**
 
-2. **⏳ Warte 1-2 Minuten**
+2. **⏳ Wait 1-2 minutes**
 
 3. **Notification:** "Bundle(s) generated successfully"
 
-4. **Klicke "locate"**
+4. **Click "locate"**
 
-**AAB liegt in:**
+**AAB located at:**
 ```
 C:\projekte\Math4Kids\android\app\build\outputs\bundle\release\app-release.aab
 ```
 
-**Das AAB in Google Play Console hochladen!**
+**Upload the AAB to Google Play Console!**
 
 ---
 
-## 🎯 Schnellstart - Alles was du tun musst
+## 🎯 Quick Start - Everything You Need to Do
 
-**1. Android Studio öffnen:**
+**1. Open Android Studio:**
 ```powershell
 npm run android
 ```
 
-**2. APK bauen:**
+**2. Build APK:**
 - In Android Studio: **Build** → **Build Bundle(s) / APK(s)** → **Build APK(s)**
-- Warten
-- Auf **"locate"** klicken
+- Wait
+- Click on **"locate"**
 
-**3. APK auf Android-Gerät kopieren und installieren**
+**3. Copy APK to Android device and install**
 
-**FERTIG! 🎉**
+**DONE! 🎉**
 
 ---
 
-## 📋 Zusammenfassung
+## 📋 Summary
 
-| Was? | Wie? | Wo liegt die Datei? |
-|------|------|---------------------|
-| **Debug-APK** | Android Studio: Build → Build APK(s) | `android\app\build\outputs\apk\debug\app-debug.apk` |
-| **Release-APK** | Android Studio: Build → Build APK(s) (Release) | `android\app\build\outputs\apk\release\app-release.apk` |
+| What? | How? | Where is the file? |
+|-------|------|---------------------|
+| **Debug APK** | Android Studio: Build → Build APK(s) | `android\app\build\outputs\apk\debug\app-debug.apk` |
+| **Release APK** | Android Studio: Build → Build APK(s) (Release) | `android\app\build\outputs\apk\release\app-release.apk` |
 | **AAB (Play Store)** | Android Studio: Build → Build Bundle(s) | `android\app\build\outputs\bundle\release\app-release.aab` |
 
 ---
 
-## ⚠️ Falls Warnung beim Installieren
+## ⚠️ If Warning When Installing
 
-**Auf Android-Gerät:**
+**On Android device:**
 
-1. **Einstellungen** → **Sicherheit**
-2. **"Unbekannte Quellen"** aktivieren
-   - ODER: **"Von unbekannten Quellen installieren"** erlauben
-3. **APK nochmal öffnen** und installieren
+1. **Settings** → **Security**
+2. **"Unknown sources"** activate
+   - OR: **"Install from unknown sources"** allow
+3. **Open APK again** and install
 
-**Neuere Android-Versionen:**
-- Bei Installation erscheint Warnung: "Diese App ist von einem unbekannten Entwickler"
-- **"Trotzdem installieren"** wählen
-
----
-
-## 💡 Tipps
-
-1. **Über Android Studio** ist am einfachsten (funktioniert immer!)
-2. **Debug-APK** ist zum Testen perfekt
-3. **AAB** für Play Store (empfohlen!)
-4. **APK-Größe:** ~5-10 MB (normal für React-Apps)
+**Newer Android versions:**
+- Warning appears during installation: "This app is from an unknown developer"
+- Select **"Install anyway"**
 
 ---
 
-**Viel Erfolg! 🎉**
+## 💡 Tips
 
+1. **Via Android Studio** is easiest (always works!)
+2. **Debug APK** is perfect for testing
+3. **AAB** for Play Store (recommended!)
+4. **APK size:** ~5-10 MB (normal for React apps)
+
+---
+
+**Good luck! 🎉**

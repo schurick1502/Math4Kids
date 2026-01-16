@@ -1,19 +1,19 @@
-# 📦 APK erstellen - Math4Kids Android App
+# 📦 Create APK - Math4Kids Android App
 
-## 🎯 Was ist eine APK?
+## 🎯 What is an APK?
 
-Eine **APK** (Android Package) ist eine Installationsdatei für Android-Geräte. Du kannst sie:
-- ✅ Direkt auf Android-Smartphones installieren
-- ✅ Per E-Mail/Cloud teilen
-- ✅ Auf USB-Stick kopieren und installieren
+An **APK** (Android Package) is an installation file for Android devices. You can:
+- ✅ Install directly on Android smartphones
+- ✅ Share via email/cloud
+- ✅ Copy to USB stick and install
 
-**Hinweis:** Für Google Play Store brauchst du ein **AAB** (Android App Bundle) - siehe unten!
+**Note:** For Google Play Store you need an **AAB** (Android App Bundle) - see below!
 
 ---
 
-## 🚀 Methode 1: Debug-APK erstellen (Einfachste Methode)
+## 🚀 Method 1: Create Debug APK (Easiest Method)
 
-### **Schritt 1: Web-App bauen**
+### **Step 1: Build Web App**
 
 **In PowerShell:**
 ```powershell
@@ -21,90 +21,90 @@ cd C:\projekte\Math4Kids
 npm run build:android
 ```
 
-**Warte bis "Sync finished" erscheint!**
+**Wait until "Sync finished" appears!**
 
 ---
 
-### **Schritt 2: APK in Android Studio erstellen**
+### **Step 2: Create APK in Android Studio**
 
-**Option A - Über Android Studio (GUI):**
+**Option A - Via Android Studio (GUI):**
 
-1. **Android Studio öffnen** (Projekt sollte schon geöffnet sein)
+1. **Open Android Studio** (Project should already be open)
 
-2. **Build-Menü öffnen:**
-   - Oben: **Build** → **Build Bundle(s) / APK(s)** → **Build APK(s)**
+2. **Open Build Menu:**
+   - Top: **Build** → **Build Bundle(s) / APK(s)** → **Build APK(s)**
 
-3. **Warte bis Build fertig ist:**
-   - Unten: "APK(s) generated successfully"
+3. **Wait until build is done:**
+   - Bottom: "APK(s) generated successfully"
 
-4. **APK finden:**
+4. **Find APK:**
    - In Android Studio: **Build** → **Select Build Variant**
-   - ODER: Klicke auf **"locate"** Link in der Notification
-   - APK liegt in: `android\app\build\outputs\apk\debug\app-debug.apk`
+   - OR: Click on **"locate"** link in the notification
+   - APK located at: `android\app\build\outputs\apk\debug\app-debug.apk`
 
-**Option B - Über Command Line (PowerShell):**
+**Option B - Via Command Line (PowerShell):**
 
 ```powershell
 cd C:\projekte\Math4Kids\android
 .\gradlew assembleDebug
 ```
 
-**APK liegt dann in:**
+**APK then located at:**
 ```
 android\app\build\outputs\apk\debug\app-debug.apk
 ```
 
 ---
 
-## 🎯 Methode 2: Release-APK erstellen (Für Verteilung)
+## 🎯 Method 2: Create Release APK (For Distribution)
 
-### **Für Release-APK benötigst du Signing (Digitale Signatur)**
+### **For release APK you need signing (digital signature)**
 
-### **Schritt 1: Keystore erstellen (einmalig)**
+### **Step 1: Create Keystore (one time)**
 
 **In PowerShell:**
 ```powershell
 cd C:\projekte\Math4Kids\android\app
 ```
 
-**Dann (Windows):**
+**Then (Windows):**
 ```powershell
 keytool -genkey -v -keystore math4kids-release-key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias math4kids
 ```
 
-**Fragen, die gestellt werden:**
-- **Passwort:** Wähle ein sicheres Passwort (merken!!)
-- **Name:** Dein Name
-- **Organisation:** Name deiner Organisation (optional)
-- **Stadt:** Deine Stadt
-- **Land:** DE (oder dein Land)
+**Questions that will be asked:**
+- **Password:** Choose a secure password (remember it!!)
+- **Name:** Your name
+- **Organization:** Name of your organization (optional)
+- **City:** Your city
+- **Country:** US (or your country)
 
-**⚠️ WICHTIG:** Passwort merken! Datei sicher aufbewahren!
+**⚠️ IMPORTANT:** Remember password! Keep file safe!
 
 ---
 
-### **Schritt 2: Keystore konfigurieren**
+### **Step 2: Configure Keystore**
 
-**Erstelle Datei: `android\keystore.properties`:**
+**Create file: `android\keystore.properties`:**
 
 ```properties
-storePassword=DEIN_PASSWORT_HIER
-keyPassword=DEIN_PASSWORT_HIER
+storePassword=YOUR_PASSWORD_HERE
+keyPassword=YOUR_PASSWORD_HERE
 keyAlias=math4kids
 storeFile=app\math4kids-release-key.jks
 ```
 
-**⚠️ WICHTIG:** Ersetze `DEIN_PASSWORT_HIER` mit deinem Passwort!
+**⚠️ IMPORTANT:** Replace `YOUR_PASSWORD_HERE` with your password!
 
 ---
 
-### **Schritt 3: build.gradle anpassen**
+### **Step 3: Adjust build.gradle**
 
-Die Datei `android/app/build.gradle` muss Signing konfiguriert haben. Ich prüfe das für dich.
+The file `android/app/build.gradle` must have signing configured. I'll check that for you.
 
 ---
 
-### **Schritt 4: Release-APK bauen**
+### **Step 4: Build Release APK**
 
 **In PowerShell:**
 ```powershell
@@ -114,18 +114,18 @@ cd android
 .\gradlew assembleRelease
 ```
 
-**Release-APK liegt dann in:**
+**Release APK then located at:**
 ```
 android\app\build\outputs\apk\release\app-release.apk
 ```
 
 ---
 
-## 📦 Methode 3: AAB erstellen (Für Google Play Store)
+## 📦 Method 3: Create AAB (For Google Play Store)
 
-**Für Play Store brauchst du ein AAB, keine APK!**
+**For Play Store you need an AAB, not APK!**
 
-### **Release-AAB erstellen:**
+### **Create Release AAB:**
 
 ```powershell
 cd C:\projekte\Math4Kids
@@ -134,33 +134,33 @@ cd android
 .\gradlew bundleRelease
 ```
 
-**AAB liegt dann in:**
+**AAB then located at:**
 ```
 android\app\build\outputs\bundle\release\app-release.aab
 ```
 
-**Das AAB hochladen in Google Play Console!**
+**Upload the AAB to Google Play Console!**
 
 ---
 
-## 📱 APK auf Android-Gerät installieren
+## 📱 Install APK on Android Device
 
-### **Methode 1: USB-Kabel**
+### **Method 1: USB Cable**
 
-1. **APK auf Computer** (siehe oben wo sie liegt)
-2. **Android-Gerät mit USB verbinden**
-3. **APK auf Gerät kopieren**
-4. **Auf Gerät:** APK öffnen → **"Installieren"**
-5. **Falls Fehler:** Einstellungen → Sicherheit → **"Unbekannte Quellen"** erlauben
+1. **APK on computer** (see above where it's located)
+2. **Connect Android device with USB**
+3. **Copy APK to device**
+4. **On device:** Open APK → **"Install"**
+5. **If error:** Settings → Security → **"Unknown sources"** allow
 
-### **Methode 2: Per E-Mail/Cloud**
+### **Method 2: Via Email/Cloud**
 
-1. **APK hochladen** (Google Drive, Dropbox, etc.)
-2. **Auf Android-Gerät:** Link öffnen
-3. **APK herunterladen**
-4. **APK öffnen** → **"Installieren"**
+1. **Upload APK** (Google Drive, Dropbox, etc.)
+2. **On Android device:** Open link
+3. **Download APK**
+4. **Open APK** → **"Install"**
 
-### **Methode 3: ADB installieren (Für Entwickler)**
+### **Method 3: ADB Install (For Developers)**
 
 ```powershell
 cd C:\projekte\Math4Kids\android\app\build\outputs\apk\debug
@@ -169,9 +169,9 @@ adb install app-debug.apk
 
 ---
 
-## 🛠️ Schnellstart - Debug-APK erstellen
+## 🛠️ Quick Start - Create Debug APK
 
-### **Alles in einem (Copy & Paste):**
+### **All in one (Copy & Paste):**
 
 **In PowerShell:**
 ```powershell
@@ -181,82 +181,81 @@ cd android
 .\gradlew assembleDebug
 ```
 
-**APK ist fertig!** 🎉
+**APK is ready!** 🎉
 
-**Liegt in:**
+**Located at:**
 ```
 C:\projekte\Math4Kids\android\app\build\outputs\apk\debug\app-debug.apk
 ```
 
 ---
 
-## 📋 Übersicht - Welche Datei für was?
+## 📋 Overview - Which File for What?
 
-| Datei | Wofür? | Wo? |
-|-------|--------|-----|
-| **app-debug.apk** | Zum Testen auf Geräten | `android\app\build\outputs\apk\debug\` |
-| **app-release.apk** | Für Verteilung (mit Signing) | `android\app\build\outputs\apk\release\` |
-| **app-release.aab** | Für Google Play Store | `android\app\build\outputs\bundle\release\` |
+| File | For what? | Where? |
+|------|-----------|--------|
+| **app-debug.apk** | For testing on devices | `android\app\build\outputs\apk\debug\` |
+| **app-release.apk** | For distribution (with signing) | `android\app\build\outputs\apk\release\` |
+| **app-release.aab** | For Google Play Store | `android\app\build\outputs\bundle\release\` |
 
 ---
 
-## ⚠️ Wichtig zu wissen
+## ⚠️ Important to Know
 
-### **Debug-APK:**
-- ✅ Einfach zu erstellen
-- ✅ Zum Testen perfekt
-- ❌ Kann nicht im Play Store veröffentlicht werden
-- ❌ Warnung beim Installieren: "Von unbekanntem Entwickler"
+### **Debug APK:**
+- ✅ Easy to create
+- ✅ Perfect for testing
+- ❌ Cannot be published on Play Store
+- ❌ Warning when installing: "From unknown developer"
 
-### **Release-APK:**
-- ✅ Professionell
-- ✅ Keine Warnung beim Installieren
-- ✅ Für Verteilung geeignet
-- ❌ Benötigt Keystore (Signing)
+### **Release APK:**
+- ✅ Professional
+- ✅ No warning when installing
+- ✅ Suitable for distribution
+- ❌ Requires keystore (signing)
 
 ### **AAB (App Bundle):**
-- ✅ Für Google Play Store erforderlich
-- ✅ Kleinere Dateigröße
-- ✅ Play Store optimiert automatisch
+- ✅ Required for Google Play Store
+- ✅ Smaller file size
+- ✅ Play Store optimizes automatically
 
 ---
 
-## 🚨 Häufige Probleme
+## 🚨 Common Problems
 
-### **Problem: "gradlew" wird nicht erkannt**
+### **Problem: "gradlew" not recognized**
 
-**Lösung:**
+**Solution:**
 ```powershell
 cd C:\projekte\Math4Kids\android
 # Windows:
 .\gradlew.bat assembleDebug
 
-# ODER:
+# OR:
 .\gradlew assembleDebug
 ```
 
-### **Problem: "Keystore nicht gefunden"**
+### **Problem: "Keystore not found"**
 
-**Lösung:**
-- Erstelle Keystore (siehe Methode 2, Schritt 1)
-- ODER nutze Debug-APK (Methode 1)
+**Solution:**
+- Create keystore (see Method 2, Step 1)
+- OR use debug APK (Method 1)
 
-### **Problem: APK kann nicht installiert werden**
+### **Problem: APK cannot be installed**
 
-**Lösung auf Android-Gerät:**
-1. **Einstellungen** → **Sicherheit**
-2. **"Unbekannte Quellen"** aktivieren
-3. **ODER:** Einstellungen → Apps → **"Installiere Apps aus unbekannten Quellen"** erlauben
-
----
-
-## 💡 Tipps
-
-1. **Debug-APK für Tests:** Schnell und einfach
-2. **Release-APK für Verteilung:** Professionell, aber Signing nötig
-3. **AAB für Play Store:** Einmalig erstellen, dann hochladen
+**Solution on Android device:**
+1. **Settings** → **Security**
+2. **"Unknown sources"** activate
+3. **OR:** Settings → Apps → **"Install apps from unknown sources"** allow
 
 ---
 
-**Viel Erfolg! 🎉**
+## 💡 Tips
 
+1. **Debug APK for tests:** Quick and easy
+2. **Release APK for distribution:** Professional, but signing needed
+3. **AAB for Play Store:** Create once, then upload
+
+---
+
+**Good luck! 🎉**

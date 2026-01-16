@@ -1,173 +1,173 @@
-# 🚀 START HIER - App starten (Super einfach!)
+# 🚀 START HERE - Start App (Super Easy!)
 
-## ✅ Alles was du tun musst (3 Commands):
+## ✅ Everything you need to do (3 Commands):
 
-### **1. PowerShell öffnen**
+### **1. Open PowerShell**
 
 **Windows:**
-- Windows-Taste drücken
-- "PowerShell" tippen
-- **Windows PowerShell** öffnen
+- Press Windows key
+- Type "PowerShell"
+- Open **Windows PowerShell**
 
-**ODER:**
-- Im Ordner `C:\projekte\Math4Kids`
-- Rechtsklick → **"PowerShell hier öffnen"**
+**OR:**
+- In folder `C:\projekte\Math4Kids`
+- Right-click → **"Open PowerShell here"**
 
 ---
 
-### **2. Diese 3 Befehle eintippen (einer nach dem anderen):**
+### **2. Type these 3 commands (one after another):**
 
-**Befehl 1:**
+**Command 1:**
 ```powershell
 cd C:\projekte\Math4Kids
 ```
-**Enter drücken** ⏎
+**Press Enter** ⏎
 
-**Befehl 2:**
+**Command 2:**
 ```powershell
 npm run build:android
 ```
-**Enter drücken** ⏎
+**Press Enter** ⏎
 
-**⏳ WARTE bis fertig!** (zeigt "Sync finished")
+**⏳ WAIT until done!** (shows "Sync finished")
 
-**Befehl 3:**
+**Command 3:**
 ```powershell
 npm run android
 ```
-**Enter drücken** ⏎
+**Press Enter** ⏎
 
 ---
 
-### **3. Android Studio öffnet sich automatisch**
+### **3. Android Studio opens automatically**
 
-**Was du siehst:**
-- Android Studio startet
-- Projekt wird geöffnet
-- Unten: "Gradle Sync running..."
+**What you see:**
+- Android Studio starts
+- Project is opened
+- At bottom: "Gradle Sync running..."
 
-**⏳ WARTE bis Gradle Sync fertig ist!** (2-5 Minuten beim ersten Mal)
+**⏳ WAIT until Gradle Sync is done!** (2-5 minutes the first time)
 
-**Sollte zeigen:** "Gradle Sync completed" ✅
+**Should show:** "Gradle Sync completed" ✅
 
 ---
 
-### **4. App starten**
+### **4. Start App**
 
 **In Android Studio:**
 
-1. **Oben in der Toolbar:** Dropdown-Menü (neben ▶️ Button)
-2. **Emulator wählen** (falls keiner da: "Device Manager" → "+ Create Device")
-3. **▶️ Run klicken** (grüner Play-Button oben)
+1. **At top in toolbar:** Dropdown menu (next to ▶️ button)
+2. **Select emulator** (if none there: "Device Manager" → "+ Create Device")
+3. **Click ▶️ Run** (green Play button at top)
 
-**ODER:**
-- Drücke **Shift+F10**
-
----
-
-## ❓ Was wenn es nicht funktioniert?
-
-### **Problem 1: PowerShell zeigt Fehler**
-
-**Kopiere die Fehlermeldung und sag mir Bescheid!**
-
-**Oder schaue hier nach:**
-- `SCHRITT-FUER-SCHRITT.md` - Detaillierte Anleitung
-- `ANDROID-STUDIO-FIX.md` - Wenn Android Studio nicht öffnet
+**OR:**
+- Press **Shift+F10**
 
 ---
 
-### **Problem 2: "npm" wird nicht erkannt**
+## ❓ What if it doesn't work?
 
-**Lösung:**
-1. Node.js installieren: https://nodejs.org/
-2. "LTS" Version herunterladen
-3. Installieren
-4. **Computer neu starten**
-5. PowerShell neu öffnen
-6. Nochmal versuchen
+### **Problem 1: PowerShell shows error**
+
+**Copy the error message and let me know!**
+
+**Or look here:**
+- `SCHRITT-FUER-SCHRITT.md` - Detailed guide
+- `ANDROID-STUDIO-FIX.md` - If Android Studio doesn't open
 
 ---
 
-### **Problem 3: Android Studio öffnet sich nicht**
+### **Problem 2: "npm" is not recognized**
 
-**Lösung - Android Studio manuell öffnen:**
+**Solution:**
+1. Install Node.js: https://nodejs.org/
+2. Download "LTS" version
+3. Install
+4. **Restart computer**
+5. Open PowerShell again
+6. Try again
 
-1. **Android Studio starten** (vom Desktop/Startmenü)
+---
+
+### **Problem 3: Android Studio doesn't open**
+
+**Solution - Open Android Studio manually:**
+
+1. **Start Android Studio** (from Desktop/Start menu)
 2. **File** → **Open**
-3. Navigiere zu: `C:\projekte\Math4Kids`
-4. Wähle den **`android`** Ordner ⚠️
-5. Klicke **OK**
+3. Navigate to: `C:\projekte\Math4Kids`
+4. Select the **`android`** folder ⚠️
+5. Click **OK**
 
 ---
 
-### **Problem 4: Gradle Sync schlägt fehl**
+### **Problem 4: Gradle Sync fails**
 
-**Lösung:**
+**Solution:**
 
 1. In Android Studio: **File** → **Invalidate Caches** → **Invalidate and Restart**
-2. ODER: **File** → **Sync Project with Gradle Files**
+2. OR: **File** → **Sync Project with Gradle Files**
 
 ---
 
-### **Problem 5: Kein Emulator/Gerät**
+### **Problem 5: No emulator/device**
 
-**Emulator erstellen:**
+**Create emulator:**
 
 1. In Android Studio: **Tools** → **Device Manager**
-2. **"+ Create Device"** klicken
-3. Gerät wählen (z.B. "Pixel 5")
-4. **Next** klicken
-5. System Image wählen (z.B. "Android 13")
-6. **Download** klicken (falls nötig)
+2. Click **"+ Create Device"**
+3. Select device (e.g. "Pixel 5")
+4. Click **Next**
+5. Select System Image (e.g. "Android 13")
+6. Click **Download** (if needed)
 7. **Next** → **Finish**
 
-**Echtgerät (Smartphone):**
+**Real device (smartphone):**
 
-1. Smartphone mit USB verbinden
-2. Smartphone: **Einstellungen** → **Über das Telefon**
-3. **Build-Nummer** 7x antippen
-4. Smartphone: **Einstellungen** → **Entwickleroptionen**
-5. **USB-Debugging** aktivieren
-6. Am Computer: "USB-Debugging erlauben?" → **OK**
-
----
-
-## 📋 CHECKLISTE
-
-**Vor dem Start prüfen:**
-
-- [ ] PowerShell geöffnet? ✅
-- [ ] Im richtigen Ordner? (`cd C:\projekte\Math4Kids`) ✅
-- [ ] Node.js installiert? (`node --version` zeigt Version) ✅
-- [ ] npm installiert? (`npm --version` zeigt Version) ✅
-- [ ] Android Studio installiert? ✅
-- [ ] Dependencies installiert? (`npm install` bereits gemacht?) ✅
-
-**Wenn etwas fehlt:** Sag mir Bescheid!
+1. Connect smartphone with USB
+2. Smartphone: **Settings** → **About phone**
+3. Tap **Build number** 7 times
+4. Smartphone: **Settings** → **Developer options**
+5. Enable **USB Debugging**
+6. On computer: Click **OK** on "Allow USB debugging?"
 
 ---
 
-## 🆘 HILFE - Wo genau steckst du?
+## 📋 CHECKLIST
 
-**Sag mir bitte:**
+**Check before starting:**
 
-1. **Was hast du gemacht?** (welche Commands?)
-2. **Was ist passiert?** (was wurde angezeigt?)
-3. **Was erwartest du?** (was soll passieren?)
+- [ ] PowerShell opened? ✅
+- [ ] In correct folder? (`cd C:\projekte\Math4Kids`) ✅
+- [ ] Node.js installed? (`node --version` shows version) ✅
+- [ ] npm installed? (`npm --version` shows version) ✅
+- [ ] Android Studio installed? ✅
+- [ ] Dependencies installed? (`npm install` already done?) ✅
 
-**Beispiel:**
+**If something is missing:** Let me know!
+
+---
+
+## 🆘 HELP - Where exactly are you stuck?
+
+**Please tell me:**
+
+1. **What did you do?** (which commands?)
+2. **What happened?** (what was displayed?)
+3. **What do you expect?** (what should happen?)
+
+**Example:**
 ```
-Ich habe: npm run build:android eingegeben
-Passiert ist: "Error: Cannot find module..."
-Ich erwarte: App sollte gebaut werden
+I did: typed npm run build:android
+What happened: "Error: Cannot find module..."
+I expect: App should be built
 ```
 
 ---
 
-## 🎯 SCHNELLSTART (Alles in einem)
+## 🎯 QUICK START (All in One)
 
-**Kopiere das hier in PowerShell:**
+**Copy this into PowerShell:**
 
 ```powershell
 cd C:\projekte\Math4Kids
@@ -175,12 +175,12 @@ npm run build:android
 npm run android
 ```
 
-**Dann in Android Studio:**
-- Warte auf Gradle Sync
-- ▶️ Run klicken
+**Then in Android Studio:**
+- Wait for Gradle Sync
+- Click ▶️ Run
 
-**FERTIG!** 🎉
+**DONE!** 🎉
 
 ---
 
-**Sag mir genau, wo du Probleme hast! Dann helfe ich dir gezielt weiter! 🎯**
+**Tell me exactly where you're having problems! Then I'll help you specifically! 🎯**

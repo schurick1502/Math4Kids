@@ -1,53 +1,53 @@
-# 🚀 Android-App Build-Anleitung - Math4Kids
+# 🚀 Android App Build Guide - Math4Kids
 
-## ✅ Was bereits fertig ist
+## ✅ What's Already Done
 
-- ✅ Capacitor installiert
-- ✅ Android-Projekt erstellt
-- ✅ MainActivity.java korrekt
-- ✅ AndroidManifest.xml mit Internet-Permission
-- ✅ App-Name: "Math4Kids"
-- ✅ Package-Name: "de.math4kids.app"
+- ✅ Capacitor installed
+- ✅ Android project created
+- ✅ MainActivity.java correct
+- ✅ AndroidManifest.xml with Internet permission
+- ✅ App name: "Math4Kids"
+- ✅ Package name: "de.math4kids.app"
 - ✅ Version: 1.0.0 (versionCode: 1, versionName: "1.0.0")
-- ✅ Colors.xml erstellt (#9333ea)
+- ✅ Colors.xml created (#9333ea)
 
 ---
 
-## 📋 Noch zu erledigen
+## 📋 Still To Do
 
-### 1. Icons erstellen
+### 1. Create Icons
 
-**Methode 1 - Mit Generator-Tool:**
-1. Öffne `generate-android-icons.html` im Browser
-2. Klicke "Alle Icons generieren"
-3. Download jedes Icon in den entsprechenden Ordner:
+**Method 1 - With Generator Tool:**
+1. Open `generate-android-icons.html` in browser
+2. Click "Generate all icons"
+3. Download each icon to the corresponding folder:
    - `android/app/src/main/res/mipmap-mdpi/ic_launcher.png` (48x48)
    - `android/app/src/main/res/mipmap-hdpi/ic_launcher.png` (72x72)
    - `android/app/src/main/res/mipmap-xhdpi/ic_launcher.png` (96x96)
    - `android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png` (144x144)
    - `android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png` (192x192)
 
-**Methode 2 - Manuell:**
-- Erstelle Icons mit Android Asset Studio: https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html
-- Lade ein 512x512 PNG hoch
-- Hintergrund: #9333ea
-- Symbol: ✖➕ (Plus und Mal)
+**Method 2 - Manually:**
+- Create icons with Android Asset Studio: https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html
+- Upload a 512x512 PNG
+- Background: #9333ea
+- Symbol: ✖➕ (Plus and Times)
 
 ---
 
-### 2. Splashscreen anpassen (Optional)
+### 2. Customize Splashscreen (Optional)
 
-Splashscreen-Dateien sind bereits vorhanden, können aber angepasst werden:
-- `android/app/src/main/res/drawable/splash.png` (Haupt-Splashscreen)
-- Weitere Splashscreens in `drawable-*` Ordnern
+Splashscreen files already exist but can be customized:
+- `android/app/src/main/res/drawable/splash.png` (Main splashscreen)
+- Additional splashscreens in `drawable-*` folders
 
-**Anpassen:**
-- Hintergrund: #9333ea (Violett)
-- Icon/Emoji: 🧮 oder ✖➕
+**Customize:**
+- Background: #9333ea (Purple)
+- Icon/Emoji: 🧮 or ✖➕
 
 ---
 
-## 🔨 Build-Commands
+## 🔨 Build Commands
 
 ### Development Build:
 ```powershell
@@ -55,40 +55,40 @@ npm run build:android
 npm run android
 ```
 
-### Manueller Sync:
+### Manual Sync:
 ```powershell
 npm run build
 npm run sync:android
 ```
 
 ### In Android Studio:
-1. `npm run android` öffnet Android Studio
-2. Wähle Gerät/Emulator
-3. Klicke "Run" ▶️
+1. `npm run android` opens Android Studio
+2. Select device/emulator
+3. Click "Run" ▶️
 
 ---
 
-## 📦 Release Build erstellen
+## 📦 Create Release Build
 
-### 1. Signing konfigurieren
+### 1. Configure Signing
 
 **In Android Studio:**
 1. Build → Generate Signed Bundle / APK
-2. Erstelle Key Store (einmalig)
-3. Wähle "Android App Bundle" (für Play Store)
+2. Create Key Store (one time)
+3. Select "Android App Bundle" (for Play Store)
 4. Build → Finished
 
-### 2. Oder mit Gradle:
+### 2. Or with Gradle:
 
-Erstelle `android/keystore.properties`:
+Create `android/keystore.properties`:
 ```properties
-storePassword=dein-passwort
-keyPassword=dein-passwort
+storePassword=your-password
+keyPassword=your-password
 keyAlias=math4kids
 storeFile=../math4kids.keystore
 ```
 
-Dann:
+Then:
 ```powershell
 cd android
 .\gradlew bundleRelease
@@ -96,37 +96,36 @@ cd android
 
 ---
 
-## ✅ Finale Prüfung
+## ✅ Final Check
 
-**Vor dem Build prüfen:**
+**Check before build:**
 
-- [ ] ✅ Capacitor installiert
-- [ ] ✅ Android-Projekt vorhanden (`android/` Ordner)
-- [ ] ✅ `dist/` Ordner vorhanden (nach `npm run build`)
-- [ ] ✅ Icons vorhanden (alle mipmap-* Ordner)
-- [ ] ✅ App-Name: "Math4Kids" (strings.xml)
-- [ ] ✅ Package-Name: "de.math4kids.app" (build.gradle)
+- [ ] ✅ Capacitor installed
+- [ ] ✅ Android project exists (`android/` folder)
+- [ ] ✅ `dist/` folder exists (after `npm run build`)
+- [ ] ✅ Icons present (all mipmap-* folders)
+- [ ] ✅ App name: "Math4Kids" (strings.xml)
+- [ ] ✅ Package name: "de.math4kids.app" (build.gradle)
 - [ ] ✅ Version: 1.0.0 (build.gradle)
-- [ ] ✅ Internet-Permission vorhanden (AndroidManifest.xml)
-- [ ] ✅ MainActivity.java korrekt
+- [ ] ✅ Internet permission present (AndroidManifest.xml)
+- [ ] ✅ MainActivity.java correct
 
 ---
 
-## 🎯 Nächste Schritte
+## 🎯 Next Steps
 
-1. **Icons erstellen** (siehe oben)
-2. **Build testen:**
+1. **Create icons** (see above)
+2. **Test build:**
    ```powershell
    npm run build:android
    npm run android
    ```
-3. **In Android Studio öffnen:**
-   - Android Studio startet automatisch
-   - Wähle Gerät/Emulator
-   - Klicke "Run" ▶️
-4. **Release Build erstellen** (für Play Store)
+3. **Open in Android Studio:**
+   - Android Studio starts automatically
+   - Select device/emulator
+   - Click "Run" ▶️
+4. **Create release build** (for Play Store)
 
 ---
 
-**Viel Erfolg! 🎉**
-
+**Good luck! 🎉**

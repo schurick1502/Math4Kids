@@ -1,104 +1,104 @@
-# 🔐 Keystore erstellen - Schritt für Schritt
+# 🔐 Create Keystore - Step by Step
 
-## 🚀 In PowerShell ausführen
+## 🚀 Run in PowerShell
 
-**Öffne PowerShell und führe diese Befehle aus:**
+**Open PowerShell and run these commands:**
 
-### **Schritt 1: Ins richtige Verzeichnis wechseln**
+### **Step 1: Navigate to the correct directory**
 
 ```powershell
 cd C:\projekte\Math4Kids\android\app
 ```
 
-### **Schritt 2: Keytool ausführen**
+### **Step 2: Run keytool**
 
 ```powershell
 &"C:\Program Files\Android\Android Studio\jbr\bin\keytool.exe" -genkey -v -keystore math4kids-release-key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias math4kids
 ```
 
-**⚠️ WICHTIG:** Passwort muss **mindestens 6 Zeichen** lang sein!
+**⚠️ IMPORTANT:** Password must be **at least 6 characters** long!
 
 ---
 
-## ❓ Fragen die gestellt werden:
+## ❓ Questions that will be asked:
 
-**1. Keystore-Kennwort eingeben:**
-- ⚠️ **Mindestens 6 Zeichen!**
-- Beispiel: `math4kids2024` oder `Math4Kids!123`
-- **Passwort merken!**
+**1. Enter keystore password:**
+- ⚠️ **At least 6 characters!**
+- Example: `math4kids2024` or `Math4Kids!123`
+- **Remember password!**
 
-**2. Keystore-Kennwort wiederholen:**
-- Nochmal eingeben
+**2. Re-enter keystore password:**
+- Enter again
 
-**3. Wie ist Ihr Vor- und Nachname?**
-- Dein Name
-- Beispiel: `Max Mustermann`
+**3. What is your first and last name?**
+- Your name
+- Example: `John Doe`
 
-**4. Wie lautet der Name Ihrer Organisationseinheit?**
-- Enter drücken (optional)
-- ODER: `Development`
+**4. What is the name of your organizational unit?**
+- Press Enter (optional)
+- OR: `Development`
 
-**5. Wie lautet der Name Ihrer Organisation?**
-- Enter drücken (optional)
-- ODER: Name deiner Organisation
+**5. What is the name of your organization?**
+- Press Enter (optional)
+- OR: Name of your organization
 
-**6. Wie lautet der Name Ihrer Stadt oder Gemeinde?**
-- Deine Stadt
-- Beispiel: `Berlin`
+**6. What is the name of your City or Locality?**
+- Your city
+- Example: `New York`
 
-**7. Wie lautet der Name Ihres Bundesland oder Kantons?**
-- Dein Bundesland
-- Beispiel: `Berlin` oder `Bayern`
+**7. What is the name of your State or Province?**
+- Your state
+- Example: `New York` or `California`
 
-**8. Wie lautet der zweistellige Ländercode für diese Einheit?**
-- `DE` (Deutschland)
-- ODER: Dein Ländercode (2 Buchstaben)
+**8. What is the two-letter country code for this unit?**
+- `US` (United States)
+- OR: Your country code (2 letters)
 
-**9. Ist CN=..., OU=..., O=..., L=..., ST=..., C=... richtig?**
-- `ja` eingeben
+**9. Is CN=..., OU=..., O=..., L=..., ST=..., C=... correct?**
+- Enter `yes`
 
-**10. Keystore-Kennwort für <math4kids> eingeben:**
-- **Gleiches Passwort** wie in Schritt 1
+**10. Enter key password for <math4kids>:**
+- **Same password** as in step 1
 
-**11. Keystore-Kennwort für <math4kids> wiederholen:**
-- Nochmal eingeben
+**11. Re-enter key password for <math4kids>:**
+- Enter again
 
 ---
 
-## ✅ Wenn fertig:
+## ✅ When finished:
 
-**Du solltest sehen:**
+**You should see:**
 ```
-[math4kids-release-key.jks gespeichert]
+[Storing math4kids-release-key.jks]
 ```
 
-**Datei wurde erstellt:**
+**File was created:**
 ```
 C:\projekte\Math4Kids\android\app\math4kids-release-key.jks
 ```
 
 ---
 
-## 📝 Schritt 3: Passwort in keystore.properties eintragen
+## 📝 Step 3: Enter password in keystore.properties
 
-**Öffne die Datei:**
+**Open the file:**
 ```
 C:\projekte\Math4Kids\android\app\keystore.properties
 ```
 
-**Ersetze:**
+**Replace:**
 ```properties
-storePassword=DEIN_PASSWORT_HIER_ERSETZEN
-keyPassword=DEIN_PASSWORT_HIER_ERSETZEN
+storePassword=REPLACE_YOUR_PASSWORD_HERE
+keyPassword=REPLACE_YOUR_PASSWORD_HERE
 ```
 
-**Mit dem Passwort, das du bei Schritt 1 gewählt hast!**
+**With the password you chose in step 1!**
 
-**Speichern!**
+**Save!**
 
 ---
 
-## 🎯 Schritt 4: Signiertes AAB erstellen
+## 🎯 Step 4: Create signed AAB
 
 **In PowerShell:**
 ```powershell
@@ -106,30 +106,29 @@ cd C:\projekte\Math4Kids
 npm run aab:release
 ```
 
-**⏳ Warte 1-2 Minuten**
+**⏳ Wait 1-2 minutes**
 
-**✅ Fertig! AAB ist signiert!**
+**✅ Done! AAB is signed!**
 
 ---
 
-## 🔍 Prüfen ob Keystore erstellt wurde
+## 🔍 Check if keystore was created
 
 **In PowerShell:**
 ```powershell
 Test-Path C:\projekte\Math4Kids\android\app\math4kids-release-key.jks
 ```
 
-**Sollte `True` anzeigen, wenn Keystore erstellt wurde.**
+**Should show `True` if keystore was created.**
 
 ---
 
-## ⚠️ Tipps:
+## ⚠️ Tips:
 
-1. **Passwort:** Mindestens 6 Zeichen, am besten mehr
-2. **Passwort sicher aufbewahren:** Ohne Passwort = keine Updates!
-3. **Keystore sichern:** Backup auf USB-Stick/Cloud
+1. **Password:** At least 6 characters, preferably more
+2. **Keep password safe:** Without password = no updates!
+3. **Backup keystore:** Backup to USB stick/cloud
 
 ---
 
-**Viel Erfolg! 🎉**
-
+**Good luck! 🎉**
