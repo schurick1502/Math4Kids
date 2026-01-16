@@ -133,7 +133,7 @@ This guide shows you which settings must be enabled in the Chrome browser on you
 **Cause:** Service Worker needs HTTPS or localhost
 
 **Solution:**
-- Use **HTTP server** (see `SCHNELLSTART-HTTP-SERVER.md`)
+- Use **HTTP server** (see `QUICKSTART-HTTP-SERVER.md`)
 - Or deploy on server with HTTPS
 
 **For local files (file://):**

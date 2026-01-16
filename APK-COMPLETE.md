@@ -108,7 +108,7 @@ cd C:\projekte\Math4Kids
 npm run aab:release
 ```
 
-**⚠️ NOTE:** Release AAB requires signing (keystore). See `APK-ERSTELLEN.md` for details.
+**⚠️ NOTE:** Release AAB requires signing (keystore). See `APK-BUILD.md` for details.
 
 **OR in Android Studio:**
 - **Build** → **Build Bundle(s) / APK(s)** → **Build Bundle(s)**

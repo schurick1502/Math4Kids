@@ -72,7 +72,7 @@ npm run android
 **Copy the error message and let me know!**
 
 **Or look here:**
-- `SCHRITT-FUER-SCHRITT.md` - Detailed guide
+- `STEP-BY-STEP.md` - Detailed guide
 - `ANDROID-STUDIO-FIX.md` - If Android Studio doesn't open
 
 ---

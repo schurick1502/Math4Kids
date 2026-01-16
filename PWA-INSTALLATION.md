@@ -120,7 +120,7 @@ If no banner appears:
 **Possible causes:**
 
 1. **Not via HTTPS/localhost?**
-   - ✅ Use HTTP server (see `SCHNELLSTART-HTTP-SERVER.md`)
+   - ✅ Use HTTP server (see `QUICKSTART-HTTP-SERVER.md`)
    - ❌ `file://` doesn't work
 
 2. **Icons missing?**
@@ -223,7 +223,7 @@ Before installation check:
 - [ ] ✅ **Icons present** (`icon-192.png` and `icon-512.png`)
 - [ ] ✅ **Service Worker registered** (check DevTools)
 - [ ] ✅ **Manifest loaded** (check DevTools)
-- [ ] ✅ **Chrome permissions** allowed (see `CHROME-BERECHTIGUNGEN.md`)
+- [ ] ✅ **Chrome permissions** allowed (see `CHROME-PERMISSIONS.md`)
 
 ---
 

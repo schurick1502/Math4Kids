@@ -51,7 +51,7 @@ Then simply follow the instructions! ✨
 
 ## 📚 Detailed Guide
 
-See: **USB-STICK-ANLEITUNG.md**
+See: **USB-STICK-GUIDE.md**
 
 ---
 
@@ -59,13 +59,13 @@ See: **USB-STICK-ANLEITUNG.md**
 
 ### App doesn't load?
 → Use an "HTTP Server" app from the Play Store
-→ **Or:** Use the local HTTP server - see **SCHNELLSTART-HTTP-SERVER.md**
+→ **Or:** Use the local HTTP server - see **QUICKSTART-HTTP-SERVER.md**
 
 ### Test on smartphone via WiFi?
-→ See **SCHNELLSTART-HTTP-SERVER.md** for local HTTP server
+→ See **QUICKSTART-HTTP-SERVER.md** for local HTTP server
 
 ### Check Chrome permissions?
-→ See **CHROME-BERECHTIGUNGEN.md** for all required settings
+→ See **CHROME-PERMISSIONS.md** for all required settings
 
 ### Install as PWA app?
 → See **PWA-INSTALLATION.md** for complete installation guide

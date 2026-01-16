@@ -69,7 +69,7 @@ cd C:\projekte\Math4Kids
 npm run apk:release
 ```
 
-**Detailed instructions:** See `APK-ERSTELLEN.md`
+**Detailed instructions:** See `APK-BUILD.md`
 
 ---
 

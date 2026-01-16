@@ -124,7 +124,7 @@ The app runs on `http://localhost:8080` and is accessible on the local network.
 2. Copy `dist/` folder to USB stick
 3. Open `index.html` on smartphone
 
-See `SCHNELLSTART-USB.md` for details.
+See `QUICKSTART-USB.md` for details.
 
 #### Option C: Install PWA
 1. Open app in browser (via HTTPS)
@@ -154,7 +154,7 @@ npm run aab:release
 AAB located at: `android/app/build/outputs/bundle/release/app-release.aab`
 
 **⚠️ Important:** A keystore must be configured for release builds.
-See `SIGNING-EINRICHTEN.md` for details.
+See `SETUP-SIGNING.md` for details.
 
 ### 📱 Android Studio Development
 
@@ -168,24 +168,24 @@ See `ANDROID-INSTALLATION.md` for complete guide.
 ## 📚 Detailed Guides
 
 ### 🚀 Quick Start Guides
-- `START-HIER.md` - Complete Android setup guide
-- `SCHNELLSTART-HTTP-SERVER.md` - Local HTTP Server
-- `SCHNELLSTART-USB.md` - USB Stick Installation
-- `SO-STARTEST-DU-DIE-APP.md` - Overview of all methods
+- `START-HERE.md` - Complete Android setup guide
+- `QUICKSTART-HTTP-SERVER.md` - Local HTTP Server
+- `QUICKSTART-USB.md` - USB Stick Installation
+- `HOW-TO-START-APP.md` - Overview of all methods
 
 ### 🤖 Android
 - `ANDROID-INSTALLATION.md` - Complete Android Setup Guide
-- `APK-ERSTELLEN.md` - Create APK (detailed)
-- `APK-SCHNELLSTART.md` - Create APK (quick)
-- `AAB-FERTIG.md` - Create AAB for Play Store
-- `SIGNING-EINRICHTEN.md` - Set up Keystore and Signing
-- `KEYSTORE-ERSTELLEN.md` - Create Keystore Step by Step
+- `APK-BUILD.md` - Create APK (detailed)
+- `APK-QUICKSTART.md` - Create APK (quick)
+- `AAB-COMPLETE.md` - Create AAB for Play Store
+- `SETUP-SIGNING.md` - Set up Keystore and Signing
+- `CREATE-KEYSTORE.md` - Create Keystore Step by Step
 - `ANDROID-STUDIO-FIX.md` - Troubleshoot Common Issues
 
 ### 🌐 Web & PWA
 - `PWA-INSTALLATION.md` - Install PWA
-- `CHROME-BERECHTIGUNGEN.md` - Chrome Permissions for PWA
-- `ICONS-ERSTELLEN.md` - Create App Icons
+- `CHROME-PERMISSIONS.md` - Chrome Permissions for PWA
+- `CREATE-ICONS.md` - Create App Icons
 
 ### 🛠️ Tools
 - `generate-android-icons.html` - Icon Generator for Android
@@ -264,7 +264,7 @@ npm run aab:release     # Create AAB for Play Store
 
 ## 🎨 Creating Icons
 
-The app requires icons in various sizes. See `ICONS-ERSTELLEN.md` for details.
+The app requires icons in various sizes. See `CREATE-ICONS.md` for details.
 
 **Quick Summary:**
 1. Open `generate-android-icons.html` in browser
@@ -308,7 +308,7 @@ The app requires icons in various sizes. See `ICONS-ERSTELLEN.md` for details.
 3. Run `npm run build:android` again
 
 ### Issue: "Keystore not found"
-**Solution:** See `KEYSTORE-ERSTELLEN.md` for instructions on creating a keystore.
+**Solution:** See `CREATE-KEYSTORE.md` for instructions on creating a keystore.
 
 ## 💡 Tips for Parents
 

@@ -112,7 +112,7 @@ keytool -genkey -v -keystore math4kids-release-key.jks -keyalg RSA -keysize 2048
 - Recreate release AAB (with signing)
 - Upload AAB
 
-**Detailed instructions:** See `APK-ERSTELLEN.md` - Method 2
+**Detailed instructions:** See `APK-BUILD.md` - Method 2
 
 ---
 

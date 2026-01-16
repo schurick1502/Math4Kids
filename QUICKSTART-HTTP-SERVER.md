@@ -130,7 +130,7 @@ In terminal press: **Ctrl+C**
 2. **Firewall:** Windows Firewall must allow port 8080
 3. **Performance:** The app runs over local network now - super fast!
 4. **Hot Reload:** Restart server after `npm run build`
-5. **Chrome settings:** See **CHROME-BERECHTIGUNGEN.md** for required permissions
+5. **Chrome settings:** See **CHROME-PERMISSIONS.md** for required permissions
 6. **PWA installation:** After starting, you can install the app as PWA - see **PWA-INSTALLATION.md**
 
 ---
