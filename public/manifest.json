@@ -1,7 +1,7 @@
 {
-  "name": "Kopfrechnen-Spaß",
-  "short_name": "Mathe",
-  "description": "Motivierendes Kopfrechnen-Spiel für Kinder",
+  "name": "Mental Math Fun",
+  "short_name": "Math",
+  "description": "Motivating mental math game for kids",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
@@ -28,6 +28,3 @@
   "share_target": null,
   "prefer_related_applications": false
 }
-
-
-

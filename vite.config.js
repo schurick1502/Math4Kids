@@ -4,71 +4,68 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: './', // Wichtig für Capacitor/Android
+  base: './', // Important for Capacitor/Android
   build: {
     outDir: 'dist',
-    // Performance-Optimierungen
-    minify: 'terser', // Bessere Komprimierung als esbuild
+    // Performance optimizations
+    minify: 'terser', // Better compression than esbuild
     terserOptions: {
       compress: {
-        drop_console: true, // Entfernt console.log in Production
+        drop_console: true, // Removes console.log in production
         drop_debugger: true,
-        pure_funcs: ['console.log', 'console.info', 'console.debug'], // Entfernt weitere Console-Aufrufe
-        passes: 2, // Mehrfache Optimierung
+        pure_funcs: ['console.log', 'console.info', 'console.debug'], // Removes additional console calls
+        passes: 2, // Multiple optimization passes
       },
       format: {
-        comments: false, // Entfernt Kommentare
+        comments: false, // Removes comments
       },
     },
-    // Bessere Sourcemaps für Production-Debugging (optional)
-    sourcemap: false, // Ausgeschaltet für kleinere Bundle-Größe
+    // Better sourcemaps for production debugging (optional)
+    sourcemap: false, // Disabled for smaller bundle size
     rollupOptions: {
       output: {
-        // Code-Splitting für bessere Performance
+        // Code splitting for better performance
         manualChunks: (id) => {
           // React Vendor Chunk
           if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
             return 'react-vendor';
           }
-          // Icons Chunk (lucide-react kann groß sein)
+          // Icons Chunk (lucide-react can be large)
           if (id.includes('node_modules/lucide-react')) {
             return 'icons';
           }
-          // Alle anderen node_modules in einen Chunk
+          // All other node_modules in one chunk
           if (id.includes('node_modules')) {
             return 'vendor';
           }
         },
-        // Optimierte Dateinamen für Caching
+        // Optimized filenames for caching
         chunkFileNames: 'assets/[name]-[hash].js',
         entryFileNames: 'assets/[name]-[hash].js',
         assetFileNames: 'assets/[name]-[hash].[ext]',
-        // Compact output für kleinere Dateien
+        // Compact output for smaller files
         compact: true,
       },
     },
-    // Erhöhte Chunk-Warnungsgrenze (für große Icons)
+    // Increased chunk warning limit (for large icons)
     chunkSizeWarningLimit: 1000,
-    // CSS Code-Splitting
+    // CSS code splitting
     cssCodeSplit: true,
   },
-  // Optimierung für Development
+  // Optimization for development
   optimizeDeps: {
     include: ['react', 'react-dom', 'lucide-react'],
-    // Pre-bundling für schnellere Entwicklung
+    // Pre-bundling for faster development
     force: false,
   },
-  // Performance-Optimierungen
+  // Performance optimizations
   server: {
-    // Komprimierung für Development-Server
+    // Compression for development server
     compress: true,
   },
-  // Preload-Module für bessere Performance
+  // Preload modules for better performance
   esbuild: {
-    // Entfernt console.log auch in Development
+    // Removes console.log also in development
     drop: process.env.NODE_ENV === 'production' ? ['console', 'debugger'] : [],
   },
 })
-
-
-

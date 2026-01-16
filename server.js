@@ -9,11 +9,11 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Port und Ordner aus Kommandozeilen-Argumenten
+// Port and directory from command line arguments
 const port = process.env.PORT || 8080;
 const directory = process.argv[2] || 'dist';
 
-// MIME-Types
+// MIME types
 const mimeTypes = {
   '.html': 'text/html',
   '.js': 'application/javascript',
@@ -33,40 +33,40 @@ const mimeTypes = {
 };
 
 const server = http.createServer((req, res) => {
-  // URL bereinigen (Query-Parameter entfernen, Pfad normalisieren)
+  // Clean URL (remove query parameters, normalize path)
   let filePath = decodeURIComponent(req.url.split('?')[0]);
-  
-  // Root-Pfad zu index.html
+
+  // Root path to index.html
   if (filePath === '/') {
     filePath = '/index.html';
   }
-  
-  // Vollständiger Dateipfad
+
+  // Full file path
   const fullPath = path.join(__dirname, directory, filePath);
-  
-  // Sicherheitsprüfung: Verhindere Directory Traversal
+
+  // Security check: Prevent directory traversal
   const requestedPath = path.normalize(fullPath);
   const basePath = path.normalize(path.join(__dirname, directory));
-  
+
   if (!requestedPath.startsWith(basePath)) {
     res.writeHead(403, { 'Content-Type': 'text/plain' });
     res.end('403 Forbidden');
     return;
   }
-  
-  // Datei lesen
+
+  // Read file
   fs.readFile(fullPath, (err, data) => {
     if (err) {
-      // Datei nicht gefunden
+      // File not found
       if (err.code === 'ENOENT') {
-        // Bei SPA: Alle Routen zu index.html umleiten
+        // For SPA: Redirect all routes to index.html
         const indexPath = path.join(__dirname, directory, 'index.html');
         fs.readFile(indexPath, (err, data) => {
           if (err) {
             res.writeHead(404, { 'Content-Type': 'text/plain' });
             res.end('404 Not Found');
           } else {
-            res.writeHead(200, { 
+            res.writeHead(200, {
               'Content-Type': 'text/html',
               'Cache-Control': 'no-cache'
             });
@@ -79,17 +79,17 @@ const server = http.createServer((req, res) => {
       }
       return;
     }
-    
-    // MIME-Type bestimmen
+
+    // Determine MIME type
     const ext = path.extname(fullPath).toLowerCase();
     const contentType = mimeTypes[ext] || 'application/octet-stream';
-    
-    // Caching-Header für statische Assets
-    const cacheControl = ext.match(/\.(html|json|manifest)$/) 
-      ? 'no-cache' 
-      : 'public, max-age=31536000'; // 1 Jahr für Assets
-    
-    res.writeHead(200, { 
+
+    // Caching headers for static assets
+    const cacheControl = ext.match(/\.(html|json|manifest)$/)
+      ? 'no-cache'
+      : 'public, max-age=31536000'; // 1 year for assets
+
+    res.writeHead(200, {
       'Content-Type': contentType,
       'Cache-Control': cacheControl,
       'Access-Control-Allow-Origin': '*'
@@ -98,16 +98,16 @@ const server = http.createServer((req, res) => {
   });
 });
 
-// Server starten
+// Start server
 server.listen(port, '0.0.0.0', () => {
   const networkInterfaces = os.networkInterfaces();
   let localIP = 'localhost';
-  
-  // Lokale IP-Adresse finden
+
+  // Find local IP address
   for (const interfaceName in networkInterfaces) {
     const interfaces = networkInterfaces[interfaceName];
     for (const iface of interfaces) {
-      // IPv4, nicht localhost, nicht intern
+      // IPv4, not localhost, not internal
       if (iface.family === 'IPv4' && !iface.internal) {
         localIP = iface.address;
         break;
@@ -115,26 +115,25 @@ server.listen(port, '0.0.0.0', () => {
     }
     if (localIP !== 'localhost') break;
   }
-  
-  console.log('\n🚀 HTTP-Server gestartet!\n');
-  console.log(`📱 Lokale IP-Adresse: http://${localIP}:${port}`);
+
+  console.log('\n🚀 HTTP Server started!\n');
+  console.log(`📱 Local IP address: http://${localIP}:${port}`);
   console.log(`💻 Localhost:        http://localhost:${port}`);
-  console.log(`\n📂 Wird bereitgestellt aus: ${path.join(__dirname, directory)}`);
-  console.log(`\n📱 Auf Smartphone öffnen:`);
-  console.log(`   1. Verbinde Smartphone mit demselben WiFi-Netzwerk`);
-  console.log(`   2. Öffne Browser auf Smartphone`);
-  console.log(`   3. Gehe zu: http://${localIP}:${port}`);
-  console.log(`\n⏹️  Server stoppen: Strg+C\n`);
+  console.log(`\n📂 Serving from: ${path.join(__dirname, directory)}`);
+  console.log(`\n📱 Open on smartphone:`);
+  console.log(`   1. Connect smartphone to the same WiFi network`);
+  console.log(`   2. Open browser on smartphone`);
+  console.log(`   3. Go to: http://${localIP}:${port}`);
+  console.log(`\n⏹️  Stop server: Ctrl+C\n`);
 });
 
-// Fehlerbehandlung
+// Error handling
 server.on('error', (err) => {
   if (err.code === 'EADDRINUSE') {
-    console.error(`❌ Port ${port} ist bereits belegt!`);
-    console.error(`💡 Verwende einen anderen Port: PORT=8081 npm run serve`);
+    console.error(`❌ Port ${port} is already in use!`);
+    console.error(`💡 Use a different port: PORT=8081 npm run serve`);
   } else {
-    console.error('❌ Server-Fehler:', err);
+    console.error('❌ Server error:', err);
   }
   process.exit(1);
 });
-

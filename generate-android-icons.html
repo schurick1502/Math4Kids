@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -73,13 +73,13 @@
 <body>
     <div class="container">
         <h1>🎨 Android Icon Generator - Math4Kids</h1>
-        
+
         <div class="info">
-            <h3>📋 Anleitung:</h3>
+            <h3>📋 Instructions:</h3>
             <ol>
-                <li>Klicke auf "Alle Icons generieren"</li>
-                <li>Rechtsklick auf jedes Icon → "Bild speichern unter..."</li>
-                <li>Speichere die Icons in den entsprechenden Ordnern:
+                <li>Click "Generate All Icons"</li>
+                <li>Right-click on each icon → "Save image as..."</li>
+                <li>Save the icons in the corresponding folders:
                     <ul>
                         <li><code>mipmap-mdpi/ic_launcher.png</code> (48x48)</li>
                         <li><code>mipmap-hdpi/ic_launcher.png</code> (72x72)</li>
@@ -88,16 +88,16 @@
                         <li><code>mipmap-xxxhdpi/ic_launcher.png</code> (192x192)</li>
                     </ul>
                 </li>
-                <li>Wiederhole für <code>ic_launcher_foreground.png</code> und <code>ic_launcher_round.png</code></li>
+                <li>Repeat for <code>ic_launcher_foreground.png</code> and <code>ic_launcher_round.png</code></li>
             </ol>
         </div>
 
         <div class="button-group">
-            <button onclick="generateAllIcons()">🎨 Alle Icons generieren</button>
-            <button onclick="downloadAllIcons()">⬇️ Alle Icons herunterladen</button>
+            <button onclick="generateAllIcons()">🎨 Generate All Icons</button>
+            <button onclick="downloadAllIcons()">⬇️ Download All Icons</button>
         </div>
 
-        <h3>📐 Icon-Größen:</h3>
+        <h3>📐 Icon Sizes:</h3>
         <div class="sizes">
             <div class="icon-item">
                 <canvas id="canvas-mdpi" width="48" height="48"></canvas>
@@ -131,21 +131,21 @@
         function generateIcon(size, canvasId) {
             const canvas = document.getElementById(canvasId);
             const ctx = canvas.getContext('2d');
-            
-            // Hintergrund - Violett Gradient
+
+            // Background - Purple gradient
             const gradient = ctx.createLinearGradient(0, 0, size, size);
             gradient.addColorStop(0, '#9333ea');
             gradient.addColorStop(0.5, '#ec4899');
             gradient.addColorStop(1, '#3b82f6');
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, size, size);
-            
-            // Weißer Kreis in der Mitte
+
+            // White circle in the center
             ctx.fillStyle = 'white';
             ctx.beginPath();
             ctx.arc(size/2, size/2, size * 0.35, 0, Math.PI * 2);
             ctx.fill();
-            
+
             // Text "✖➕"
             ctx.fillStyle = '#9333ea';
             ctx.font = `bold ${size * 0.35}px Arial`;
@@ -162,7 +162,7 @@
                 { size: 144, id: 'canvas-xxhdpi' },
                 { size: 192, id: 'canvas-xxxhdpi' }
             ];
-            
+
             sizes.forEach(({ size, id }) => {
                 generateIcon(size, id);
             });
@@ -186,11 +186,10 @@
             });
         }
 
-        // Automatisch beim Laden generieren
+        // Auto-generate on load
         window.onload = function() {
             generateAllIcons();
         };
     </script>
 </body>
 </html>
-

@@ -9,14 +9,14 @@ export default {
     extend: {},
   },
   plugins: [],
-  // Optimierung für kleinere Bundle-Größe
+  // Optimization for smaller bundle size
   corePlugins: {
-    // Deaktiviere nicht benötigte Plugins
+    // Disable unused plugins
     preflight: true,
   },
-  // Safelist für dynamische Klassen
+  // Safelist for dynamic classes
   safelist: [
-    // Wichtige dynamische Klassen behalten
+    // Keep important dynamic classes
     'animate-blob',
     'animate-float',
     'animation-delay-2000',
@@ -26,6 +26,3 @@ export default {
     'blur-2xl',
   ]
 }
-
-
-

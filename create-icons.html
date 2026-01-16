@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Icon Generator - Kopfrechnen-Spaß</title>
+    <title>Icon Generator - Mental Math Fun</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -79,25 +79,24 @@
 </head>
 <body>
     <div class="container">
-        <h1>🎨 Icon Generator für Kopfrechnen-Spaß</h1>
-        
+        <h1>🎨 Icon Generator for Mental Math Fun</h1>
+
         <div class="instructions">
-            <h3>📋 Anleitung:</h3>
+            <h3>📋 Instructions:</h3>
             <ol>
-                <li>Klicke auf "Icons generieren" um Vorschau-Icons zu erstellen</li>
-                <li>Klicke mit der rechten Maustaste auf ein Icon → "Bild speichern unter..."</li>
-                <li>Speichere die Icons im <code>public/</code> Ordner:
+                <li>Click "Generate Icons" to create preview icons</li>
+                <li>Right-click on an icon → "Save image as..."</li>
+                <li>Save the icons in the <code>public/</code> folder:
                     <ul>
-                        <li><code>icon-192.png</code> (192x192 Pixel)</li>
-                        <li><code>icon-512.png</code> (512x512 Pixel)</li>
+                        <li><code>icon-192.png</code> (192x192 pixels)</li>
+                        <li><code>icon-512.png</code> (512x512 pixels)</li>
                     </ul>
                 </li>
             </ol>
-            <p><strong>Tipp:</strong> Du kannst auch eigene Icons hochladen oder mit Online-Tools wie 
-            <a href="https://realfavicongenerator.net" target="_blank" style="color: #9333ea;">RealFaviconGenerator</a> 
-            professionelle Icons erstellen.</p>
+            <p><strong>Tip:</strong> You can also upload your own icons or create professional icons with online tools like
+            <a href="https://realfavicongenerator.net" target="_blank" style="color: #9333ea;">RealFaviconGenerator</a>.</p>
         </div>
-        
+
         <div class="icon-preview">
             <div class="icon-item">
                 <canvas id="canvas192" width="192" height="192"></canvas>
@@ -108,15 +107,15 @@
                 <p><strong>512 x 512 px</strong></p>
             </div>
         </div>
-        
+
         <div class="button-group">
-            <button onclick="generateIcons()">🎨 Icons generieren</button>
-            <button onclick="downloadIcon(192)">⬇️ 192px herunterladen</button>
-            <button onclick="downloadIcon(512)">⬇️ 512px herunterladen</button>
+            <button onclick="generateIcons()">🎨 Generate Icons</button>
+            <button onclick="downloadIcon(192)">⬇️ Download 192px</button>
+            <button onclick="downloadIcon(512)">⬇️ Download 512px</button>
         </div>
-        
+
         <div class="success" id="success">
-            ✅ Icons erfolgreich generiert! Rechtsklick auf ein Icon → "Bild speichern unter..."
+            ✅ Icons successfully generated! Right-click on an icon → "Save image as..."
         </div>
     </div>
 
@@ -130,35 +129,35 @@
         function generateIcon(size) {
             const canvas = document.getElementById(`canvas${size}`);
             const ctx = canvas.getContext('2d');
-            
-            // Hintergrund - Lila Gradient
+
+            // Background - Purple gradient
             const gradient = ctx.createLinearGradient(0, 0, size, size);
             gradient.addColorStop(0, '#9333ea');
             gradient.addColorStop(0.5, '#ec4899');
             gradient.addColorStop(1, '#3b82f6');
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, size, size);
-            
-            // Weißer Kreis in der Mitte
+
+            // White circle in the center
             ctx.fillStyle = 'white';
             ctx.beginPath();
             ctx.arc(size/2, size/2, size * 0.35, 0, Math.PI * 2);
             ctx.fill();
-            
-            // Zahlen und Symbole
+
+            // Numbers and symbols
             ctx.fillStyle = '#9333ea';
             ctx.font = `bold ${size * 0.25}px Arial`;
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
-            
-            // Haupttext
+
+            // Main text
             ctx.fillText('1+1', size/2, size * 0.4);
-            
-            // Gleichheitszeichen
+
+            // Equals sign
             ctx.font = `bold ${size * 0.15}px Arial`;
             ctx.fillText('=', size/2, size * 0.55);
-            
-            // Ergebnis
+
+            // Result
             ctx.font = `bold ${size * 0.2}px Arial`;
             ctx.fillStyle = '#ec4899';
             ctx.fillText('2', size/2, size * 0.7);
@@ -172,13 +171,10 @@
             link.click();
         }
 
-        // Icons beim Laden automatisch generieren
+        // Auto-generate icons on load
         window.onload = function() {
             generateIcons();
         };
     </script>
 </body>
 </html>
-
-
-

@@ -1,7 +1,7 @@
 {
-  "name": "kopfrechnen-pwa",
+  "name": "mental-math-pwa",
   "version": "1.0.0",
-  "description": "Motivierendes Kopfrechnen-Spiel für Kinder",
+  "description": "Motivating mental math game for kids",
   "private": true,
   "type": "module",
   "scripts": {

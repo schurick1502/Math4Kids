@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kopfrechnen-v1';
+const CACHE_NAME = 'mental-math-v1';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -6,7 +6,7 @@ const urlsToCache = [
   '/service-worker.js'
 ];
 
-// Installation - Cache erstellen
+// Installation - Create cache
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -15,7 +15,7 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
-// Aktivierung - Alte Caches löschen
+// Activation - Delete old caches
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -31,18 +31,18 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Fetch - Cache-First Strategie mit Network-Fallback
+// Fetch - Cache-first strategy with network fallback
 self.addEventListener('fetch', (event) => {
-  // Nur GET-Requests cachen
+  // Only cache GET requests
   if (event.request.method !== 'GET') {
     return;
   }
-  
-  // Externe Ressourcen nicht cachen
+
+  // Don't cache external resources
   if (!event.request.url.startsWith(self.location.origin)) {
     return;
   }
-  
+
   event.respondWith(
     caches.match(event.request)
       .then((cachedResponse) => {
@@ -50,22 +50,22 @@ self.addEventListener('fetch', (event) => {
         if (cachedResponse) {
           return cachedResponse;
         }
-        
+
         // Cache miss - fetch from network
         return fetch(event.request).then((response) => {
           // Check if valid response
           if (!response || response.status !== 200 || response.type !== 'basic') {
             return response;
           }
-          
+
           // Clone the response for caching
           const responseToCache = response.clone();
-          
+
           // Cache the response
           caches.open(CACHE_NAME).then((cache) => {
             cache.put(event.request, responseToCache);
           });
-          
+
           return response;
         }).catch(() => {
           // Network error - return offline fallback if available
@@ -76,6 +76,3 @@ self.addEventListener('fetch', (event) => {
       })
   );
 });
-
-
-
