@@ -1,5 +1,12 @@
 # 🧮 Math4Kids - Kopfrechnen-Lernapp
 
+[![GitHub Release](https://img.shields.io/github/v/release/schurick1502/Math4Kids?style=flat-square&logo=github)](https://github.com/schurick1502/Math4Kids/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
+[![Platform: Android](https://img.shields.io/badge/Platform-Android-3DDC84?style=flat-square&logo=android&logoColor=white)](releases/Math4Kids-v1.0.0.apk)
+[![Platform: Web](https://img.shields.io/badge/Platform-Web%20(PWA)-4285F4?style=flat-square&logo=googlechrome&logoColor=white)](https://schurick1502.github.io/Math4Kids/)
+[![Made with React](https://img.shields.io/badge/Made%20with-React-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
+[![Built with Vite](https://img.shields.io/badge/Built%20with-Vite-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/)
+
 Eine motivierende Progressive Web App (PWA) und native Android-App für Kinder von Klasse 1-4 zum Üben von Kopfrechnen.
 
 ## 📥 Download
