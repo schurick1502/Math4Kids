@@ -2,6 +2,12 @@
 
 Eine motivierende Progressive Web App (PWA) und native Android-App für Kinder von Klasse 1-4 zum Üben von Kopfrechnen.
 
+## 📥 Download
+
+**[⬇️ Android APK herunterladen (v1.0.0)](releases/Math4Kids-v1.0.0.apk)** - Direkt installierbar auf Android-Geräten
+
+**[🌐 Web-App ausprobieren](https://schurick1502.github.io/Math4Kids/)** - Läuft direkt im Browser
+
 ## ✨ Features
 
 ### 🎯 Spielmechanik
@@ -70,7 +76,7 @@ Eine motivierende Progressive Web App (PWA) und native Android-App für Kinder v
 ### 1. Projekt klonen und installieren
 
 ```bash
-git clone https://github.com/dein-username/Math4Kids.git
+git clone https://github.com/schurick1502/Math4Kids.git
 cd Math4Kids
 npm install
 ```
@@ -327,7 +333,7 @@ Dieses Projekt ist Open Source und steht zur freien Verfügung.
 
 ## 🚀 Nächste Schritte
 
-1. **Klonen:** `git clone https://github.com/dein-username/Math4Kids.git`
+1. **Klonen:** `git clone https://github.com/schurick1502/Math4Kids.git`
 2. **Installieren:** `npm install`
 3. **Starten:** `npm run dev`
 4. **Entwickeln:** Viel Spaß! 🎉
