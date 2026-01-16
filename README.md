@@ -8,6 +8,14 @@ Eine motivierende Progressive Web App (PWA) und native Android-App für Kinder v
 
 **[🌐 Web-App ausprobieren](https://schurick1502.github.io/Math4Kids/)** - Läuft direkt im Browser
 
+## 📸 Screenshots
+
+<p align="center">
+  <img src="screenshots/01-startseite.png" width="250" alt="Startseite">
+  <img src="screenshots/02-spiel-aufgabe.png" width="250" alt="Spiel-Aufgabe">
+  <img src="screenshots/03-einstellungen.png" width="250" alt="Einstellungen">
+</p>
+
 ## ✨ Features
 
 ### 🎯 Spielmechanik
