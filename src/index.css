@@ -15,6 +15,18 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Edge-to-edge (Android 15+/API 36): keep content clear of status and navigation bars */
+.safe-area-padding {
+  padding-top: max(1rem, env(safe-area-inset-top));
+  padding-right: max(1rem, env(safe-area-inset-right));
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  padding-left: max(1rem, env(safe-area-inset-left));
+}
+
+.safe-area-max-h {
+  max-height: calc(100vh - max(1rem, env(safe-area-inset-top)) - max(1rem, env(safe-area-inset-bottom)));
+}
+
 input[type="number"] {
   -moz-appearance: textfield;
 }

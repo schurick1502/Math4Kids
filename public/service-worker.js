@@ -1,78 +1,56 @@
-const CACHE_NAME = 'mental-math-v1';
-const urlsToCache = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/service-worker.js'
-];
+// Paths are relative to this file, so the app works both at the domain root
+// (Capacitor: https://localhost/) and in a subfolder (GitHub Pages: /Math4Kids/).
+// Bump CACHE_NAME whenever the pre-cached files change.
+const CACHE_NAME = 'mental-math-v2';
+const scopeUrl = (path) => new URL(path, self.registration.scope).href;
+const urlsToCache = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png'];
 
-// Installation - Create cache
+// Installation - pre-cache the app shell
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => cache.addAll(urlsToCache))
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache.map(scopeUrl)))
   );
   self.skipWaiting();
 });
 
-// Activation - Delete old caches
+// Activation - delete old caches
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
+    caches.keys().then((cacheNames) =>
+      Promise.all(cacheNames.filter((name) => name !== CACHE_NAME).map((name) => caches.delete(name)))
+    )
   );
   self.clients.claim();
 });
 
-// Fetch - Cache-first strategy with network fallback
+const putInCache = (request, response) => {
+  if (response && response.status === 200 && response.type === 'basic') {
+    const copy = response.clone();
+    caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+  }
+  return response;
+};
+
 self.addEventListener('fetch', (event) => {
-  // Only cache GET requests
-  if (event.request.method !== 'GET') {
+  const { request } = event;
+  if (request.method !== 'GET' || !request.url.startsWith(self.location.origin)) {
     return;
   }
 
-  // Don't cache external resources
-  if (!event.request.url.startsWith(self.location.origin)) {
+  // Pages: network first so new releases arrive, cached app shell when offline
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request)
+        .then((response) => putInCache(request, response))
+        .catch(() =>
+          caches.match(request).then((cached) => cached || caches.match(scopeUrl('./index.html')))
+        )
+    );
     return;
   }
 
+  // Assets (file names contain content hashes): cache first, network fallback
   event.respondWith(
-    caches.match(event.request)
-      .then((cachedResponse) => {
-        // Cache hit - return cached response
-        if (cachedResponse) {
-          return cachedResponse;
-        }
-
-        // Cache miss - fetch from network
-        return fetch(event.request).then((response) => {
-          // Check if valid response
-          if (!response || response.status !== 200 || response.type !== 'basic') {
-            return response;
-          }
-
-          // Clone the response for caching
-          const responseToCache = response.clone();
-
-          // Cache the response
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseToCache);
-          });
-
-          return response;
-        }).catch(() => {
-          // Network error - return offline fallback if available
-          if (event.request.destination === 'document') {
-            return caches.match('/index.html');
-          }
-        });
-      })
+    caches.match(request).then((cached) => cached || fetch(request).then((response) => putInCache(request, response)))
   );
 });

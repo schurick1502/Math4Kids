@@ -1362,9 +1362,9 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-400 via-pink-400 to-blue-400 flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-purple-400 via-pink-400 to-blue-400 flex items-center justify-center safe-area-padding relative overflow-hidden">
       <AnimatedBackground />
-      <div className="bg-white rounded-3xl shadow-2xl p-8 max-w-2xl w-full max-h-screen overflow-y-auto relative z-10">
+      <div className="bg-white rounded-3xl shadow-2xl p-8 max-w-2xl w-full safe-area-max-h overflow-y-auto relative z-10">
         {gameState === 'menu' && renderMenuScreen()}
         {gameState === 'multiplayer-setup' && renderMultiplayerSetup()}
         {gameState === 'playing' && renderPlayingScreen()}
