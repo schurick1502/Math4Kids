@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Math4Kids is a mental-math game for grades 1–4 (plus times tables and an adults mode), shipped from one React codebase as a PWA (GitHub Pages: https://schurick1502.github.io/Math4Kids/) and as a native Android app wrapped with Capacitor 8 (`appId` / namespace `de.math4kids.app`). UI text is English since v1.1.0 (v1.0.0 was German). The app is being published on Google Play (see the section below).
+Math4Kids is a mental-math game for grades 1–4 (plus times tables and an adults mode), shipped from one React codebase as a PWA (GitHub Pages: https://schurick1502.github.io/Math4Kids/) and as a native Android app wrapped with Capacitor 8 (`appId` / namespace `de.math4kids.app`). Since v1.2.0 the UI is bilingual (German/English). The app is being published on Google Play (see the section below).
 
 ## Commands
 
@@ -20,6 +20,7 @@ npm run apk:debug        # -> android/app/build/outputs/apk/debug/app-debug.apk
 npm run apk:release      # -> android/app/build/outputs/apk/release/
 npm run aab:release      # -> android/app/build/outputs/bundle/release/app-release.aab (Play upload)
 npm run icons            # regenerate launcher/PWA icons and store/ graphics (scripts/generate-icons.mjs)
+npm run screenshots      # after `npm run build`: Play screenshots DE/EN -> store/screenshots/{de,en}
 ```
 
 - The `apk:*` / `aab:*` scripts call `.\gradlew.bat` and therefore only work on Windows. Elsewhere: `npm run build:android && cd android && ./gradlew bundleRelease`.
@@ -30,10 +31,12 @@ npm run icons            # regenerate launcher/PWA icons and store/ graphics (sc
 
 ## Architecture
 
-- **Single-component app**: virtually all logic lives in `src/App.jsx` (~1400 lines, one `App` component with many `useState` hooks). It contains the screen state machine (`gameState`: `menu`, `multiplayer-setup`, `playing`, `handover`, `settings`, `finished`), question generation (`generateQuestion(level)` — operations, number ranges and target times per level), single-player and two-player hot-seat mode (`player1`/`player2`, handover countdown), and the rewards/penalties system. All UI strings are hard-coded English.
-- **Persistence**: `localStorage` only — keys `rewards`, `penalties`, `numberOfQuestions`. Defaults come from `DEFAULT_REWARDS` / `DEFAULT_PENALTIES` at the top of `App.jsx`. No backend, no accounts, no network calls.
-- **Performance tiering**: `detectDevicePerformance()` reduces the animated background (`AnimatedBackground`) on weak devices; keep this in mind when adding animations.
-- **Edge-to-edge**: the root `div` in `App.jsx` uses the `safe-area-padding` / `safe-area-max-h` classes from `src/index.css` (with `viewport-fit=cover` in `index.html`) so content stays clear of system bars.
+- **Game logic is pure and UI-free** (`src/game/`): `reducer.js` holds the whole game flow (screens `menu` → `duo-setup` → `playing` ⇄ `handover` → `result`, plus `settings`) as a `useReducer` reducer — scores are always derived from reducer state, never from closures (that was the v1.1 "last answer not counted" bug). `questions.js` returns language-neutral question data (`basic` / `percent` / `rule3`), `levels.js` defines the 6 levels (ids, ops, target seconds, tile gradient), `scoring.js` computes points/rank/stars, `content.js` owns example rewards/tasks per language, legacy-default migration and per-level records.
+- **Screens** live in `src/screens/` (one component per screen), shared UI in `src/components/` (`ui.jsx`: Logo, Stars, Confetti, Background, LanguageToggle, ScreenHeader; `NumberPad.jsx`: on-screen keypad that also accepts a physical keyboard). `src/App.jsx` only wires state, persistence, the Android back button (`@capacitor/app`: back → menu, from menu → exit) and the PWA install prompt.
+- **i18n** (`src/i18n/`): `en.js` / `de.js` flat key→text dictionaries with `{placeholder}` syntax; `useI18n()` gives `t(key, vars)`, `n(number)` (locale number format) and `lang`/`setLang`. Language = stored choice, else the device's first preferred language (`de*` → German, everything else English). Every new UI string needs a key in **both** files. Level names use keys `level{id}Name` / `level{id}Desc`.
+- **Persistence**: `localStorage` only, always via `src/game/storage.js` (wrapped in try/catch) — keys `language`, `numberOfQuestions` (5/10/15/20), `records` (`{levelId: {stars, points, avgSeconds}}`), and `rewards` / `penalties` (absent = not customized → language-specific examples are shown; lists from v1.0/v1.1 that equal the old English defaults are removed on start). No backend, accounts or network calls — changing what is stored requires updating `public/privacy-policy.html` and the data-safety answers in `store/LISTING.md`.
+- **Design system**: Tailwind with Nunito (bundled via `@fontsource/nunito`, no Google Fonts request), brand colors `brand-purple/pink/blue/amber`, component classes `btn`, `btn-primary`, `btn-soft`, `icon-btn`, `field` in `src/index.css`, animations `pop`/`shake`/`rise`/`fall`/`drift` in `tailwind.config.js`. `prefers-reduced-motion` disables animations and confetti; weak devices get a static background.
+- **Edge-to-edge**: the app shell in `App.jsx` uses the `safe-area-padding` class from `src/index.css` (with `viewport-fit=cover` in `index.html`) so content stays clear of system bars. Capacitor's own `SystemBars` logs a harmless "Error injecting safe area CSS" on startup.
 - **PWA**: `public/manifest.json` and `public/service-worker.js` (cache name `mental-math-v1` — bump it when cached assets change). `src/main.jsx` registers the SW. The Vite entry is the root `index.html`; `public/index.html` is a separate legacy file.
 - **Build config**: `vite.config.js` uses `base: './'` (required for Capacitor's file loading), terser with `drop_console` (console output is stripped in production builds), and manual chunks `react-vendor` / `icons` (lucide-react) / `vendor`.
 - **Android**: `android/` is a stock Capacitor 8 project (AGP 8.13, Gradle 8.14.3, compile/target SDK 36, minSdk 24); `MainActivity` is a bare `BridgeActivity`, no Capacitor plugins are used. SDK levels live in `android/variables.gradle`; app version (`versionCode` / `versionName`) in `android/app/build.gradle` — every Play upload needs a higher `versionCode`.
@@ -44,6 +47,7 @@ npm run icons            # regenerate launcher/PWA icons and store/ graphics (sc
 
 ## Google Play release
 
-- v1.1.1 (versionCode 2) is the first Play build: target API 36, signed AAB, own icon, tested on an Android 16 emulator. Upload the AAB, never the APKs from `releases/`.
+- v1.1.1 (versionCode 2) was the first Play-ready build; v1.2.0 (versionCode 3) is the redesign. Upload the AAB, never the APKs from `releases/`. Version lives in both `package.json` (shown in Settings via `__APP_VERSION__`) and `android/app/build.gradle`.
+- Emulator testing: give the AVD ≥ 4 cores / 4 GB (`hw.cpu.ncore`, `hw.ramSize` in its `config.ini`) and wait until the load average drops after boot — otherwise the WebView renderer ANRs and the app shows a white screen.
 - `store/` holds the listing texts, Play Console form answers (`LISTING.md`), Play icon, feature graphic and 1080×1920 screenshots.
 - Children's app: Play's Families policy applies. The privacy policy `public/privacy-policy.html` is served at https://schurick1502.github.io/Math4Kids/privacy-policy.html — update it (and the data-safety answers) whenever data handling changes.

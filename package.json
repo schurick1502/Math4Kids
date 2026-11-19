@@ -1,6 +1,6 @@
 {
   "name": "mental-math-pwa",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Motivating mental math game for kids",
   "private": true,
   "type": "module",
@@ -16,12 +16,15 @@
     "apk:debug": "npm run build:android && cd android && .\\gradlew.bat assembleDebug",
     "apk:release": "npm run build:android && cd android && .\\gradlew.bat assembleRelease",
     "aab:release": "npm run build:android && cd android && .\\gradlew.bat bundleRelease",
-    "icons": "node scripts/generate-icons.mjs"
+    "icons": "node scripts/generate-icons.mjs",
+    "screenshots": "node scripts/store-screenshots.mjs"
   },
   "dependencies": {
     "@capacitor/android": "^8.0.0",
+    "@capacitor/app": "^8.1.2",
     "@capacitor/cli": "^8.0.0",
     "@capacitor/core": "^8.0.0",
+    "@fontsource/nunito": "^5.3.0",
     "lucide-react": "^0.263.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

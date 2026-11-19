@@ -27,69 +27,34 @@ A motivating Progressive Web App (PWA) and native Android app for children in gr
 ## 📸 Screenshots
 
 <p align="center">
-  <img src="screenshots/01-home-screen.png" width="250" alt="Home Screen">
-  <img src="screenshots/02-game-task.png" width="250" alt="Game Task">
-  <img src="screenshots/03-settings.png" width="250" alt="Settings">
-  <img src="screenshots/04-multiplayer.png" width="250" alt="Multiplayer Setup">
+  <img src="store/screenshots/en/01-menu.png" width="220" alt="Level selection">
+  <img src="store/screenshots/en/02-playing.png" width="220" alt="Playing with the number pad">
+  <img src="store/screenshots/en/03-result.png" width="220" alt="Result with stars">
+  <img src="store/screenshots/de/04-duel-setup.png" width="220" alt="Duel setup (German)">
 </p>
 
 ## ✨ Features
 
-### 🎯 Game Mechanics
-- **4 Grade Levels** with increasing difficulty
-- **10 Tasks** per round
-- **3 Lives** - mistakes or timeouts cost a life
-- **Countdown Timer** for each task (visually animated)
-- **Instant Feedback** for every answer
-- **Progress Bar** for orientation
-- **Performance Optimization** for older devices
+### 🎯 Game
+- **6 levels**: Grade 1 (± up to 10), Grade 2 (± up to 20), Times tables (1–12), Grade 3 (+, −, × up to 100), Grade 4 (all operations up to 1000), Adults (percent & rule of three)
+- **Big on-screen number pad** – no fiddly system keyboard
+- **5, 10, 15 or 20 questions** per round with live timer and target time per question
+- **Up to 3 stars** per round and **personal records** per level
+- **2-player duel** on one device with automatic hand-over
 
-### 🏆 Motivation System
-- **Rewards** for ≥90% correct answers (customizable)
-- **Fun Penalty Tasks** for <90% (motivating, not demotivating)
-- **CRUD Functions** for managing rewards and penalty tasks
-- **Persistent Storage** of all data in the browser
+### 🏆 Motivation
+- **Rewards** for good rounds (three reward levels, editable by parents)
+- **Fun tasks** for rounds that did not go so well (editable)
 
-### 📱 Multi-Platform Support
+### 🌍 Languages
+- **German and English** – follows the device language, switchable in the app
 
-#### 🌐 Progressive Web App (PWA)
-- **Offline-capable** thanks to Service Worker
-- **Installable** on smartphone and tablet
-- **Responsive Design** for all screen sizes
-- **Touchscreen-optimized** for mobile devices
+### 🔒 Privacy
+- No ads, no tracking, no account – everything stays on the device ([privacy policy](https://schurick1502.github.io/Math4Kids/privacy-policy.html))
 
-#### 🤖 Native Android App
-- **APK File** for direct installation
-- **AAB File** for Google Play Store
-- **Capacitor-based** for native performance
-- **Fully signed** for Play Store release
-
-#### 💻 Web Version
-- **HTTP Server** for local use
-- **USB Stick Installation** possible
-- **Browser-optimized** (Chrome, Firefox, Safari)
-
-### 🎨 Grade Levels in Detail
-
-**Grade 1:**
-- Operations: Addition (+) and Subtraction (-)
-- Number Range: 1-10
-- Time per Task: 30 seconds
-
-**Grade 2:**
-- Operations: Addition (+) and Subtraction (-)
-- Number Range: 1-20
-- Time per Task: 25 seconds
-
-**Grade 3:**
-- Operations: Addition (+), Subtraction (-), Multiplication (×)
-- Number Range: 1-100 (Multiplication: 1-10 × 1-10)
-- Time per Task: 20 seconds
-
-**Grade 4:**
-- Operations: Addition (+), Subtraction (-), Multiplication (×), Division (÷)
-- Number Range: 1-1000 (Multiplication/Division: up to 12)
-- Time per Task: 15 seconds
+### 📱 Platforms
+- **Android app** (Capacitor 8, Android 7–16)
+- **Progressive Web App** – installable and offline-capable
 
 ## 🚀 Quick Start
 

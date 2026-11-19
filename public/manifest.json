@@ -1,7 +1,7 @@
 {
-  "name": "Mental Math Fun",
-  "short_name": "Math",
-  "description": "Motivating mental math game for kids",
+  "name": "Math4Kids",
+  "short_name": "Math4Kids",
+  "description": "Mental math for kids – Kopfrechnen für Kinder",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

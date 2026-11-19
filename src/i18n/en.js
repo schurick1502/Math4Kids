@@ -1,0 +1,97 @@
+// English UI texts. Keys must match de.js. Placeholders: {name}
+export default {
+  appTagline: 'Mental math for kids',
+  language: 'Language',
+
+  // Menu
+  modeSolo: 'Solo',
+  modeDuo: '2 players',
+  chooseLevel: 'Pick your level',
+  targetPerQuestion: '{seconds} s',
+  bestTime: 'Ø {time}',
+  settings: 'Settings',
+  installApp: 'Install app',
+
+  // Levels
+  level1Name: 'Grade 1',
+  level1Desc: 'Plus & minus up to 10',
+  level2Name: 'Grade 2',
+  level2Desc: 'Plus & minus up to 20',
+  level3Name: 'Times tables',
+  level3Desc: 'Multiplication 1–12',
+  level4Name: 'Grade 3',
+  level4Desc: 'Plus, minus, times up to 100',
+  level5Name: 'Grade 4',
+  level5Desc: 'All operations up to 1000',
+  level6Name: 'Adults',
+  level6Desc: 'Percent & rule of three',
+
+  // Multiplayer setup
+  duoTitle: '2-player duel',
+  duoHint: 'Take turns on one device. Who is faster?',
+  player: 'Player {number}',
+  playerName: 'Name',
+  missingNames: 'Please enter a name for both players.',
+  startDuel: 'Start duel',
+  back: 'Back',
+
+  // Playing
+  questionOf: 'Question {current} of {total}',
+  correctCount: '{count} correct',
+  turnOf: "{name}'s turn",
+  percentQuestion: '{percent}% of {base}',
+  ruleOfThreeQuestion: '{amount} pieces cost {price}. How much do {target} pieces cost?',
+  currency: '${value}',
+  correct: 'Correct!',
+  wrong: 'Not quite!',
+  correctAnswerIs: 'The answer is {answer}',
+  cancel: 'Quit',
+  delete: 'Delete',
+  ok: 'OK',
+
+  // Handover
+  passDevice: 'Pass the device!',
+  nextPlayer: 'Next up: {name}',
+  getReady: 'Get ready…',
+
+  // Results
+  wellDone: 'Well done!',
+  newRecord: 'New record!',
+  accuracy: 'Correct',
+  time: 'Time',
+  avgTime: 'Ø {seconds}s per question',
+  targetTime: 'Target: {time}',
+  points: 'points',
+  yourReward: 'Your reward',
+  yourTask: 'Your fun task',
+  nextTimeBetter: "You'll beat it next time!",
+  playAgain: 'Play again',
+  toMenu: 'Menu',
+  winner: '{name} wins!',
+  tie: "It's a tie!",
+  duelOver: 'Duel finished',
+
+  rank1: 'Outstanding',
+  rank2: 'Very good',
+  rank3: 'Good',
+  rank4: 'Okay',
+  rank5: 'Keep practicing',
+
+  // Settings
+  questionsPerRound: 'Questions per round',
+  rewards: 'Rewards',
+  rewardsHint: 'Level 1 is the top prize for the best rounds.',
+  rewardLevel: 'Level {rank}',
+  rewardPerson: 'Who? (e.g. Mom)',
+  rewardText: 'Reward (e.g. ice cream)',
+  addReward: 'Add reward',
+  penalties: 'Fun tasks',
+  penaltiesHint: 'Picked when a round does not go so well.',
+  newPenalty: 'New task',
+  addPenalty: 'Add task',
+  resetDefaults: 'Restore examples',
+  resetRecords: 'Reset records',
+  recordsReset: 'Records were reset.',
+  privacy: 'Privacy policy',
+  version: 'Version {version}',
+};

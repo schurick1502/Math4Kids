@@ -2,13 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body,
+#root {
+  height: 100%;
+}
+
 body {
   margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  font-family: 'Nunito', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow: hidden;
+  background: #9333ea;
+  overscroll-behavior: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+input,
+textarea {
+  user-select: text;
+  -webkit-user-select: text;
 }
 
 * {
@@ -17,122 +32,42 @@ body {
 
 /* Edge-to-edge (Android 15+/API 36): keep content clear of status and navigation bars */
 .safe-area-padding {
-  padding-top: max(1rem, env(safe-area-inset-top));
-  padding-right: max(1rem, env(safe-area-inset-right));
-  padding-bottom: max(1rem, env(safe-area-inset-bottom));
-  padding-left: max(1rem, env(safe-area-inset-left));
+  padding-top: max(0.75rem, env(safe-area-inset-top));
+  padding-right: max(0.75rem, env(safe-area-inset-right));
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  padding-left: max(0.75rem, env(safe-area-inset-left));
 }
 
-.safe-area-max-h {
-  max-height: calc(100vh - max(1rem, env(safe-area-inset-top)) - max(1rem, env(safe-area-inset-bottom)));
-}
-
-input[type="number"] {
-  -moz-appearance: textfield;
-}
-
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Animationen für den Hintergrund - GPU-optimiert */
-@keyframes blob {
-  0%, 100% {
-    transform: translate3d(0, 0, 0) scale(1);
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl font-extrabold transition-transform duration-150 active:scale-95 disabled:opacity-40 disabled:active:scale-100;
   }
-  25% {
-    transform: translate3d(20px, -50px, 0) scale(1.1);
+  .btn-primary {
+    @apply btn bg-gradient-to-r from-brand-purple to-brand-pink text-white shadow-lg shadow-purple-500/30;
   }
-  50% {
-    transform: translate3d(-20px, 20px, 0) scale(0.9);
+  .btn-soft {
+    @apply btn bg-purple-50 text-purple-700 hover:bg-purple-100;
   }
-  75% {
-    transform: translate3d(50px, 50px, 0) scale(1.05);
+  .icon-btn {
+    @apply inline-flex h-11 w-11 items-center justify-center rounded-full bg-purple-50 text-purple-700 transition-transform active:scale-90 hover:bg-purple-100;
+  }
+  .field {
+    @apply w-full rounded-xl border-2 border-purple-100 bg-white px-4 py-3 text-base font-semibold text-slate-800 outline-none transition-colors focus:border-brand-purple;
+  }
+  .section-title {
+    @apply mb-3 text-lg font-extrabold text-slate-800;
   }
 }
 
-@keyframes float {
-  0%, 100% {
-    transform: translate3d(0, 0, 0) rotate(0deg);
-    opacity: 0.3;
-  }
-  25% {
-    transform: translate3d(0, -20px, 0) rotate(5deg);
-    opacity: 0.5;
-  }
-  50% {
-    transform: translate3d(0, -40px, 0) rotate(-5deg);
-    opacity: 0.3;
-  }
-  75% {
-    transform: translate3d(0, -20px, 0) rotate(3deg);
-    opacity: 0.4;
-  }
-}
-
-.animate-blob {
-  animation: blob 7s infinite;
-  will-change: transform;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-.animate-float {
-  animation: float 20s ease-in-out infinite;
-  will-change: transform;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-.animation-delay-2000 {
-  animation-delay: 2s;
-}
-
-.animation-delay-4000 {
-  animation-delay: 4s;
-}
-
-/* Reduzierte Animationen für langsamere Geräte */
 @media (prefers-reduced-motion: reduce) {
-  .animate-blob,
-  .animate-float {
-    animation: none;
-  }
-}
-
-/* Performance-Optimierung für langsamere Geräte */
-@media (max-width: 768px) {
-  .animate-blob {
-    animation-duration: 12s; /* Langsamer = weniger GPU-Last */
-  }
-  .animate-float {
-    animation-duration: 30s;
-  }
-}
-
-/* Weitere Optimierungen für sehr langsame Geräte */
-@media (max-width: 480px) {
-  .animate-blob {
-    animation-duration: 15s;
-  }
-  .animate-float {
-    animation-duration: 35s;
-  }
-}
-
-/* CPU-intensive Animationen für schwache Geräte reduzieren */
-@media (prefers-reduced-motion: reduce) {
-  .animate-blob,
-  .animate-float {
-    animation: none !important;
-  }
-  
-  * {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+  .confetti {
+    display: none;
+  }
 }
-

@@ -1,0 +1,97 @@
+// Deutsche Texte. Schlüssel müssen zu en.js passen. Platzhalter: {name}
+export default {
+  appTagline: 'Kopfrechnen für Kinder',
+  language: 'Sprache',
+
+  // Menü
+  modeSolo: 'Allein',
+  modeDuo: 'Zu zweit',
+  chooseLevel: 'Wähle deine Stufe',
+  targetPerQuestion: '{seconds} s',
+  bestTime: 'Ø {time}',
+  settings: 'Einstellungen',
+  installApp: 'App installieren',
+
+  // Stufen
+  level1Name: 'Klasse 1',
+  level1Desc: 'Plus & Minus bis 10',
+  level2Name: 'Klasse 2',
+  level2Desc: 'Plus & Minus bis 20',
+  level3Name: 'Einmaleins',
+  level3Desc: 'Malnehmen 1–12',
+  level4Name: 'Klasse 3',
+  level4Desc: 'Plus, Minus, Mal bis 100',
+  level5Name: 'Klasse 4',
+  level5Desc: 'Alle Rechenarten bis 1000',
+  level6Name: 'Erwachsene',
+  level6Desc: 'Prozent & Dreisatz',
+
+  // Zwei Spieler
+  duoTitle: 'Duell zu zweit',
+  duoHint: 'Abwechselnd an einem Gerät. Wer ist schneller?',
+  player: 'Spieler {number}',
+  playerName: 'Name',
+  missingNames: 'Bitte für beide Spieler einen Namen eingeben.',
+  startDuel: 'Duell starten',
+  back: 'Zurück',
+
+  // Spiel
+  questionOf: 'Aufgabe {current} von {total}',
+  correctCount: '{count} richtig',
+  turnOf: '{name} ist dran',
+  percentQuestion: '{percent} % von {base}',
+  ruleOfThreeQuestion: '{amount} Stück kosten {price}. Was kosten {target} Stück?',
+  currency: '{value} €',
+  correct: 'Richtig!',
+  wrong: 'Leider falsch!',
+  correctAnswerIs: 'Richtig ist {answer}',
+  cancel: 'Beenden',
+  delete: 'Löschen',
+  ok: 'OK',
+
+  // Übergabe
+  passDevice: 'Gerät weitergeben!',
+  nextPlayer: 'Jetzt ist {name} dran',
+  getReady: 'Mach dich bereit …',
+
+  // Ergebnis
+  wellDone: 'Super gemacht!',
+  newRecord: 'Neuer Rekord!',
+  accuracy: 'Richtig',
+  time: 'Zeit',
+  avgTime: 'Ø {seconds} s pro Aufgabe',
+  targetTime: 'Ziel: {time}',
+  points: 'Punkte',
+  yourReward: 'Deine Belohnung',
+  yourTask: 'Deine lustige Aufgabe',
+  nextTimeBetter: 'Nächstes Mal klappt es noch besser!',
+  playAgain: 'Nochmal',
+  toMenu: 'Menü',
+  winner: '{name} gewinnt!',
+  tie: 'Unentschieden!',
+  duelOver: 'Duell beendet',
+
+  rank1: 'Hervorragend',
+  rank2: 'Sehr gut',
+  rank3: 'Gut',
+  rank4: 'In Ordnung',
+  rank5: 'Weiter üben',
+
+  // Einstellungen
+  questionsPerRound: 'Aufgaben pro Runde',
+  rewards: 'Belohnungen',
+  rewardsHint: 'Stufe 1 ist der Hauptpreis für die besten Runden.',
+  rewardLevel: 'Stufe {rank}',
+  rewardPerson: 'Von wem? (z. B. Mama)',
+  rewardText: 'Belohnung (z. B. Eis)',
+  addReward: 'Belohnung hinzufügen',
+  penalties: 'Lustige Aufgaben',
+  penaltiesHint: 'Kommen dran, wenn eine Runde nicht so gut lief.',
+  newPenalty: 'Neue Aufgabe',
+  addPenalty: 'Aufgabe hinzufügen',
+  resetDefaults: 'Beispiele wiederherstellen',
+  resetRecords: 'Rekorde zurücksetzen',
+  recordsReset: 'Rekorde wurden zurückgesetzt.',
+  privacy: 'Datenschutzerklärung',
+  version: 'Version {version}',
+};
