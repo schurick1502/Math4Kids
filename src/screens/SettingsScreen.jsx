@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Gift, PartyPopper, Plus, Trash2, RotateCcw, Trophy, Languages, ListOrdered, ShieldCheck } from 'lucide-react';
+import { Gift, PartyPopper, Plus, Trash2, RotateCcw, Trophy, Languages, ListOrdered, ShieldCheck, Lock } from 'lucide-react';
 import { useI18n, LANGUAGES } from '../i18n/index.jsx';
 import { QUESTION_COUNTS } from '../game/levels.js';
 import { ScreenHeader } from '../components/ui.jsx';
@@ -32,7 +32,7 @@ function Segmented({ options, value, onChange }) {
 
 export default function SettingsScreen({
   questionCount, onQuestionCount, rewards, onRewards, penalties, onPenalties,
-  onResetContent, onResetRecords, onBack,
+  onResetContent, onResetRecords, onBack, onChangePin, pinNotice,
 }) {
   const { t, lang, setLang } = useI18n();
   const [person, setPerson] = useState('');
@@ -111,6 +111,11 @@ export default function SettingsScreen({
               <Plus className="h-6 w-6" />
             </button>
           </div>
+        </Card>
+
+        <Card icon={Lock} title={t('parentPin')} hint={t('parentPinHint')}>
+          <button type="button" onClick={onChangePin} className="btn w-full bg-white py-3 text-purple-700 shadow-sm">{t('pinChange')}</button>
+          {pinNotice && <p role="status" className="mt-2 text-center text-sm font-bold text-emerald-600">{t('pinSaved')}</p>}
         </Card>
 
         <div className="grid grid-cols-2 gap-2">

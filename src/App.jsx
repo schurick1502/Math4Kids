@@ -17,6 +17,8 @@ import PlayingScreen from './screens/PlayingScreen.jsx';
 import HandoverScreen from './screens/HandoverScreen.jsx';
 import ResultScreen from './screens/ResultScreen.jsx';
 import SettingsScreen from './screens/SettingsScreen.jsx';
+import ParentGateScreen from './screens/ParentGateScreen.jsx';
+import { hasPin } from './game/parentLock.js';
 
 const FEEDBACK_MS = { correct: 900, wrong: 2000 };
 
@@ -38,6 +40,9 @@ export default function App() {
   const [duoPlayers, setDuoPlayers] = useState([{ name: '', level: 1 }, { name: '', level: 1 }]);
   const [lastStart, setLastStart] = useState(null);
   const [installPrompt, setInstallPrompt] = useState(null);
+  // Parent gate in front of the settings: 'setup' (no PIN yet), 'unlock' or 'change'
+  const [gateMode, setGateMode] = useState('unlock');
+  const [pinNotice, setPinNotice] = useState(false);
   const lite = useMemo(isLowEndDevice, []);
 
   const rewards = customRewards ?? DEFAULT_REWARDS[lang];
@@ -108,9 +113,20 @@ export default function App() {
         return <HandoverScreen game={state.game} onReady={() => dispatch({ type: 'HANDOVER_DONE', now: Date.now() })} onQuit={() => dispatch({ type: 'QUIT' })} />;
       case 'result':
         return <ResultScreen result={state.result} onMenu={goMenu} onAgain={() => start(lastStart.mode, lastStart.players)} />;
+      case 'parent-gate':
+        return (
+          <ParentGateScreen
+            key={gateMode}
+            mode={gateMode === 'unlock' ? 'unlock' : 'setup'}
+            onBack={() => dispatch({ type: 'NAVIGATE', screen: gateMode === 'change' ? 'settings' : 'menu' })}
+            onSuccess={(pinSaved) => { setPinNotice(pinSaved); dispatch({ type: 'NAVIGATE', screen: 'settings' }); }}
+          />
+        );
       case 'settings':
         return (
           <SettingsScreen
+            pinNotice={pinNotice}
+            onChangePin={() => { setGateMode('change'); dispatch({ type: 'NAVIGATE', screen: 'parent-gate' }); }}
             questionCount={questionCount}
             onQuestionCount={updateQuestionCount}
             rewards={rewards}
@@ -128,14 +144,14 @@ export default function App() {
             records={records}
             onStart={(level) => start('solo', [{ name: '', level }])}
             onDuo={() => dispatch({ type: 'NAVIGATE', screen: 'duo-setup' })}
-            onSettings={() => dispatch({ type: 'NAVIGATE', screen: 'settings' })}
+            onSettings={() => { setPinNotice(false); setGateMode(hasPin() ? 'unlock' : 'setup'); dispatch({ type: 'NAVIGATE', screen: 'parent-gate' }); }}
             onInstall={installPrompt ? async () => { installPrompt.prompt(); await installPrompt.userChoice; setInstallPrompt(null); } : null}
           />
         );
     }
   };
 
-  const fullHeight = ['playing', 'handover', 'result'].includes(state.screen);
+  const fullHeight = ['playing', 'handover', 'result', 'parent-gate'].includes(state.screen);
 
   return (
     <div className="relative h-full">

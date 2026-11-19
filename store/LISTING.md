@@ -51,6 +51,7 @@ FEATURES
 • In English and German
 
 SAFE FOR KIDS
+• Parent PIN protects the settings
 • No ads, no in-app purchases
 • No account, no sign-up
 • No tracking or analytics – settings stay on the device
@@ -82,6 +83,7 @@ FUNKTIONEN
 • Auf Deutsch und Englisch
 
 SICHER FÜR KINDER
+• Eltern-PIN schützt die Einstellungen
 • Keine Werbung, keine In-App-Käufe
 • Kein Konto, keine Anmeldung
 • Kein Tracking, keine Analyse – Einstellungen bleiben auf dem Gerät
@@ -96,11 +98,16 @@ SICHER FÜR KINDER
 | App-Zugriff | Alle Funktionen ohne Einschränkung/Anmeldung verfügbar |
 | Einstufung (IARC-Fragebogen) | Kategorie „Spiel“ bzw. Lernen; keine Gewalt, keine Nutzerinteraktion online, kein Teilen von Standort, keine Käufe → erwartet: USK 0 / PEGI 3 / „Everyone“ |
 | Zielgruppe | Altersgruppen z. B. **6–8, 9–12** (ggf. 13+ wegen Erwachsenen-Modus) → Familienrichtlinien gelten |
-| Datensicherheit | **Keine Daten erhoben, keine Daten geteilt.** Alle Eingaben (Belohnungen, lustige Aufgaben, Spielernamen, Einstellungen, Sprache, Rekorde) bleiben lokal auf dem Gerät und werden nicht übertragen. Verschlüsselung bei Übertragung: n/a. Löschung: über App-Daten löschen/Deinstallation. |
+| Datensicherheit | **Keine Daten erhoben, keine Daten geteilt.** Alle Eingaben (Belohnungen, lustige Aufgaben, Spielernamen, Einstellungen, Sprache, Rekorde, Eltern-PIN als Hash) bleiben lokal auf dem Gerät und werden nicht übertragen. Verschlüsselung bei Übertragung: n/a. Löschung: über App-Daten löschen/Deinstallation. |
 | Behörden-Apps / Finanzen / Gesundheit / News | Nein |
 | Werbe-ID (Advertising ID) | Nein, wird nicht verwendet |
 
 ## Release-Notizen
+
+Version 1.3.0 (versionCode 4):
+
+- **en-US:** `New: parent PIN for the settings – children can no longer change rewards or settings.`
+- **de-DE:** `Neu: Eltern-PIN für die Einstellungen – Kinder können Belohnungen und Einstellungen nicht mehr ändern.`
 
 Version 1.2.0 (versionCode 3):
 

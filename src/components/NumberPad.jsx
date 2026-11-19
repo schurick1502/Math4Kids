@@ -2,17 +2,16 @@ import { useEffect } from 'react';
 import { Delete } from 'lucide-react';
 import { useI18n } from '../i18n/index.jsx';
 
-const MAX_DIGITS = 6;
-
 // Big, kid-friendly keypad. Also accepts a physical keyboard (digits, Backspace, Enter).
-export default function NumberPad({ value, onChange, onSubmit, disabled }) {
+// keepLeadingZeros: for PINs ("0815"); answers drop a leading zero ("07" → "7")
+export default function NumberPad({ value, onChange, onSubmit, disabled, maxLength = 6, keepLeadingZeros = false }) {
   const { t } = useI18n();
 
   const press = (key) => {
     if (disabled) return;
     if (key === 'back') onChange(value.slice(0, -1));
     else if (key === 'ok') onSubmit();
-    else if (value.length < MAX_DIGITS) onChange(value === '0' ? key : value + key);
+    else if (value.length < maxLength) onChange(value === '0' && !keepLeadingZeros ? key : value + key);
   };
 
   useEffect(() => {

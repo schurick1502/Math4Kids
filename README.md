@@ -48,6 +48,7 @@ All versions: [GitHub Releases](https://github.com/schurick1502/Math4Kids/releas
 ### 🏆 Motivation
 - **Rewards** for good rounds (three reward levels, editable by parents)
 - **Fun tasks** for rounds that did not go so well (editable)
+- **Parent PIN** protects the settings
 
 ### 🌍 Languages
 - **German and English** – follows the device language, switchable in the app
