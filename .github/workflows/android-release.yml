@@ -1,0 +1,139 @@
+name: Android Release
+
+# Tag push (v1.2.1, …): build signed AAB + APK and attach the APK to the GitHub release.
+# Manual run: build for testing; unsigned if the signing secrets are not configured.
+#
+# Required repository secrets (Settings → Secrets and variables → Actions):
+#   ANDROID_KEYSTORE_BASE64   base64 of android/app/math4kids-release-key.jks
+#   ANDROID_KEYSTORE_PASSWORD storePassword from keystore.properties
+#   ANDROID_KEY_ALIAS         keyAlias
+#   ANDROID_KEY_PASSWORD      keyPassword
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: android-release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+      KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+      KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+      KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Read app version
+        id: version
+        run: |
+          pkg=$(node -p "require('./package.json').version")
+          gradle_name=$(grep -oP 'versionName "\K[^"]+' android/app/build.gradle)
+          gradle_code=$(grep -oP 'versionCode \K[0-9]+' android/app/build.gradle)
+          echo "name=$pkg" >> "$GITHUB_OUTPUT"
+          echo "Version $pkg (versionCode $gradle_code)"
+          if [ "$pkg" != "$gradle_name" ]; then
+            echo "::error::package.json ($pkg) and build.gradle versionName ($gradle_name) differ"; exit 1
+          fi
+          if [ "${GITHUB_REF_TYPE}" = "tag" ] && [ "${GITHUB_REF_NAME#v}" != "$pkg" ]; then
+            echo "::error::Tag ${GITHUB_REF_NAME} does not match app version $pkg"; exit 1
+          fi
+
+      - name: Check signing secrets
+        id: signing
+        run: |
+          if [ -n "$KEYSTORE_BASE64" ] && [ -n "$KEYSTORE_PASSWORD" ] && [ -n "$KEY_ALIAS" ] && [ -n "$KEY_PASSWORD" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          elif [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+            echo "::error::Signing secrets are missing – a tagged release must be signed"; exit 1
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::Signing secrets not set – building an UNSIGNED test build"
+          fi
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Setup Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          packages: 'platforms;android-36 build-tools;36.0.0 platform-tools'
+
+      - name: Build web app and sync Android project
+        run: |
+          npm ci
+          npm run build
+          npx cap sync android
+
+      - name: Prepare signing
+        if: steps.signing.outputs.enabled == 'true'
+        run: |
+          echo "$KEYSTORE_BASE64" | base64 --decode > android/app/release.jks
+          {
+            echo "storeFile=release.jks"
+            echo "storePassword=$KEYSTORE_PASSWORD"
+            echo "keyAlias=$KEY_ALIAS"
+            echo "keyPassword=$KEY_PASSWORD"
+          } > android/app/keystore.properties
+
+      - name: Build AAB and APK
+        working-directory: android
+        run: ./gradlew bundleRelease assembleRelease --no-daemon
+
+      - name: Collect outputs
+        id: out
+        run: |
+          v=${{ steps.version.outputs.name }}
+          suffix=$([ "${{ steps.signing.outputs.enabled }}" = "true" ] && echo "" || echo "-unsigned")
+          mkdir -p dist-android
+          cp android/app/build/outputs/bundle/release/app-release.aab "dist-android/Math4Kids-v$v$suffix.aab"
+          apk=$(ls android/app/build/outputs/apk/release/*.apk | head -1)
+          cp "$apk" "dist-android/Math4Kids-v$v$suffix.apk"
+          echo "apk=dist-android/Math4Kids-v$v$suffix.apk" >> "$GITHUB_OUTPUT"
+          ls -l dist-android
+
+      - name: Verify signature
+        if: steps.signing.outputs.enabled == 'true'
+        run: |
+          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --print-certs "${{ steps.out.outputs.apk }}" | grep -E "Signer #1 certificate (DN|SHA-256)"
+          jarsigner -verify dist-android/*.aab | tail -1
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Math4Kids-v${{ steps.version.outputs.name }}-android
+          path: dist-android/
+          retention-days: 30
+
+      - name: Attach APK to GitHub release
+        if: github.ref_type == 'tag'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "$GITHUB_REF_NAME" > /dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" "${{ steps.out.outputs.apk }}" --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" "${{ steps.out.outputs.apk }}" --title "Math4Kids $GITHUB_REF_NAME" --generate-notes
+          fi
+
+      - name: Remove signing material
+        if: always()
+        run: rm -f android/app/release.jks android/app/keystore.properties
