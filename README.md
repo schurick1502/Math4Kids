@@ -2,7 +2,7 @@
 
 [![GitHub Release](https://img.shields.io/github/v/release/schurick1502/Math4Kids?style=flat-square&logo=github)](https://github.com/schurick1502/Math4Kids/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
-[![Platform: Android](https://img.shields.io/badge/Platform-Android-3DDC84?style=flat-square&logo=android&logoColor=white)](releases/Math4Kids-v1.1.0-english.apk)
+[![Platform: Android](https://img.shields.io/badge/Platform-Android-3DDC84?style=flat-square&logo=android&logoColor=white)](https://github.com/schurick1502/Math4Kids/releases/latest)
 [![Platform: Web](https://img.shields.io/badge/Platform-Web%20(PWA)-4285F4?style=flat-square&logo=googlechrome&logoColor=white)](https://schurick1502.github.io/Math4Kids/)
 [![Made with React](https://img.shields.io/badge/Made%20with-React-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
 [![Built with Vite](https://img.shields.io/badge/Built%20with-Vite-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/)
@@ -18,11 +18,14 @@ A motivating Progressive Web App (PWA) and native Android app for children in gr
 ### Android APK
 | Version | Language | Download |
 |---------|----------|----------|
-| v1.1.0 | 🇬🇧 English | **[⬇️ Download](releases/Math4Kids-v1.1.0-english.apk)** |
+| v1.2.0 | 🇩🇪 German + 🇬🇧 English | **[⬇️ Download](https://github.com/schurick1502/Math4Kids/releases/latest/download/Math4Kids-v1.2.0.apk)** |
+| v1.1.0 | 🇬🇧 English | [⬇️ Download](releases/Math4Kids-v1.1.0-english.apk) |
 | v1.0.0 | 🇩🇪 German | [⬇️ Download](releases/Math4Kids-v1.0.0.apk) |
 
+All versions: [GitHub Releases](https://github.com/schurick1502/Math4Kids/releases)
+
 ### Web App
-**[🌐 Try the Web App](https://schurick1502.github.io/Math4Kids/)** - Runs directly in your browser (English)
+**[🌐 Try the Web App](https://schurick1502.github.io/Math4Kids/)** - Runs directly in your browser (German & English)
 
 ## 📸 Screenshots
 
