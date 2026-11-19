@@ -18,7 +18,7 @@ A motivating Progressive Web App (PWA) and native Android app for children in gr
 ### Android APK
 | Version | Language | Download |
 |---------|----------|----------|
-| v1.2.0 | 🇩🇪 German + 🇬🇧 English | **[⬇️ Download](https://github.com/schurick1502/Math4Kids/releases/latest/download/Math4Kids-v1.2.0.apk)** |
+| Latest (v1.3.0+) | 🇩🇪 German + 🇬🇧 English | **[⬇️ Download](https://github.com/schurick1502/Math4Kids/releases/latest)** – APK under "Assets" |
 | v1.1.0 | 🇬🇧 English | [⬇️ Download](releases/Math4Kids-v1.1.0-english.apk) |
 | v1.0.0 | 🇩🇪 German | [⬇️ Download](releases/Math4Kids-v1.0.0.apk) |
 
